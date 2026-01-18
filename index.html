@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary SEO Meta Tags -->
+  <title>M3U8下载器 - 免费在线M3U8转MP4工具 | Free M3U8 Downloader & Converter</title>
+  <meta name="description"
+    content="免费在线M3U8下载器，支持M3U8转MP4、TS合并MP4、HLS视频下载。无需安装，浏览器直接转换，快速无损。Free online M3U8 to MP4 converter, download HLS streams instantly." />
+  <meta name="keywords"
+    content="m3u8下载器,m3u8转mp4,m3u8视频下载,m3u8转换器,在线m3u8下载,TS合并MP4,HLS downloader,M3U8 to MP4,M3U8 converter,download M3U8 video" />
+  <meta name="author" content="M3U8 Converter" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://m3u8-converter.com/" />
+  <meta property="og:title" content="M3U8下载器 - 免费在线M3U8转MP4工具 | Free M3U8 Downloader" />
+  <meta property="og:description" content="免费在线M3U8下载器，支持M3U8转MP4、HLS视频下载。无需安装，浏览器直接转换。" />
+  <meta property="og:image" content="/og-image.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:title" content="M3U8下载器 - 免费在线M3U8转MP4工具" />
+  <meta property="twitter:description" content="免费在线M3U8下载器，支持M3U8转MP4、HLS视频下载。" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://m3u8-converter.com/" />
+
+  <!-- Alternate Languages -->
+  <link rel="alternate" hreflang="zh" href="https://m3u8-converter.com/?lang=zh" />
+  <link rel="alternate" hreflang="en" href="https://m3u8-converter.com/?lang=en" />
+  <link rel="alternate" hreflang="x-default" href="https://m3u8-converter.com/" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "M3U8 Downloader",
+      "alternateName": "M3U8下载器",
+      "description": "Free online M3U8 to MP4 converter. Download HLS streams, merge TS files, convert M3U8 videos directly in your browser.",
+      "url": "https://m3u8-converter.com/",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "M3U8 to MP4 conversion",
+        "HLS stream download",
+        "TS file merge",
+        "Multiple output formats",
+        "Browser-based processing"
+      ]
+    }
+    </script>
+
+  <!-- FAQ Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "如何将M3U8转换为MP4？/ How to convert M3U8 to MP4?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "只需粘贴M3U8链接，选择MP4格式，点击转换即可。工具会自动下载所有TS分片并合并为MP4视频。Simply paste the M3U8 URL, select MP4 format, and click convert. The tool will automatically download all TS segments and merge them into an MP4 video."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "M3U8文件怎么打开？/ What is an M3U8 file?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "M3U8是HLS流媒体的播放列表文件，包含视频分片(.ts文件)的URL列表。使用本工具可以将其转换为普通的MP4视频文件。M3U8 is an HLS streaming playlist file containing URLs of video segments (.ts files). Use this tool to convert it to a regular MP4 video."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "支持哪些输出格式？/ What output formats are supported?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "支持MP4、WebM、AVI、MKV、MOV等多种常见视频格式。We support MP4, WebM, AVI, MKV, MOV and other common video formats."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- Language Switcher -->
+    <div class="lang-switcher" role="navigation" aria-label="Language selection">
+      <button id="lang-zh" class="lang-btn active" data-lang="zh" aria-label="切换到中文">中文</button>
+      <button id="lang-en" class="lang-btn" data-lang="en" aria-label="Switch to English">EN</button>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="2" y="2" width="28" height="28" rx="8" stroke="url(#logo-gradient)" stroke-width="2" />
+          <path d="M12 10L22 16L12 22V10Z" fill="url(#logo-gradient)" />
+          <defs>
+            <linearGradient id="logo-gradient" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6366F1" />
+              <stop offset="1" stop-color="#8B5CF6" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <h1 data-i18n="title">M3U8 Converter</h1>
+      </div>
+      <p class="tagline" data-i18n="tagline">免费在线M3U8下载器 · M3U8转MP4 · 浏览器直接转换</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Feature Badges -->
+      <div class="feature-badges">
+        <span class="badge" data-i18n="badge_free">✓ 完全免费</span>
+        <span class="badge" data-i18n="badge_privacy">✓ 本地处理</span>
+        <span class="badge" data-i18n="badge_fast">✓ 快速转换</span>
+      </div>
+
+      <!-- FFmpeg Loader (auto-loads on page open) -->
+      <section id="ffmpeg-loader" class="card loader-card" aria-labelledby="loader-title">
+        <div class="loader-content">
+          <div class="loader-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2" opacity="0.2" />
+              <path d="M24 4C35.046 4 44 12.954 44 24" stroke="url(#loader-gradient)" stroke-width="3"
+                stroke-linecap="round">
+                <animateTransform attributeName="transform" type="rotate" from="0 24 24" to="360 24 24" dur="1s"
+                  repeatCount="indefinite" />
+              </path>
+              <defs>
+                <linearGradient id="loader-gradient" x1="24" y1="4" x2="44" y2="24" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#6366F1" />
+                  <stop offset="1" stop-color="#8B5CF6" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h2 id="loader-title" data-i18n="loading">正在加载...</h2>
+          <div id="load-progress" class="progress-container">
+            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-fill" id="load-progress-fill"></div>
+            </div>
+            <p class="progress-text" id="load-progress-text" data-i18n="loading">正在加载转换引擎...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Converter Panel -->
+      <section id="converter-panel" class="card converter-card hidden" aria-labelledby="converter-title">
+        <h2 class="sr-only" id="converter-title" data-i18n="converter_title">视频转换</h2>
+
+        <!-- URL Input -->
+        <div class="input-group">
+          <label for="m3u8-url" data-i18n="input_label">M3U8 链接</label>
+          <div class="input-wrapper">
+            <input type="url" id="m3u8-url" data-i18n-placeholder="input_placeholder" placeholder="粘贴 M3U8 视频链接..."
+              autocomplete="off" aria-describedby="url-hint" />
+            <button id="paste-btn" class="btn btn-icon" title="粘贴" aria-label="从剪贴板粘贴">
+              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path
+                  d="M13 3H14.5C15.328 3 16 3.672 16 4.5V16.5C16 17.328 15.328 18 14.5 18H5.5C4.672 18 4 17.328 4 16.5V4.5C4 3.672 4.672 3 5.5 3H7"
+                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                <rect x="7" y="2" width="6" height="3" rx="1" stroke="currentColor" stroke-width="1.5" />
+              </svg>
+            </button>
+          </div>
+          <p id="url-hint" class="input-hint" data-i18n="input_hint">支持标准 M3U8/HLS 视频流链接</p>
+        </div>
+
+        <!-- Options -->
+        <div class="options-grid">
+          <div class="option-group">
+            <label for="output-format" data-i18n="format_label">输出格式</label>
+            <select id="output-format" aria-describedby="format-desc">
+              <option value="mp4">MP4 (H.264) - 推荐</option>
+              <option value="webm">WebM (VP9)</option>
+              <option value="avi">AVI</option>
+              <option value="mkv">MKV (快速)</option>
+              <option value="mov">MOV</option>
+            </select>
+            <p id="format-desc" class="option-desc" data-i18n="format_desc">MP4 兼容性最佳</p>
+          </div>
+          <div class="option-group">
+            <label for="quality" data-i18n="quality_label">质量</label>
+            <select id="quality">
+              <option value="high" data-i18n="quality_high">高质量</option>
+              <option value="medium" selected data-i18n="quality_medium">标准</option>
+              <option value="low" data-i18n="quality_low">快速</option>
+            </select>
+            <p class="option-desc" data-i18n="quality_desc">标准质量平衡速度与画质</p>
+          </div>
+        </div>
+
+        <!-- Convert Button -->
+        <button id="convert-btn" class="btn btn-primary btn-large btn-convert" disabled>
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M10 3V14M10 14L5 9M10 14L15 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M3 17H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <span data-i18n="convert_btn">开始转换</span>
+        </button>
+
+        <!-- Progress -->
+        <div id="progress-section" class="progress-section hidden">
+          <div class="progress-header">
+            <span id="progress-stage" data-i18n="progress_parsing">解析中...</span>
+            <span id="progress-percent">0%</span>
+          </div>
+          <div class="progress-bar" role="progressbar">
+            <div class="progress-fill" id="convert-progress-fill"></div>
+          </div>
+          <p class="progress-detail" id="progress-detail"></p>
+        </div>
+
+        <!-- Log -->
+        <details id="log-section" class="log-section hidden">
+          <summary data-i18n="log_title">处理日志</summary>
+          <div id="log-content" class="log-content">
+            <pre id="log-text"></pre>
+          </div>
+        </details>
+      </section>
+
+      <!-- Result Panel -->
+      <section id="result-panel" class="card result-card hidden" aria-labelledby="result-title">
+        <div class="result-header">
+          <div class="result-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10" fill="#10B981" />
+              <path d="M8 12L11 15L16 9" stroke="white" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+          <div>
+            <h3 id="result-title" data-i18n="result_title">转换完成</h3>
+            <p class="result-subtitle" data-i18n="result_subtitle">视频已准备好下载</p>
+          </div>
+        </div>
+
+        <div class="video-preview">
+          <video id="preview-video" controls preload="metadata"></video>
+        </div>
+
+        <div class="result-meta">
+          <div class="meta-item">
+            <span class="meta-label" data-i18n="result_filename">文件名</span>
+            <span class="meta-value" id="result-filename">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label" data-i18n="result_size">大小</span>
+            <span class="meta-value" id="result-size">-</span>
+          </div>
+        </div>
+
+        <div class="result-actions">
+          <button id="download-btn" class="btn btn-primary btn-large">
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M10 3V13M10 13L6 9M10 13L14 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M3 16H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <span data-i18n="download_btn">下载视频</span>
+          </button>
+          <button id="new-convert-btn" class="btn btn-secondary">
+            <span data-i18n="new_btn">转换新视频</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section class="faq-section" aria-labelledby="faq-title">
+        <h2 id="faq-title" data-i18n="faq_title">常见问题 FAQ</h2>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary data-i18n="faq_q1">如何将 M3U8 转换为 MP4？</summary>
+            <p data-i18n="faq_a1">只需三步：1) 粘贴M3U8链接 2) 选择MP4格式 3) 点击转换。工具会自动下载所有TS分片并合并为MP4视频文件。整个过程在浏览器本地完成，无需上传。</p>
+          </details>
+
+          <details class="faq-item">
+            <summary data-i18n="faq_q2">M3U8 文件是什么？怎么打开？</summary>
+            <p data-i18n="faq_a2">M3U8 是 HLS (HTTP Live Streaming)
+              流媒体协议的播放列表文件，包含视频分片(.ts文件)的URL列表。网页视频、直播回放常用此格式。使用本工具可将其转换为普通MP4视频。</p>
+          </details>
+
+          <details class="faq-item">
+            <summary data-i18n="faq_q3">支持哪些视频格式？</summary>
+            <p data-i18n="faq_a3">支持导出 MP4、WebM、AVI、MKV、MOV 等常见视频格式。推荐使用 MP4 格式，兼容性最佳，适用于几乎所有设备和平台。</p>
+          </details>
+
+          <details class="faq-item">
+            <summary data-i18n="faq_q4">视频数据会上传到服务器吗？</summary>
+            <p data-i18n="faq_a4">不会。所有处理均在您的浏览器本地完成，使用 WebAssembly 技术在前端运行 FFmpeg。视频数据不会上传到任何服务器，完全保护您的隐私。</p>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        <span data-i18n="footer_tech">基于</span>
+        <a href="https://github.com/ffmpegwasm/ffmpeg.wasm" target="_blank" rel="noopener noreferrer">FFmpeg.wasm</a>
+        <span data-i18n="footer_built">构建</span> ·
+        <span data-i18n="footer_local">所有处理在浏览器本地完成</span>
+      </p>
+      <p class="legal" data-i18n="footer_legal">
+        ⚠️ 请确保您有权下载和转换目标视频内容。本工具仅供学习和个人使用。
+      </p>
+    </footer>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
