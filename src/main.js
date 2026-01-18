@@ -3,6 +3,7 @@ import { ffmpegHandler } from './ffmpeg-handler.js';
 import { parseM3U8, parseVariantPlaylist, formatDuration, formatBytes } from './m3u8-parser.js';
 import { fetchM3U8, downloadSegments } from './downloader.js';
 import { i18n } from './i18n.js';
+import { themeManager } from './theme.js';
 
 // DOM Elements
 const elements = {
@@ -48,7 +49,10 @@ let outputFilename = '';
 
 // Initialize app
 async function init() {
-  // Initialize i18n first
+  // Initialize theme first (before any rendering)
+  themeManager.init();
+
+  // Initialize i18n
   i18n.init();
 
   setupEventListeners();

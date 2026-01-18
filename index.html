@@ -103,10 +103,21 @@
 
 <body>
   <div id="app">
-    <!-- Language Switcher -->
-    <div class="lang-switcher" role="navigation" aria-label="Language selection">
-      <button id="lang-zh" class="lang-btn active" data-lang="zh" aria-label="切换到中文">中文</button>
-      <button id="lang-en" class="lang-btn" data-lang="en" aria-label="Switch to English">EN</button>
+    <!-- Top Bar: Language Switcher & Theme Toggle -->
+    <div class="top-bar" role="navigation" aria-label="Settings">
+      <div class="lang-switcher">
+        <button id="lang-zh" class="lang-btn active" data-lang="zh" aria-label="切换到中文">中文</button>
+        <button id="lang-en" class="lang-btn" data-lang="en" aria-label="Switch to English">EN</button>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="切换主题">
+        <svg class="icon-sun" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M10 2V4M10 16V18M18 10H16M4 10H2M15.66 4.34L14.24 5.76M5.76 14.24L4.34 15.66M15.66 15.66L14.24 14.24M5.76 5.76L4.34 4.34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
 
     <!-- Header -->
