@@ -66,6 +66,18 @@ npm run build
 - **Memory Limits** - Large videos (>500MB) may cause browser memory issues
 - **No DRM** - Cannot bypass DRM-protected streams
 
+### 📚 Tutorials & Guides
+
+| Article | Description |
+|---------|-------------|
+| [How to Download M3U8 Video](https://www.m3u8converter.com/blog/how-to-download-m3u8-video.html) | Complete tutorial for beginners |
+| [M3U8 to MP4 Guide](https://www.m3u8converter.com/blog/m3u8-to-mp4-guide.html) | Compare different methods |
+| [What is HLS Streaming?](https://www.m3u8converter.com/blog/what-is-hls-streaming.html) | Technical deep dive |
+| [Merge TS Files to MP4](https://www.m3u8converter.com/blog/merge-ts-files-to-mp4.html) | 3 ways to merge segments |
+| [Best M3U8 Downloaders 2026](https://www.m3u8converter.com/blog/best-m3u8-downloader-2026.html) | Tool comparison |
+
+👉 [View all articles](https://www.m3u8converter.com/blog/)
+
 ### 📜 License
 
 MIT License - Use freely for personal and educational purposes.
@@ -129,6 +141,18 @@ npm run build
 - **CORS 限制** - 部分 M3U8 链接可能因浏览器安全策略无法访问
 - **内存限制** - 大视频（>500MB）可能导致浏览器内存不足
 - **无法破解 DRM** - 不支持受 DRM 保护的流媒体
+
+### 📚 教程与指南
+
+| 文章 | 说明 |
+|------|------|
+| [如何下载 M3U8 视频](https://www.m3u8converter.com/blog/how-to-download-m3u8-video.html) | 完整教程，新手入门 |
+| [M3U8 转 MP4 指南](https://www.m3u8converter.com/blog/m3u8-to-mp4-guide.html) | 多种方法对比 |
+| [什么是 HLS 流媒体？](https://www.m3u8converter.com/blog/what-is-hls-streaming.html) | 技术原理介绍 |
+| [TS 文件合并为 MP4](https://www.m3u8converter.com/blog/merge-ts-files-to-mp4.html) | 3 种合并方法 |
+| [2026 最佳 M3U8 下载器](https://www.m3u8converter.com/blog/best-m3u8-downloader-2026.html) | 工具对比评测 |
+
+👉 [查看全部文章](https://www.m3u8converter.com/blog/)
 
 ### 🔑 SEO 关键词
 

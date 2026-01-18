@@ -4,10 +4,10 @@
   
   <!-- Homepage -->
   <url>
-    <loc>https://m3u8-converter.com/</loc>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://m3u8-converter.com/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://m3u8-converter.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://m3u8-converter.com/"/>
+    <loc>https://www.m3u8converter.com/</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.m3u8converter.com/?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.m3u8converter.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.m3u8converter.com/"/>
     <lastmod>2026-01-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -15,42 +15,42 @@
   
   <!-- Blog Articles -->
   <url>
-    <loc>https://m3u8-converter.com/blog/</loc>
+    <loc>https://www.m3u8converter.com/blog/</loc>
     <lastmod>2026-01-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://m3u8-converter.com/blog/how-to-download-m3u8-video.html</loc>
+    <loc>https://www.m3u8converter.com/blog/how-to-download-m3u8-video.html</loc>
     <lastmod>2026-01-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://m3u8-converter.com/blog/m3u8-to-mp4-guide.html</loc>
+    <loc>https://www.m3u8converter.com/blog/m3u8-to-mp4-guide.html</loc>
     <lastmod>2026-01-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://m3u8-converter.com/blog/what-is-hls-streaming.html</loc>
+    <loc>https://www.m3u8converter.com/blog/what-is-hls-streaming.html</loc>
     <lastmod>2026-01-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://m3u8-converter.com/blog/merge-ts-files-to-mp4.html</loc>
+    <loc>https://www.m3u8converter.com/blog/merge-ts-files-to-mp4.html</loc>
     <lastmod>2026-01-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://m3u8-converter.com/blog/best-m3u8-downloader-2026.html</loc>
+    <loc>https://www.m3u8converter.com/blog/best-m3u8-downloader-2026.html</loc>
     <lastmod>2026-01-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

@@ -1,11 +1,11 @@
 # M3U8 Converter - robots.txt
-# https://m3u8-converter.com/
+# https://www.m3u8converter.com/
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://m3u8-converter.com/sitemap.xml
+Sitemap: https://www.m3u8converter.com/sitemap.xml
 
 # Disallow admin or private paths (if any)
 Disallow: /api/
