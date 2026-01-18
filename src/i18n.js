@@ -70,6 +70,21 @@ const translations = {
         footer_built: '构建',
         footer_local: '所有处理在浏览器本地完成',
         footer_legal: '⚠️ 请确保您有权下载和转换目标视频内容。本工具仅供学习和个人使用。',
+        footer_blog: '📚 教程博客',
+        footer_opensource: '🎉 开源项目',
+        footer_opensource_desc: '代码完全开源，欢迎 Star ⭐ 和贡献',
+        github_star: 'Star on GitHub',
+        github_issue: '💬 反馈问题',
+
+        // Blog Section
+        blog_title: '📚 教程与指南',
+        blog_article1: '如何下载 M3U8 视频',
+        blog_article1_desc: '完整教程，新手入门',
+        blog_article2: 'M3U8 转 MP4 指南',
+        blog_article2_desc: '多种方法对比',
+        blog_article3: 'HLS 流媒体详解',
+        blog_article3_desc: '技术原理介绍',
+        blog_view_all: '查看全部文章 →',
 
         // Messages
         msg_fetching: '正在获取播放列表...',
@@ -151,6 +166,21 @@ const translations = {
         footer_built: '',
         footer_local: 'All processing done locally in browser',
         footer_legal: '⚠️ Please ensure you have the right to download and convert the target video content. This tool is for educational and personal use only.',
+        footer_blog: '📚 Blog & Tutorials',
+        footer_opensource: '🎉 Open Source',
+        footer_opensource_desc: 'Code is fully open source. Star ⭐ and contribute!',
+        github_star: 'Star on GitHub',
+        github_issue: '💬 Report Issue',
+
+        // Blog Section
+        blog_title: '📚 Tutorials & Guides',
+        blog_article1: 'How to Download M3U8 Video',
+        blog_article1_desc: 'Complete tutorial for beginners',
+        blog_article2: 'M3U8 to MP4 Guide',
+        blog_article2_desc: 'Compare different methods',
+        blog_article3: 'HLS Streaming Explained',
+        blog_article3_desc: 'Technical deep dive',
+        blog_view_all: 'View all articles →',
 
         // Messages
         msg_fetching: 'Fetching playlist...',

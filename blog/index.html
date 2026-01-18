@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客 | M3U8下载器教程 - M3U8 Converter Blog & Tutorials</title>
+    <meta name="description" content="M3U8视频下载教程、HLS流媒体技术指南、TS文件合并方法。Learn how to download and convert M3U8 videos.">
+    <meta name="keywords" content="m3u8下载教程,m3u8转mp4方法,HLS视频下载,m3u8 download tutorial">
+    <link rel="canonical" href="https://m3u8-converter.com/blog/">
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .blog-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .blog-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .blog-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #6366F1, #8B5CF6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .blog-header p {
+            color: var(--color-text-secondary);
+        }
+
+        .article-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .article-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .article-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .article-card h2 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+        }
+
+        .article-card .zh-content,
+        .article-card .en-content {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .article-card .en-content {
+            margin-top: 0.5rem;
+            font-style: italic;
+            opacity: 0.85;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-primary);
+            text-decoration: none;
+            margin-bottom: 2rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .lang-btn {
+            font-size: 0.875rem;
+            padding: 0.25rem 0.75rem;
+            background: transparent;
+            color: var(--color-text-muted);
+            border: 1px solid transparent;
+            border-radius: 999px;
+            cursor: pointer;
+        }
+
+        .lang-btn.active {
+            background: var(--color-surface);
+            color: var(--color-primary);
+            border-color: var(--color-border);
+        }
+
+        [data-lang="en"] {
+            display: none;
+        }
+
+        [lang="en"] [data-lang="en"] {
+            display: block;
+        }
+
+        [lang="en"] [data-lang="zh"] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="blog-container">
+        <div class="top-bar">
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+                <button class="lang-btn" onclick="setLang('en')">EN</button>
+            </div>
+        </div>
+
+        <a href="/" class="back-link">← <span data-lang="zh">返回转换器</span><span data-lang="en">Back to
+                Converter</span></a>
+
+        <header class="blog-header">
+            <h1 data-lang="zh">M3U8 转换指南</h1>
+            <h1 data-lang="en">M3U8 Converter Guide</h1>
+            <p data-lang="zh">学习如何下载和转换 M3U8/HLS 视频流</p>
+            <p data-lang="en">Learn how to download and convert M3U8/HLS video streams</p>
+        </header>
+
+        <div class="article-list">
+            <a href="/blog/how-to-download-m3u8-video.html" class="article-card">
+                <h2>📥 <span data-lang="zh">如何下载 M3U8 视频 - 完整教程</span><span data-lang="en">How to Download M3U8 Video -
+                        Complete Guide</span></h2>
+                <p data-lang="zh" class="zh-content">详细介绍从网页获取 M3U8 链接并下载为 MP4 视频的完整步骤，适合新手入门。</p>
+                <p data-lang="en" class="en-content">Step-by-step guide to finding M3U8 links from web pages and
+                    downloading them as MP4 videos. Beginner friendly.</p>
+                <div class="article-meta">
+                    <span>📅 2026-01-18</span>
+                    <span>⏱️ 5 min</span>
+                </div>
+            </a>
+
+            <a href="/blog/m3u8-to-mp4-guide.html" class="article-card">
+                <h2>🔄 <span data-lang="zh">M3U8 转 MP4 终极指南</span><span data-lang="en">Ultimate M3U8 to MP4 Conversion
+                        Guide</span></h2>
+                <p data-lang="zh" class="zh-content">多种 M3U8 转换为 MP4 的方法对比：在线工具、命令行、桌面软件，选择最适合你的方案。</p>
+                <p data-lang="en" class="en-content">Compare different methods for converting M3U8 to MP4: online tools,
+                    command line, desktop software. Find what works best for you.</p>
+                <div class="article-meta">
+                    <span>📅 2026-01-18</span>
+                    <span>⏱️ 8 min</span>
+                </div>
+            </a>
+
+            <a href="/blog/what-is-hls-streaming.html" class="article-card">
+                <h2>📡 <span data-lang="zh">什么是 HLS 流媒体？M3U8 格式详解</span><span data-lang="en">What is HLS Streaming? M3U8
+                        Format Explained</span></h2>
+                <p data-lang="zh" class="zh-content">深入了解 HLS (HTTP Live Streaming) 协议原理，M3U8 播放列表结构，以及 TS 分片机制。</p>
+                <p data-lang="en" class="en-content">Deep dive into HLS (HTTP Live Streaming) protocol, M3U8 playlist
+                    structure, and TS segment mechanism.</p>
+                <div class="article-meta">
+                    <span>📅 2026-01-18</span>
+                    <span>⏱️ 10 min</span>
+                </div>
+            </a>
+
+            <a href="/blog/merge-ts-files-to-mp4.html" class="article-card">
+                <h2>🔗 <span data-lang="zh">TS 文件合并为 MP4 的 3 种方法</span><span data-lang="en">3 Ways to Merge TS Files
+                        into MP4</span></h2>
+                <p data-lang="zh" class="zh-content">下载了一堆 .ts 分片文件不知如何合并？本文介绍三种简单有效的 TS 合并方案。</p>
+                <p data-lang="en" class="en-content">Downloaded a bunch of .ts segment files and don't know how to merge
+                    them? Learn three simple and effective methods.</p>
+                <div class="article-meta">
+                    <span>📅 2026-01-18</span>
+                    <span>⏱️ 6 min</span>
+                </div>
+            </a>
+
+            <a href="/blog/best-m3u8-downloader-2026.html" class="article-card">
+                <h2>🏆 <span data-lang="zh">2026 年最佳 M3U8 下载器推荐</span><span data-lang="en">Best M3U8 Downloaders in
+                        2026</span></h2>
+                <p data-lang="zh" class="zh-content">对比评测各类 M3U8 下载工具：浏览器扩展、在线工具、桌面软件，找到最适合你的选择。</p>
+                <p data-lang="en" class="en-content">Compare and review various M3U8 download tools: browser extensions,
+                    online tools, desktop software. Find the best choice for you.</p>
+                <div class="article-meta">
+                    <span>📅 2026-01-18</span>
+                    <span>⏱️ 7 min</span>
+                </div>
+            </a>
+        </div>
+
+        <footer
+            style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border); color: var(--color-text-muted);">
+            <p>© 2026 M3U8 Converter. <span data-lang="zh">所有处理在浏览器本地完成。</span><span data-lang="en">All processing done
+                    locally in browser.</span></p>
+            <p style="margin-top: 0.5rem;">
+                <a href="https://github.com/liqiujiong/m3u8converter" target="_blank" rel="noopener noreferrer"
+                    style="color: var(--color-primary);">⭐ Star on GitHub</a>
+            </p>
+        </footer>
+    </div>
+    <script type="module">
+        import { themeManager } from '/src/theme.js';
+        themeManager.init();
+    </script>
+    <script>
+        function setLang(lang) {
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.includes(lang === 'zh' ? '中' : 'EN'));
+            });
+            localStorage.setItem('preferred-lang', lang);
+        }
+        // Initialize
+        const savedLang = localStorage.getItem('preferred-lang') || (navigator.language.startsWith('zh') ? 'zh' : 'en');
+        setLang(savedLang);
+    </script>
+</body>
+
+</html>

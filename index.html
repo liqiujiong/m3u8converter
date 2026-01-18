@@ -111,11 +111,14 @@
       </div>
       <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="切换主题">
         <svg class="icon-sun" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M10 2V4M10 16V18M18 10H16M4 10H2M15.66 4.34L14.24 5.76M5.76 14.24L4.34 15.66M15.66 15.66L14.24 14.24M5.76 5.76L4.34 4.34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5" />
+          <path
+            d="M10 2V4M10 16V18M18 10H16M4 10H2M15.66 4.34L14.24 5.76M5.76 14.24L4.34 15.66M15.66 15.66L14.24 14.24M5.76 5.76L4.34 4.34"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
         </svg>
         <svg class="icon-moon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" stroke="currentColor"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </button>
     </div>
@@ -299,6 +302,35 @@
         </div>
       </section>
 
+      <!-- Blog Articles Section -->
+      <section class="blog-section card" aria-labelledby="blog-title">
+        <h2 id="blog-title" data-i18n="blog_title">📚 教程与指南</h2>
+        <div class="blog-list">
+          <a href="/blog/how-to-download-m3u8-video.html" class="blog-item">
+            <span class="blog-icon">📥</span>
+            <div class="blog-content">
+              <strong data-i18n="blog_article1">如何下载 M3U8 视频</strong>
+              <span data-i18n="blog_article1_desc">完整教程，新手入门</span>
+            </div>
+          </a>
+          <a href="/blog/m3u8-to-mp4-guide.html" class="blog-item">
+            <span class="blog-icon">🔄</span>
+            <div class="blog-content">
+              <strong data-i18n="blog_article2">M3U8 转 MP4 指南</strong>
+              <span data-i18n="blog_article2_desc">多种方法对比</span>
+            </div>
+          </a>
+          <a href="/blog/what-is-hls-streaming.html" class="blog-item">
+            <span class="blog-icon">📡</span>
+            <div class="blog-content">
+              <strong data-i18n="blog_article3">HLS 流媒体详解</strong>
+              <span data-i18n="blog_article3_desc">技术原理介绍</span>
+            </div>
+          </a>
+        </div>
+        <a href="/blog/" class="blog-view-all" data-i18n="blog_view_all">查看全部文章 →</a>
+      </section>
+
       <!-- FAQ Section -->
       <section class="faq-section" aria-labelledby="faq-title">
         <h2 id="faq-title" data-i18n="faq_title">常见问题 FAQ</h2>
@@ -330,6 +362,27 @@
 
     <!-- Footer -->
     <footer class="footer">
+      <!-- Open Source Banner -->
+      <a href="https://github.com/liqiujiong/m3u8converter" target="_blank" rel="noopener noreferrer"
+        class="open-source-banner">
+        <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+        </svg>
+        <div class="open-source-text">
+          <strong data-i18n="footer_opensource">🎉 开源项目</strong>
+          <span data-i18n="footer_opensource_desc">代码完全开源，欢迎 Star ⭐ 和贡献</span>
+        </div>
+        <span class="open-source-arrow">→</span>
+      </a>
+
+      <!-- Links -->
+      <div class="footer-links">
+        <a href="/blog/" data-i18n="footer_blog">📚 教程博客</a>
+        <span>·</span>
+        <a href="https://github.com/liqiujiong/m3u8converter" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+
       <p>
         <span data-i18n="footer_tech">基于</span>
         <a href="https://github.com/ffmpegwasm/ffmpeg.wasm" target="_blank" rel="noopener noreferrer">FFmpeg.wasm</a>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>什么是 HLS 流媒体？M3U8 格式详解 | M3U8下载器</title>
+    <meta name="description" content="深入了解HLS (HTTP Live Streaming) 流媒体协议原理，M3U8播放列表结构，TS分片机制，以及自适应码率技术。">
+    <meta name="keywords" content="HLS流媒体,什么是HLS,M3U8格式,TS分片,HTTP Live Streaming">
+    <link rel="canonical" href="https://m3u8-converter.com/blog/what-is-hls-streaming.html">
+    <link rel="stylesheet" href="/src/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .article-container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .article-header h1 {
+            font-size: 2rem;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content {
+            line-height: 1.8;
+        }
+
+        .article-content h2 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+        }
+
+        .article-content h3 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1rem;
+            color: var(--color-text-secondary);
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            color: var(--color-text-secondary);
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .article-content code {
+            background: var(--color-bg-alt);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .article-content pre {
+            background: var(--color-bg-alt);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+        }
+
+        .info-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--color-success);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .diagram {
+            background: var(--color-bg-alt);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .diagram-text {
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .back-link {
+            display: inline-flex;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+    </style>
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "什么是 HLS 流媒体？M3U8 格式详解",
+    "description": "深入了解HLS流媒体协议原理",
+    "datePublished": "2026-01-18"
+  }
+  </script>
+</head>
+
+<body>
+    <div class="article-container">
+        <nav class="breadcrumb">
+            <a href="/">首页</a> / <a href="/blog/">博客</a> / HLS流媒体详解
+        </nav>
+
+        <article>
+            <header class="article-header">
+                <h1>📡 什么是 HLS 流媒体？M3U8 格式详解</h1>
+                <div class="article-meta">
+                    <span>📅 2026年1月18日</span>
+                    <span>⏱️ 10 分钟阅读</span>
+                    <span>📚 技术深度</span>
+                </div>
+            </header>
+
+            <div class="article-content">
+                <p>HLS (HTTP Live Streaming) 是目前最流行的视频流媒体协议之一。理解它的工作原理，有助于你更好地下载和处理在线视频。</p>
+
+                <h2>HLS 协议简介</h2>
+                <p><strong>HLS (HTTP Live Streaming)</strong> 是苹果公司在 2009 年开发的流媒体协议。它的核心思想是：</p>
+                <ul>
+                    <li>将视频切割成小片段（通常 2-10 秒）</li>
+                    <li>使用标准 HTTP 协议传输</li>
+                    <li>通过播放列表（M3U8）管理分片</li>
+                    <li>支持自适应码率（不同网速播放不同质量）</li>
+                </ul>
+
+                <div class="info-box">
+                    <strong>为什么 HLS 如此流行？</strong><br>
+                    HLS 使用标准 HTTP，可以利用现有的 CDN 基础设施，无需特殊服务器。几乎所有现代浏览器和设备都原生支持 HLS。
+                </div>
+
+                <h2>HLS 工作流程</h2>
+                <div class="diagram">
+                    <pre class="diagram-text">
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│  原始视频   │ →  │   编码器    │ →  │  TS 分片    │
+│  (MP4等)    │    │  (FFmpeg)   │    │ (2-10秒/片) │
+└─────────────┘    └─────────────┘    └─────────────┘
+                                              ↓
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│   播放器    │ ←  │  HTTP/CDN   │ ←  │ M3U8 播放列表│
+│  (浏览器)   │    │   (传输)    │    │ (索引文件)  │
+└─────────────┘    └─────────────┘    └─────────────┘
+          </pre>
+                </div>
+
+                <h2>M3U8 文件结构</h2>
+                <p>M3U8 是一个 UTF-8 编码的文本文件，包含元数据和分片 URL 列表：</p>
+
+                <h3>基本播放列表示例</h3>
+                <pre><code>#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-TARGETDURATION:10
+#EXT-X-MEDIA-SEQUENCE:0
+
+#EXTINF:10.0,
+segment_0.ts
+#EXTINF:10.0,
+segment_1.ts
+#EXTINF:10.0,
+segment_2.ts
+#EXTINF:8.5,
+segment_3.ts
+
+#EXT-X-ENDLIST</code></pre>
+
+                <h3>关键标签解释</h3>
+                <ul>
+                    <li><code>#EXTM3U</code>：文件头，表示这是 M3U8 文件</li>
+                    <li><code>#EXT-X-VERSION</code>：HLS 协议版本</li>
+                    <li><code>#EXT-X-TARGETDURATION</code>：分片最大时长（秒）</li>
+                    <li><code>#EXTINF</code>：下一个分片的实际时长</li>
+                    <li><code>#EXT-X-ENDLIST</code>：表示播放列表结束（VOD）</li>
+                </ul>
+
+                <h2>变体播放列表（多码率）</h2>
+                <p>为了支持自适应码率，HLS 使用主播放列表指向不同质量的子播放列表：</p>
+
+                <pre><code>#EXTM3U
+#EXT-X-VERSION:3
+
+#EXT-X-STREAM-INF:BANDWIDTH=800000,RESOLUTION=640x360
+low/playlist.m3u8
+
+#EXT-X-STREAM-INF:BANDWIDTH=1400000,RESOLUTION=1280x720
+mid/playlist.m3u8
+
+#EXT-X-STREAM-INF:BANDWIDTH=2800000,RESOLUTION=1920x1080
+high/playlist.m3u8</code></pre>
+
+                <p>播放器会根据用户的网络状况自动选择合适的质量流。</p>
+
+                <h2>TS 分片格式</h2>
+                <p><strong>MPEG-TS (Transport Stream)</strong> 是 HLS 使用的容器格式：</p>
+                <ul>
+                    <li>为流媒体设计，支持错误恢复</li>
+                    <li>固定 188 字节的数据包</li>
+                    <li>通常包含 H.264 视频和 AAC 音频</li>
+                    <li>每个 .ts 文件是一个独立可播放的片段</li>
+                </ul>
+
+                <h2>加密与 DRM</h2>
+                <p>HLS 支持内容保护：</p>
+
+                <h3>AES-128 加密</h3>
+                <pre><code>#EXT-X-KEY:METHOD=AES-128,URI="https://example.com/key.bin"</code></pre>
+                <p>每个分片使用 AES-128 加密，密钥从指定 URL 获取。</p>
+
+                <h3>FairPlay DRM</h3>
+                <p>苹果的专有 DRM 方案，用于保护付费内容，需要授权才能播放。</p>
+
+                <h2>HLS vs 其他协议</h2>
+                <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+                    <thead>
+                        <tr style="background: var(--color-bg-alt);">
+                            <th style="padding: 0.75rem; border: 1px solid var(--color-border);">协议</th>
+                            <th style="padding: 0.75rem; border: 1px solid var(--color-border);">延迟</th>
+                            <th style="padding: 0.75rem; border: 1px solid var(--color-border);">兼容性</th>
+                            <th style="padding: 0.75rem; border: 1px solid var(--color-border);">使用场景</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 0.75rem; border: 1px solid var(--color-border);">HLS</td>
+                            <td style="padding: 0.75rem; border: 1px solid var(--color-border);">高 (10-30秒)</td>
+                            <td style="padding: 0.75rem; border: 1px solid var(--color-border);">极好</td>
+                            <td style="padding: 0.75rem; border: 1px solid var(--color-border);">点播、直播</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.75rem; border: 1px solid var(--color-border);">DASH</td>
+                            <td style="padding: 0.75rem; border: 1px solid var(--color-border);">中 (5-15秒)</td>
+                            <td style="padding: 0.75rem; border: 1px solid var(--color-border);">好</td>
+                            <td style="padding: 0.75rem; border: 1px solid var(--color-border);">点播</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.75rem; border: 1px solid var(--color-border);">WebRTC</td>
+                            <td style="padding: 0.75rem; border: 1px solid var(--color-border);">极低 (<1秒)< /td>
+                            <td style="padding: 0.75rem; border: 1px solid var(--color-border);">中</td>
+                            <td style="padding: 0.75rem; border: 1px solid var(--color-border);">实时通信</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>如何处理 HLS 视频</h2>
+                <p>了解了 HLS 原理后，处理这类视频就很简单了：</p>
+                <ol>
+                    <li>获取 M3U8 播放列表 URL</li>
+                    <li>解析播放列表，获取所有 TS 分片 URL</li>
+                    <li>下载所有 TS 分片</li>
+                    <li>合并分片并转换为 MP4</li>
+                </ol>
+                <p>我们的 <a href="/">M3U8 Converter</a> 工具自动完成以上所有步骤。</p>
+            </div>
+        </article>
+
+        <footer
+            style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border);">
+            <a href="/blog/" class="back-link">← 返回博客列表</a>
+        </footer>
+    </div>
+    <script type="module">
+        import { themeManager } from '/src/theme.js';
+        themeManager.init();
+    </script>
+</body>
+
+</html>

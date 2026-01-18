@@ -1,0 +1,15 @@
+# M3U8 Converter - robots.txt
+# https://m3u8-converter.com/
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://m3u8-converter.com/sitemap.xml
+
+# Disallow admin or private paths (if any)
+Disallow: /api/
+Disallow: /_*
+
+# Crawl-delay for politeness (optional)
+Crawl-delay: 1

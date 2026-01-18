@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M3U8 转 MP4 终极指南 - 多种方法对比 | M3U8下载器</title>
+    <meta name="description" content="全面对比M3U8转MP4的各种方法：在线工具、FFmpeg命令行、桌面软件。找到最适合你的转换方案。">
+    <meta name="keywords" content="m3u8转mp4,m3u8怎么转mp4,m3u8转换mp4方法,FFmpeg转换m3u8">
+    <link rel="canonical" href="https://m3u8-converter.com/blog/m3u8-to-mp4-guide.html">
+    <link rel="stylesheet" href="/src/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .article-container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .article-header h1 {
+            font-size: 2rem;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content {
+            line-height: 1.8;
+        }
+
+        .article-content h2 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+        }
+
+        .article-content h3 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1rem;
+            color: var(--color-text-secondary);
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            color: var(--color-text-secondary);
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .article-content code {
+            background: var(--color-bg-alt);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .article-content pre {
+            background: var(--color-bg-alt);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            border: 1px solid var(--color-border);
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .comparison-table th {
+            background: var(--color-bg-alt);
+        }
+
+        .comparison-table td {
+            color: var(--color-text-secondary);
+        }
+
+        .tip-box {
+            background: rgba(99, 102, 241, 0.1);
+            border-left: 4px solid var(--color-primary);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .cta-box {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .cta-box a {
+            display: inline-block;
+            background: white;
+            color: var(--color-primary);
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .breadcrumb {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .back-link {
+            display: inline-flex;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+    </style>
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "M3U8 转 MP4 终极指南",
+    "description": "全面对比M3U8转MP4的各种方法",
+    "datePublished": "2026-01-18"
+  }
+  </script>
+</head>
+
+<body>
+    <div class="article-container">
+        <nav class="breadcrumb">
+            <a href="/">首页</a> / <a href="/blog/">博客</a> / M3U8转MP4指南
+        </nav>
+
+        <article>
+            <header class="article-header">
+                <h1>🔄 M3U8 转 MP4 终极指南</h1>
+                <div class="article-meta">
+                    <span>📅 2026年1月18日</span>
+                    <span>⏱️ 8 分钟阅读</span>
+                    <span>🔧 进阶教程</span>
+                </div>
+            </header>
+
+            <div class="article-content">
+                <p>将 M3U8 视频流转换为 MP4 有多种方法，每种方法都有其优缺点。本文将全面对比各种方案，帮助你选择最适合的工具。</p>
+
+                <h2>方法对比表</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>方法</th>
+                            <th>难度</th>
+                            <th>速度</th>
+                            <th>隐私</th>
+                            <th>适合人群</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>在线工具（本站）</td>
+                            <td>⭐ 简单</td>
+                            <td>⭐⭐⭐ 快</td>
+                            <td>⭐⭐⭐ 本地处理</td>
+                            <td>所有用户</td>
+                        </tr>
+                        <tr>
+                            <td>FFmpeg 命令行</td>
+                            <td>⭐⭐⭐ 复杂</td>
+                            <td>⭐⭐⭐ 最快</td>
+                            <td>⭐⭐⭐ 完全本地</td>
+                            <td>技术人员</td>
+                        </tr>
+                        <tr>
+                            <td>桌面软件</td>
+                            <td>⭐⭐ 中等</td>
+                            <td>⭐⭐⭐ 快</td>
+                            <td>⭐⭐ 取决于软件</td>
+                            <td>常规用户</td>
+                        </tr>
+                        <tr>
+                            <td>浏览器扩展</td>
+                            <td>⭐ 简单</td>
+                            <td>⭐⭐ 中等</td>
+                            <td>⭐⭐ 取决于扩展</td>
+                            <td>常规用户</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>方法一：在线转换工具（推荐）</h2>
+                <p>使用我们的 M3U8 Converter 在线工具是最简单的方法：</p>
+                <ul>
+                    <li><strong>无需安装</strong>：直接在浏览器中使用</li>
+                    <li><strong>隐私保护</strong>：所有处理在本地完成，视频不上传</li>
+                    <li><strong>多格式支持</strong>：MP4、WebM、AVI、MKV、MOV</li>
+                    <li><strong>免费使用</strong>：无需注册，无限制</li>
+                </ul>
+
+                <div class="cta-box">
+                    <h3>立即体验在线转换</h3>
+                    <a href="/">打开 M3U8 Converter →</a>
+                </div>
+
+                <h2>方法二：FFmpeg 命令行</h2>
+                <p>如果你熟悉命令行，FFmpeg 是最强大的选择：</p>
+
+                <h3>安装 FFmpeg</h3>
+                <pre><code># macOS (使用 Homebrew)
+brew install ffmpeg
+
+# Windows (使用 Chocolatey)
+choco install ffmpeg
+
+# Ubuntu/Debian
+sudo apt install ffmpeg</code></pre>
+
+                <h3>转换命令</h3>
+                <pre><code># 基本转换
+ffmpeg -i "https://example.com/video.m3u8" -c copy output.mp4
+
+# 重新编码（更好的兼容性）
+ffmpeg -i "https://example.com/video.m3u8" -c:v libx264 -c:a aac output.mp4
+
+# 下载时显示进度
+ffmpeg -i "https://example.com/video.m3u8" -c copy -progress - output.mp4</code></pre>
+
+                <div class="tip-box">
+                    <strong>💡 提示：</strong> 使用 <code>-c copy</code> 可以直接复制流而不重新编码，速度最快。如果遇到播放问题，再使用
+                    <code>-c:v libx264</code> 重新编码。
+                </div>
+
+                <h2>方法三：桌面软件</h2>
+                <p>常用的桌面软件包括：</p>
+                <ul>
+                    <li><strong>VLC Media Player</strong>：免费开源，支持 M3U8 转换</li>
+                    <li><strong>JDownloader</strong>：强大的下载管理器</li>
+                    <li><strong>Video DownloadHelper</strong>：配合浏览器扩展使用</li>
+                </ul>
+
+                <h3>使用 VLC 转换</h3>
+                <ol>
+                    <li>打开 VLC，选择 媒体 → 转换/保存</li>
+                    <li>选择"网络"标签，粘贴 M3U8 URL</li>
+                    <li>点击"转换/保存"</li>
+                    <li>选择输出配置文件（如 Video - H.264 + MP3）</li>
+                    <li>设置输出文件位置，点击"开始"</li>
+                </ol>
+
+                <h2>方法四：浏览器扩展</h2>
+                <p>一些浏览器扩展可以自动检测并下载 M3U8 视频：</p>
+                <ul>
+                    <li><strong>Video DownloadHelper</strong>（Firefox/Chrome）</li>
+                    <li><strong>HLS Downloader</strong>（Chrome）</li>
+                    <li><strong>Stream Recorder</strong>（Chrome）</li>
+                </ul>
+                <p>注意：使用扩展时请注意隐私和安全，选择知名度高、评价好的扩展。</p>
+
+                <h2>选择建议</h2>
+                <ul>
+                    <li><strong>普通用户</strong>：推荐使用本站的在线工具，简单快捷</li>
+                    <li><strong>需要批量下载</strong>：使用 FFmpeg 命令行配合脚本</li>
+                    <li><strong>经常下载视频</strong>：安装 VLC 或专业下载软件</li>
+                    <li><strong>重视隐私</strong>：使用本站工具或本地 FFmpeg</li>
+                </ul>
+
+                <h2>常见错误处理</h2>
+                <h3>403 Forbidden</h3>
+                <p>服务器拒绝访问，可能需要添加 Referer 头或使用 Cookie。</p>
+
+                <h3>CORS 错误</h3>
+                <p>浏览器跨域限制，在线工具可能无法直接访问，可尝试使用 FFmpeg。</p>
+
+                <h3>加密视频</h3>
+                <p>如果视频使用 AES-128 加密，需要提供密钥才能解密下载。</p>
+            </div>
+        </article>
+
+        <footer
+            style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border);">
+            <a href="/blog/" class="back-link">← 返回博客列表</a>
+        </footer>
+    </div>
+    <script type="module">
+        import { themeManager } from '/src/theme.js';
+        themeManager.init();
+    </script>
+</body>
+
+</html>

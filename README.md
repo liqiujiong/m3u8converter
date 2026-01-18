@@ -1,6 +1,10 @@
 # M3U8 Converter | M3U8下载器
 
-[English](#english) | [中文](#中文)
+[![GitHub stars](https://img.shields.io/github/stars/liqiujiong/m3u8converter?style=social)](https://github.com/liqiujiong/m3u8converter)
+[![GitHub issues](https://img.shields.io/github/issues/liqiujiong/m3u8converter)](https://github.com/liqiujiong/m3u8converter/issues)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+[English](#english) | [中文](#中文) | [⭐ Star on GitHub](https://github.com/liqiujiong/m3u8converter)
 
 ---
 
@@ -141,18 +145,30 @@ MIT 许可证 - 可自由用于个人和教育目的。
 ## 📁 Project Structure
 
 ```
-├── index.html          # Main HTML with SEO meta tags & structured data
-├── vite.config.js      # Vite config with CORS headers
-├── package.json        # Dependencies
+├── index.html              # Main HTML with SEO meta tags & structured data
+├── vite.config.js          # Vite config with CORS headers
+├── vercel.json             # Vercel deployment config
+├── package.json            # Dependencies
 ├── public/
-│   └── favicon.svg     # Site favicon
+│   ├── favicon.svg         # Site favicon
+│   ├── og-image.png        # Social sharing image (Open Graph)
+│   ├── robots.txt          # Search engine crawler rules
+│   └── sitemap.xml         # XML sitemap for SEO
+├── blog/                   # SEO blog articles
+│   ├── index.html          # Blog listing page
+│   ├── how-to-download-m3u8-video.html
+│   ├── m3u8-to-mp4-guide.html
+│   ├── what-is-hls-streaming.html
+│   ├── merge-ts-files-to-mp4.html
+│   └── best-m3u8-downloader-2026.html
 └── src/
-    ├── main.js         # App entry & UI logic
-    ├── style.css       # Modern business theme CSS
-    ├── i18n.js         # Internationalization (zh/en)
+    ├── main.js             # App entry & UI logic
+    ├── style.css           # Modern business theme CSS
+    ├── theme.js            # Dark/light mode toggle
+    ├── i18n.js             # Internationalization (zh/en)
     ├── ffmpeg-handler.js   # FFmpeg WASM wrapper
-    ├── m3u8-parser.js  # M3U8 playlist parser
-    └── downloader.js   # Segment downloader
+    ├── m3u8-parser.js      # M3U8 playlist parser
+    └── downloader.js       # Segment downloader
 ```
 
 ## 🚀 Vercel Deployment | Vercel 部署
@@ -219,9 +235,22 @@ vercel --prod
 
 ---
 
-## 🤝 Contributing
+## 🤝 Contributing | 贡献
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+We welcome contributions! Here's how you can help:
+
+我们欢迎任何形式的贡献！您可以通过以下方式参与：
+
+- ⭐ **Star this project** if you find it useful | 如果觉得有用请 Star
+- 🐛 **[Report bugs](https://github.com/liqiujiong/m3u8converter/issues)** | 报告问题
+- 💡 **[Request features](https://github.com/liqiujiong/m3u8converter/issues)** | 提交功能建议
+- 🔧 **Submit pull requests** | 提交代码改进
+
+---
+
+## 📄 License
+
+MIT License - feel free to use in personal and commercial projects.
 
 ---
 
