@@ -29,6 +29,11 @@ const translations = {
         input_hint: '支持标准 M3U8/HLS 视频流链接',
         format_label: '输出格式',
         format_desc: 'MP4 兼容性最佳',
+        format_mp4: 'MP4 (H.264) - 推荐',
+        format_webm: 'WebM (VP9)',
+        format_avi: 'AVI',
+        format_mkv: 'MKV (快速)',
+        format_mov: 'MOV',
         quality_label: '质量',
         quality_high: '高质量',
         quality_medium: '标准',
@@ -78,12 +83,16 @@ const translations = {
 
         // Blog Section
         blog_title: '📚 教程与指南',
+        blog_latest: '🆕 最新文章',
+        blog_guides: '📖 基础教程',
+        blog_new1: '浏览器获取 M3U8 链接的 5 种方法',
+        blog_new2: 'M3U8 与 MP4 有什么区别？',
+        blog_new3: 'FFmpeg 下载 M3U8 命令指南',
         blog_article1: '如何下载 M3U8 视频',
-        blog_article1_desc: '完整教程，新手入门',
         blog_article2: 'M3U8 转 MP4 指南',
-        blog_article2_desc: '多种方法对比',
         blog_article3: 'HLS 流媒体详解',
-        blog_article3_desc: '技术原理介绍',
+        blog_article4: 'TS 文件合并为 MP4',
+        blog_article5: '2026 最佳 M3U8 下载器',
         blog_view_all: '查看全部文章 →',
 
         // Messages
@@ -125,6 +134,11 @@ const translations = {
         input_hint: 'Supports standard M3U8/HLS video stream URLs',
         format_label: 'Output Format',
         format_desc: 'MP4 offers best compatibility',
+        format_mp4: 'MP4 (H.264) - Recommended',
+        format_webm: 'WebM (VP9)',
+        format_avi: 'AVI',
+        format_mkv: 'MKV (Fast)',
+        format_mov: 'MOV',
         quality_label: 'Quality',
         quality_high: 'High Quality',
         quality_medium: 'Standard',
@@ -174,12 +188,16 @@ const translations = {
 
         // Blog Section
         blog_title: '📚 Tutorials & Guides',
+        blog_latest: '🆕 Latest Articles',
+        blog_guides: '📖 Basic Tutorials',
+        blog_new1: '5 Ways to Extract M3U8 Links in Browser',
+        blog_new2: 'M3U8 vs MP4: What\'s the Difference?',
+        blog_new3: 'FFmpeg M3U8 Download Guide',
         blog_article1: 'How to Download M3U8 Video',
-        blog_article1_desc: 'Complete tutorial for beginners',
         blog_article2: 'M3U8 to MP4 Guide',
-        blog_article2_desc: 'Compare different methods',
         blog_article3: 'HLS Streaming Explained',
-        blog_article3_desc: 'Technical deep dive',
+        blog_article4: 'Merge TS Files to MP4',
+        blog_article5: 'Best M3U8 Downloaders 2026',
         blog_view_all: 'View all articles →',
 
         // Messages

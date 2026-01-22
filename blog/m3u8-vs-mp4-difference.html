@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M3U8 与 MP4 有什么区别？格式对比详解 | M3U8下载器</title>
+    <meta name="description" content="深入对比M3U8和MP4两种视频格式的区别：技术原理、使用场景、优缺点分析，帮助你选择合适的视频格式。">
+    <meta name="keywords" content="m3u8和mp4区别,m3u8是什么格式,mp4和m3u8对比,视频格式区别,hls和mp4">
+    <link rel="canonical" href="https://www.m3u8converter.com/blog/m3u8-vs-mp4-difference.html">
+    <meta property="og:title" content="M3U8 与 MP4 有什么区别？格式对比详解">
+    <meta property="og:description" content="深入对比M3U8和MP4两种视频格式的区别">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.m3u8converter.com/blog/m3u8-vs-mp4-difference.html">
+    <link rel="stylesheet" href="/src/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .article-container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .article-header {
+            margin-bottom: 2rem;
+        }
+
+        .article-header h1 {
+            font-size: 2rem;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content {
+            line-height: 1.8;
+        }
+
+        .article-content h2 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            color: var(--color-text);
+        }
+
+        .article-content h3 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1rem;
+            color: var(--color-text-secondary);
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            color: var(--color-text-secondary);
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .article-content code {
+            background: var(--color-bg-alt);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .article-content pre {
+            background: var(--color-bg-alt);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .article-content pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .tip-box {
+            background: rgba(99, 102, 241, 0.1);
+            border-left: 4px solid var(--color-primary);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .tip-box strong {
+            color: var(--color-primary);
+        }
+
+        .cta-box {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .cta-box h3 {
+            margin-bottom: 1rem;
+        }
+
+        .cta-box a {
+            display: inline-block;
+            background: white;
+            color: var(--color-primary);
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-primary);
+            text-decoration: none;
+            margin-bottom: 2rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            border: 1px solid var(--color-border);
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .comparison-table th {
+            background: var(--color-bg-alt);
+            font-weight: 600;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: var(--color-surface);
+        }
+
+        .format-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .format-card h3 {
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .format-badge {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-weight: 600;
+        }
+
+        .badge-m3u8 {
+            background: linear-gradient(135deg, #6366F1, #8B5CF6);
+            color: white;
+        }
+
+        .badge-mp4 {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .pros,
+        .cons {
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .pros {
+            background: rgba(34, 197, 94, 0.1);
+            border-left: 3px solid #22c55e;
+        }
+
+        .cons {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 3px solid #ef4444;
+        }
+
+        .pros h4,
+        .cons h4 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .pros ul,
+        .cons ul {
+            margin: 0;
+            padding-left: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 600px) {
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .use-case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .use-case-item {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .use-case-item .emoji {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .use-case-item h4 {
+            margin: 0 0 0.5rem;
+            font-size: 1rem;
+        }
+
+        .use-case-item p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .lang-btn {
+            font-size: 0.875rem;
+            padding: 0.25rem 0.75rem;
+            background: transparent;
+            color: var(--color-text-muted);
+            border: 1px solid transparent;
+            border-radius: 999px;
+            cursor: pointer;
+        }
+
+        .lang-btn.active {
+            background: var(--color-surface);
+            color: var(--color-primary);
+            border-color: var(--color-border);
+        }
+
+        [data-lang="en"] {
+            display: none;
+        }
+
+        [lang="en"] [data-lang="en"] {
+            display: block;
+        }
+
+        [lang="en"] [data-lang="zh"] {
+            display: none;
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "M3U8 与 MP4 有什么区别？格式对比详解",
+        "description": "深入对比M3U8和MP4两种视频格式的区别",
+        "datePublished": "2026-01-22",
+        "dateModified": "2026-01-22",
+        "author": { "@type": "Organization", "name": "M3U8 Converter" },
+        "publisher": { "@type": "Organization", "name": "M3U8 Converter" }
+    }
+    </script>
+</head>
+
+<body>
+    <div class="article-container">
+        <div class="lang-switcher">
+            <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+            <button class="lang-btn" onclick="setLang('en')">EN</button>
+        </div>
+
+        <nav class="breadcrumb">
+            <span data-lang="zh"><a href="/">首页</a> / <a href="/blog/">博客</a> / M3U8 与 MP4 的区别</span>
+            <span data-lang="en"><a href="/">Home</a> / <a href="/blog/">Blog</a> / M3U8 vs MP4 Difference</span>
+        </nav>
+
+        <article>
+            <header class="article-header">
+                <h1 data-lang="zh">🎬 M3U8 与 MP4 有什么区别？格式对比详解</h1>
+                <h1 data-lang="en">🎬 M3U8 vs MP4: What's the Difference?</h1>
+                <div class="article-meta">
+                    <span>📅 2026-01-22</span>
+                    <span>⏱️ <span data-lang="zh">7 分钟阅读</span><span data-lang="en">7 min read</span></span>
+                    <span>👁️ <span data-lang="zh">技术科普</span><span data-lang="en">Technical</span></span>
+                </div>
+            </header>
+
+            <div class="article-content">
+                <!-- 中文内容 -->
+                <div data-lang="zh">
+                    <p>在下载或处理网络视频时，你可能会遇到 <strong>M3U8</strong> 和 <strong>MP4</strong>
+                        这两种常见格式。它们有什么区别？各自适用于什么场景？本文将为你详细解读。</p>
+
+                    <h2>快速对比</h2>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>特性</th>
+                                <th>M3U8 / HLS</th>
+                                <th>MP4</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>本质</strong></td>
+                                <td>播放列表（索引文件）</td>
+                                <td>视频容器格式</td>
+                            </tr>
+                            <tr>
+                                <td><strong>文件类型</strong></td>
+                                <td>文本文件 + 多个 TS 分片</td>
+                                <td>单个二进制文件</td>
+                            </tr>
+                            <tr>
+                                <td><strong>主要用途</strong></td>
+                                <td>流媒体播放、直播</td>
+                                <td>本地播放、分发</td>
+                            </tr>
+                            <tr>
+                                <td><strong>兼容性</strong></td>
+                                <td>需要播放器支持 HLS</td>
+                                <td>几乎所有设备都支持</td>
+                            </tr>
+                            <tr>
+                                <td><strong>下载难度</strong></td>
+                                <td>需要专门工具</td>
+                                <td>右键直接保存</td>
+                            </tr>
+                            <tr>
+                                <td><strong>自适应码率</strong></td>
+                                <td>✅ 支持</td>
+                                <td>❌ 不支持</td>
+                            </tr>
+                            <tr>
+                                <td><strong>实时直播</strong></td>
+                                <td>✅ 支持</td>
+                                <td>❌ 不适合</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>什么是 M3U8？</h2>
+                    <div class="format-card">
+                        <h3><span class="format-badge badge-m3u8">M3U8</span> HLS 流媒体播放列表</h3>
+                        <p>M3U8 是 <strong>HLS (HTTP Live Streaming)</strong> 协议的核心组成部分，由 Apple
+                            开发。它本身不是视频文件，而是一个描述视频结构的文本文件。</p>
+
+                        <h4>M3U8 文件内容示例：</h4>
+                        <pre><code>#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-TARGETDURATION:10
+#EXT-X-MEDIA-SEQUENCE:0
+#EXTINF:10.0,
+segment_0.ts
+#EXTINF:10.0,
+segment_1.ts
+#EXTINF:10.0,
+segment_2.ts
+#EXT-X-ENDLIST</code></pre>
+
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <h4>✅ 优点</h4>
+                                <ul>
+                                    <li>支持自适应码率</li>
+                                    <li>适合流媒体和直播</li>
+                                    <li>边下边播，启动快</li>
+                                    <li>更好的 CDN 缓存</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h4>❌ 缺点</h4>
+                                <ul>
+                                    <li>不是通用播放格式</li>
+                                    <li>需要合并分片</li>
+                                    <li>可能有延迟</li>
+                                    <li>难以直接下载</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>什么是 MP4？</h2>
+                    <div class="format-card">
+                        <h3><span class="format-badge badge-mp4">MP4</span> 通用视频容器格式</h3>
+                        <p>MP4 (MPEG-4 Part 14) 是目前最流行的视频容器格式，可以封装各种编码的视频、音频和字幕。</p>
+
+                        <h4>MP4 容器可包含：</h4>
+                        <ul>
+                            <li><strong>视频编码</strong>：H.264/AVC, H.265/HEVC, AV1</li>
+                            <li><strong>音频编码</strong>：AAC, MP3, AC3</li>
+                            <li><strong>字幕</strong>：SRT (内封), WebVTT</li>
+                            <li><strong>元数据</strong>：标题、艺术家、封面等</li>
+                        </ul>
+
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <h4>✅ 优点</h4>
+                                <ul>
+                                    <li>通用兼容性极佳</li>
+                                    <li>单文件便于管理</li>
+                                    <li>支持离线播放</li>
+                                    <li>方便编辑和分享</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h4>❌ 缺点</h4>
+                                <ul>
+                                    <li>不支持自适应码率</li>
+                                    <li>大文件加载慢</li>
+                                    <li>不适合直播</li>
+                                    <li>需完整下载才能播放</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>技术原理对比</h2>
+
+                    <h3>M3U8/HLS 工作流程</h3>
+                    <ol>
+                        <li>服务器将完整视频切割成小片段（通常 2-10 秒）</li>
+                        <li>生成 M3U8 索引文件，列出所有分片地址</li>
+                        <li>播放器读取 M3U8，按顺序请求分片</li>
+                        <li>根据网络状况自动切换清晰度</li>
+                    </ol>
+
+                    <h3>MP4 工作流程</h3>
+                    <ol>
+                        <li>服务器存储完整的 MP4 文件</li>
+                        <li>用户请求下载或播放</li>
+                        <li>支持 Range 请求实现拖动播放</li>
+                        <li>固定码率，不自动适应网速</li>
+                    </ol>
+
+                    <h2>使用场景</h2>
+
+                    <h3>M3U8 适用于：</h3>
+                    <div class="use-case-grid">
+                        <div class="use-case-item">
+                            <div class="emoji">📺</div>
+                            <h4>直播流</h4>
+                            <p>电视直播、游戏直播</p>
+                        </div>
+                        <div class="use-case-item">
+                            <div class="emoji">🎥</div>
+                            <h4>视频网站</h4>
+                            <p>YouTube、B站等平台</p>
+                        </div>
+                        <div class="use-case-item">
+                            <div class="emoji">📱</div>
+                            <h4>移动设备</h4>
+                            <p>弱网络环境播放</p>
+                        </div>
+                        <div class="use-case-item">
+                            <div class="emoji">🔐</div>
+                            <h4>版权保护</h4>
+                            <p>防止直接下载</p>
+                        </div>
+                    </div>
+
+                    <h3>MP4 适用于：</h3>
+                    <div class="use-case-grid">
+                        <div class="use-case-item">
+                            <div class="emoji">💾</div>
+                            <h4>本地存储</h4>
+                            <p>个人视频收藏</p>
+                        </div>
+                        <div class="use-case-item">
+                            <div class="emoji">✂️</div>
+                            <h4>视频编辑</h4>
+                            <p>剪辑和后期处理</p>
+                        </div>
+                        <div class="use-case-item">
+                            <div class="emoji">📤</div>
+                            <h4>分享传输</h4>
+                            <p>邮件、消息发送</p>
+                        </div>
+                        <div class="use-case-item">
+                            <div class="emoji">💿</div>
+                            <h4>离线播放</h4>
+                            <p>无网络环境观看</p>
+                        </div>
+                    </div>
+
+                    <h2>如何将 M3U8 转换为 MP4？</h2>
+                    <p>由于 M3U8 不便于保存和分享，很多用户需要将其转换为 MP4。常见方法包括：</p>
+
+                    <ol>
+                        <li><strong>在线工具</strong>：使用 M3U8 Converter 等在线转换器</li>
+                        <li><strong>命令行</strong>：使用 <a href="/blog/ffmpeg-m3u8-commands.html">FFmpeg</a> 进行转换</li>
+                        <li><strong>桌面软件</strong>：VLC、IDM 等支持 M3U8 下载的工具</li>
+                    </ol>
+
+                    <div class="cta-box">
+                        <h3>🚀 在线 M3U8 转 MP4</h3>
+                        <p>无需安装软件，浏览器直接转换</p>
+                        <a href="/">立即使用 →</a>
+                    </div>
+
+                    <h2>常见问题</h2>
+
+                    <h3>Q: M3U8 文件可以直接播放吗？</h3>
+                    <p>可以，支持 HLS 的播放器（如 VLC、PotPlayer）可以直接播放 M3U8 链接。Safari 浏览器原生支持 HLS 播放。</p>
+
+                    <h3>Q: 转换会损失画质吗？</h3>
+                    <p>如果使用"直接复制"模式（-c copy），不会损失任何画质。只有重新编码才会影响画质。</p>
+
+                    <h3>Q: 为什么很多网站使用 M3U8？</h3>
+                    <ul>
+                        <li>自适应码率提供更好的用户体验</li>
+                        <li>分段传输更适合 CDN 缓存</li>
+                        <li>边下边播减少等待时间</li>
+                        <li>一定程度上增加下载难度</li>
+                    </ul>
+
+                    <h2>相关阅读</h2>
+                    <ul>
+                        <li><a href="/blog/what-is-hls-streaming.html">什么是 HLS 流媒体？M3U8 格式详解</a></li>
+                        <li><a href="/blog/how-to-download-m3u8-video.html">如何下载 M3U8 视频 - 完整教程</a></li>
+                        <li><a href="/blog/browser-extract-m3u8.html">浏览器获取 M3U8 链接的 5 种方法</a></li>
+                    </ul>
+
+                    <h2>总结</h2>
+                    <p>简单来说：</p>
+                    <ul>
+                        <li><strong>M3U8</strong> 是流媒体索引格式，适合在线播放和直播，不便于保存</li>
+                        <li><strong>MP4</strong> 是通用视频容器，适合本地存储、编辑和分享</li>
+                    </ul>
+                    <p>两种格式各有所长，M3U8 更适合流媒体分发，MP4 更适合视频存档。如果你想保存网上的 M3U8 视频，建议转换为 MP4 格式以便长期保存和在各种设备上播放。</p>
+                </div>
+
+                <!-- English Content -->
+                <div data-lang="en">
+                    <p>When downloading or processing online videos, you'll likely encounter <strong>M3U8</strong> and
+                        <strong>MP4</strong> formats. What are the differences between them? When should you use each?
+                        This article will explain in detail.</p>
+
+                    <h2>Quick Comparison</h2>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>M3U8 / HLS</th>
+                                <th>MP4</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Nature</strong></td>
+                                <td>Playlist (index file)</td>
+                                <td>Video container format</td>
+                            </tr>
+                            <tr>
+                                <td><strong>File Type</strong></td>
+                                <td>Text file + multiple TS segments</td>
+                                <td>Single binary file</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Primary Use</strong></td>
+                                <td>Streaming, live broadcasts</td>
+                                <td>Local playback, distribution</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Compatibility</strong></td>
+                                <td>Requires HLS support</td>
+                                <td>Almost all devices support</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Download Difficulty</strong></td>
+                                <td>Needs special tools</td>
+                                <td>Right-click to save</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Adaptive Bitrate</strong></td>
+                                <td>✅ Supported</td>
+                                <td>❌ Not supported</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Live Streaming</strong></td>
+                                <td>✅ Supported</td>
+                                <td>❌ Not suitable</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>What is M3U8?</h2>
+                    <div class="format-card">
+                        <h3><span class="format-badge badge-m3u8">M3U8</span> HLS Streaming Playlist</h3>
+                        <p>M3U8 is a core component of <strong>HLS (HTTP Live Streaming)</strong> protocol, developed by
+                            Apple. It's not a video file itself, but a text file describing the video structure.</p>
+
+                        <h4>M3U8 File Example:</h4>
+                        <pre><code>#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-TARGETDURATION:10
+#EXT-X-MEDIA-SEQUENCE:0
+#EXTINF:10.0,
+segment_0.ts
+#EXTINF:10.0,
+segment_1.ts
+#EXTINF:10.0,
+segment_2.ts
+#EXT-X-ENDLIST</code></pre>
+
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <h4>✅ Pros</h4>
+                                <ul>
+                                    <li>Adaptive bitrate support</li>
+                                    <li>Great for streaming/live</li>
+                                    <li>Fast startup time</li>
+                                    <li>Better CDN caching</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h4>❌ Cons</h4>
+                                <ul>
+                                    <li>Not universal format</li>
+                                    <li>Needs segment merging</li>
+                                    <li>May have latency</li>
+                                    <li>Hard to download directly</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>What is MP4?</h2>
+                    <div class="format-card">
+                        <h3><span class="format-badge badge-mp4">MP4</span> Universal Video Container Format</h3>
+                        <p>MP4 (MPEG-4 Part 14) is currently the most popular video container format, capable of
+                            encapsulating various video, audio, and subtitle codecs.</p>
+
+                        <h4>MP4 Container Can Include:</h4>
+                        <ul>
+                            <li><strong>Video Codecs</strong>: H.264/AVC, H.265/HEVC, AV1</li>
+                            <li><strong>Audio Codecs</strong>: AAC, MP3, AC3</li>
+                            <li><strong>Subtitles</strong>: SRT (embedded), WebVTT</li>
+                            <li><strong>Metadata</strong>: Title, artist, cover art, etc.</li>
+                        </ul>
+
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <h4>✅ Pros</h4>
+                                <ul>
+                                    <li>Excellent compatibility</li>
+                                    <li>Single file, easy to manage</li>
+                                    <li>Supports offline playback</li>
+                                    <li>Easy to edit and share</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h4>❌ Cons</h4>
+                                <ul>
+                                    <li>No adaptive bitrate</li>
+                                    <li>Large files load slowly</li>
+                                    <li>Not suitable for live</li>
+                                    <li>Needs full download to play</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>Technical Comparison</h2>
+
+                    <h3>M3U8/HLS Workflow</h3>
+                    <ol>
+                        <li>Server splits complete video into small segments (typically 2-10 seconds)</li>
+                        <li>Generates M3U8 index file listing all segment URLs</li>
+                        <li>Player reads M3U8 and requests segments sequentially</li>
+                        <li>Automatically switches quality based on network conditions</li>
+                    </ol>
+
+                    <h3>MP4 Workflow</h3>
+                    <ol>
+                        <li>Server stores complete MP4 file</li>
+                        <li>User requests download or playback</li>
+                        <li>Supports Range requests for seeking</li>
+                        <li>Fixed bitrate, no automatic adaptation</li>
+                    </ol>
+
+                    <h2>Use Cases</h2>
+
+                    <h3>M3U8 is Best For:</h3>
+                    <div class="use-case-grid">
+                        <div class="use-case-item">
+                            <div class="emoji">📺</div>
+                            <h4>Live Streaming</h4>
+                            <p>TV, gaming streams</p>
+                        </div>
+                        <div class="use-case-item">
+                            <div class="emoji">🎥</div>
+                            <h4>Video Platforms</h4>
+                            <p>YouTube, Netflix, etc.</p>
+                        </div>
+                        <div class="use-case-item">
+                            <div class="emoji">📱</div>
+                            <h4>Mobile Devices</h4>
+                            <p>Weak network playback</p>
+                        </div>
+                        <div class="use-case-item">
+                            <div class="emoji">🔐</div>
+                            <h4>DRM Protection</h4>
+                            <p>Prevent direct downloads</p>
+                        </div>
+                    </div>
+
+                    <h3>MP4 is Best For:</h3>
+                    <div class="use-case-grid">
+                        <div class="use-case-item">
+                            <div class="emoji">💾</div>
+                            <h4>Local Storage</h4>
+                            <p>Personal video collection</p>
+                        </div>
+                        <div class="use-case-item">
+                            <div class="emoji">✂️</div>
+                            <h4>Video Editing</h4>
+                            <p>Cutting and post-production</p>
+                        </div>
+                        <div class="use-case-item">
+                            <div class="emoji">📤</div>
+                            <h4>Sharing</h4>
+                            <p>Email, messaging</p>
+                        </div>
+                        <div class="use-case-item">
+                            <div class="emoji">💿</div>
+                            <h4>Offline Playback</h4>
+                            <p>Watch without internet</p>
+                        </div>
+                    </div>
+
+                    <h2>How to Convert M3U8 to MP4?</h2>
+                    <p>Since M3U8 isn't convenient for saving and sharing, many users need to convert it to MP4. Common
+                        methods include:</p>
+
+                    <ol>
+                        <li><strong>Online Tools</strong>: Use online converters like M3U8 Converter</li>
+                        <li><strong>Command Line</strong>: Use <a href="/blog/ffmpeg-m3u8-commands.html">FFmpeg</a> for
+                            conversion</li>
+                        <li><strong>Desktop Software</strong>: VLC, IDM, and other M3U8-compatible tools</li>
+                    </ol>
+
+                    <div class="cta-box">
+                        <h3>🚀 Online M3U8 to MP4 Converter</h3>
+                        <p>No software needed, convert directly in browser</p>
+                        <a href="/">Use Now →</a>
+                    </div>
+
+                    <h2>FAQ</h2>
+
+                    <h3>Q: Can M3U8 files be played directly?</h3>
+                    <p>Yes, players supporting HLS (like VLC, PotPlayer) can play M3U8 links directly. Safari browser
+                        natively supports HLS playback.</p>
+
+                    <h3>Q: Will conversion lose quality?</h3>
+                    <p>If using "direct copy" mode (-c copy), no quality is lost. Quality is only affected when
+                        re-encoding.</p>
+
+                    <h3>Q: Why do many websites use M3U8?</h3>
+                    <ul>
+                        <li>Adaptive bitrate provides better user experience</li>
+                        <li>Segmented delivery is better for CDN caching</li>
+                        <li>Progressive download reduces wait time</li>
+                        <li>Adds some difficulty to downloading</li>
+                    </ul>
+
+                    <h2>Related Reading</h2>
+                    <ul>
+                        <li><a href="/blog/what-is-hls-streaming.html">What is HLS Streaming? M3U8 Format Explained</a>
+                        </li>
+                        <li><a href="/blog/how-to-download-m3u8-video.html">How to Download M3U8 Video - Complete
+                                Guide</a></li>
+                        <li><a href="/blog/browser-extract-m3u8.html">5 Ways to Extract M3U8 Links in Browser</a></li>
+                    </ul>
+
+                    <h2>Summary</h2>
+                    <p>In simple terms:</p>
+                    <ul>
+                        <li><strong>M3U8</strong> is a streaming index format, ideal for online playback and live
+                            streaming, not convenient for saving</li>
+                        <li><strong>MP4</strong> is a universal video container, ideal for local storage, editing, and
+                            sharing</li>
+                    </ul>
+                    <p>Both formats have their strengths - M3U8 is better for streaming distribution, MP4 is better for
+                        video archiving. If you want to save online M3U8 videos, converting to MP4 format is recommended
+                        for long-term storage and playback on various devices.</p>
+                </div>
+            </div>
+        </article>
+
+        <footer
+            style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border);">
+            <a href="/blog/" class="back-link">← <span data-lang="zh">返回博客列表</span><span data-lang="en">Back to
+                    Blog</span></a>
+        </footer>
+    </div>
+
+    <script type="module">
+        import { themeManager } from '/src/theme.js';
+        themeManager.init();
+    </script>
+    <script>
+        function setLang(lang) {
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.includes(lang === 'zh' ? '中' : 'EN'));
+            });
+            localStorage.setItem('preferred-lang', lang);
+        }
+        // Initialize
+        const savedLang = localStorage.getItem('preferred-lang') || (navigator.language.startsWith('zh') ? 'zh' : 'en');
+        setLang(savedLang);
+    </script>
+</body>
+
+</html>

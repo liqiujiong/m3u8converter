@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FFmpeg 下载 M3U8 完整命令指南 | M3U8下载器</title>
+    <meta name="description" content="详细介绍如何使用 FFmpeg 下载和转换 M3U8/HLS 视频流，包含常用命令、参数详解和常见问题解决方案。">
+    <meta name="keywords" content="ffmpeg m3u8,ffmpeg下载m3u8,ffmpeg转换hls,ffmpeg命令行,m3u8转mp4命令">
+    <link rel="canonical" href="https://www.m3u8converter.com/blog/ffmpeg-m3u8-commands.html">
+    <meta property="og:title" content="FFmpeg 下载 M3U8 完整命令指南">
+    <meta property="og:description" content="详细介绍如何使用 FFmpeg 下载和转换 M3U8/HLS 视频流">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.m3u8converter.com/blog/ffmpeg-m3u8-commands.html">
+    <link rel="stylesheet" href="/src/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .article-container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .article-header {
+            margin-bottom: 2rem;
+        }
+
+        .article-header h1 {
+            font-size: 2rem;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content {
+            line-height: 1.8;
+        }
+
+        .article-content h2 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            color: var(--color-text);
+        }
+
+        .article-content h3 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1rem;
+            color: var(--color-text-secondary);
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            color: var(--color-text-secondary);
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .article-content code {
+            background: var(--color-bg-alt);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .article-content pre {
+            background: var(--color-bg-alt);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .article-content pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .tip-box {
+            background: rgba(99, 102, 241, 0.1);
+            border-left: 4px solid var(--color-primary);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .tip-box strong {
+            color: var(--color-primary);
+        }
+
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box strong {
+            color: #f59e0b;
+        }
+
+        .cta-box {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .cta-box h3 {
+            margin-bottom: 1rem;
+        }
+
+        .cta-box a {
+            display: inline-block;
+            background: white;
+            color: var(--color-primary);
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-primary);
+            text-decoration: none;
+            margin-bottom: 2rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .command-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .command-table th,
+        .command-table td {
+            border: 1px solid var(--color-border);
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .command-table th {
+            background: var(--color-bg-alt);
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .lang-btn {
+            font-size: 0.875rem;
+            padding: 0.25rem 0.75rem;
+            background: transparent;
+            color: var(--color-text-muted);
+            border: 1px solid transparent;
+            border-radius: 999px;
+            cursor: pointer;
+        }
+
+        .lang-btn.active {
+            background: var(--color-surface);
+            color: var(--color-primary);
+            border-color: var(--color-border);
+        }
+
+        [data-lang="en"] {
+            display: none;
+        }
+
+        [lang="en"] [data-lang="en"] {
+            display: block;
+        }
+
+        [lang="en"] [data-lang="zh"] {
+            display: none;
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "FFmpeg 下载 M3U8 完整命令指南",
+        "description": "详细介绍如何使用 FFmpeg 下载和转换 M3U8/HLS 视频流",
+        "datePublished": "2026-01-22",
+        "dateModified": "2026-01-22",
+        "author": { "@type": "Organization", "name": "M3U8 Converter" },
+        "publisher": { "@type": "Organization", "name": "M3U8 Converter" }
+    }
+    </script>
+</head>
+
+<body>
+    <div class="article-container">
+        <div class="lang-switcher">
+            <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+            <button class="lang-btn" onclick="setLang('en')">EN</button>
+        </div>
+
+        <nav class="breadcrumb">
+            <span data-lang="zh"><a href="/">首页</a> / <a href="/blog/">博客</a> / FFmpeg M3U8 命令指南</span>
+            <span data-lang="en"><a href="/">Home</a> / <a href="/blog/">Blog</a> / FFmpeg M3U8 Commands</span>
+        </nav>
+
+        <article>
+            <header class="article-header">
+                <h1 data-lang="zh">⚡ FFmpeg 下载 M3U8 完整命令指南</h1>
+                <h1 data-lang="en">⚡ Complete FFmpeg M3U8 Download Guide</h1>
+                <div class="article-meta">
+                    <span>📅 2026-01-22</span>
+                    <span>⏱️ <span data-lang="zh">8 分钟阅读</span><span data-lang="en">8 min read</span></span>
+                    <span>👁️ <span data-lang="zh">进阶技术</span><span data-lang="en">Advanced</span></span>
+                </div>
+            </header>
+
+            <div class="article-content">
+                <!-- 中文内容 -->
+                <div data-lang="zh">
+                    <p><strong>FFmpeg</strong> 是一个强大的开源多媒体处理工具，可以处理几乎所有类型的音视频格式。本文将详细介绍如何使用 FFmpeg 下载和转换 M3U8/HLS
+                        视频流，包括基础命令、高级参数和常见问题解决方案。</p>
+
+                    <h2>安装 FFmpeg</h2>
+                    <p>在开始之前，你需要先安装 FFmpeg：</p>
+
+                    <h3>Windows 安装</h3>
+                    <ol>
+                        <li>访问 <a href="https://ffmpeg.org/download.html" target="_blank" rel="noopener">FFmpeg 官网</a>
+                            下载 Windows 版本</li>
+                        <li>解压到任意目录，如 <code>C:\ffmpeg</code></li>
+                        <li>将 <code>C:\ffmpeg\bin</code> 添加到系统环境变量 PATH</li>
+                        <li>打开命令提示符，输入 <code>ffmpeg -version</code> 验证安装</li>
+                    </ol>
+
+                    <h3>macOS 安装</h3>
+                    <pre><code># 使用 Homebrew 安装
+brew install ffmpeg</code></pre>
+
+                    <h3>Linux 安装</h3>
+                    <pre><code># Ubuntu/Debian
+sudo apt update
+sudo apt install ffmpeg
+
+# CentOS/RHEL
+sudo yum install ffmpeg</code></pre>
+
+                    <h2>基础下载命令</h2>
+                    <p>最简单的 M3U8 下载命令：</p>
+                    <pre><code>ffmpeg -i "https://example.com/video.m3u8" -c copy output.mp4</code></pre>
+
+                    <p>参数说明：</p>
+                    <ul>
+                        <li><code>-i</code>：指定输入文件（M3U8 链接）</li>
+                        <li><code>-c copy</code>：直接复制流，不重新编码（速度最快）</li>
+                        <li><code>output.mp4</code>：输出文件名</li>
+                    </ul>
+
+                    <div class="tip-box">
+                        <strong>💡 提示：</strong> 使用 <code>-c copy</code> 可以保持原始质量且速度最快。只有当遇到兼容性问题时才需要重新编码。
+                    </div>
+
+                    <h2>常用命令参数详解</h2>
+
+                    <h3>处理认证和 Headers</h3>
+                    <p>某些 M3U8 流需要特定的 HTTP Headers 才能访问：</p>
+                    <pre><code>ffmpeg -headers "Referer: https://example.com\r\nUser-Agent: Mozilla/5.0\r\n" \
+  -i "https://example.com/video.m3u8" \
+  -c copy output.mp4</code></pre>
+
+                    <h3>设置超时和重试</h3>
+                    <pre><code>ffmpeg -reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5 \
+  -i "https://example.com/video.m3u8" \
+  -c copy output.mp4</code></pre>
+
+                    <h3>指定时间范围</h3>
+                    <p>只下载视频的特定片段：</p>
+                    <pre><code># 下载前 60 秒
+ffmpeg -i "https://example.com/video.m3u8" -t 60 -c copy output.mp4
+
+# 从第 30 秒开始下载 60 秒
+ffmpeg -ss 30 -i "https://example.com/video.m3u8" -t 60 -c copy output.mp4</code></pre>
+
+                    <h3>重新编码为兼容格式</h3>
+                    <p>当直接复制不兼容时，需要重新编码：</p>
+                    <pre><code>ffmpeg -i "https://example.com/video.m3u8" \
+  -c:v libx264 -preset fast -crf 23 \
+  -c:a aac -b:a 128k \
+  output.mp4</code></pre>
+
+                    <table class="command-table">
+                        <thead>
+                            <tr>
+                                <th>参数</th>
+                                <th>说明</th>
+                                <th>推荐值</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>-preset</code></td>
+                                <td>编码速度/质量平衡</td>
+                                <td>fast, medium, slow</td>
+                            </tr>
+                            <tr>
+                                <td><code>-crf</code></td>
+                                <td>视频质量 (0-51)</td>
+                                <td>18-28 (越低质量越好)</td>
+                            </tr>
+                            <tr>
+                                <td><code>-b:a</code></td>
+                                <td>音频比特率</td>
+                                <td>128k, 192k, 256k</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>处理加密 M3U8</h2>
+                    <p>部分 M3U8 流使用 AES-128 加密。如果你有解密密钥，可以这样下载：</p>
+                    <pre><code># FFmpeg 会自动从 M3U8 中读取 KEY 并解密
+ffmpeg -i "https://example.com/encrypted.m3u8" -c copy output.mp4</code></pre>
+
+                    <div class="warning-box">
+                        <strong>⚠️ 注意：</strong> 如果 KEY 文件需要认证，需要通过 <code>-headers</code> 参数传递相应的认证信息。FFmpeg 无法处理 DRM
+                        保护的视频。
+                    </div>
+
+                    <h2>完整示例脚本</h2>
+                    <p>以下是一个完整的下载脚本，包含错误处理和进度显示：</p>
+                    <pre><code>#!/bin/bash
+# M3U8 下载脚本
+
+URL="$1"
+OUTPUT="${2:-output.mp4}"
+
+if [ -z "$URL" ]; then
+    echo "用法: $0 <m3u8_url> [output_file]"
+    exit 1
+fi
+
+ffmpeg -y \
+    -reconnect 1 \
+    -reconnect_streamed 1 \
+    -reconnect_delay_max 5 \
+    -i "$URL" \
+    -c copy \
+    -bsf:a aac_adtstoasc \
+    "$OUTPUT"
+
+echo "下载完成: $OUTPUT"</code></pre>
+
+                    <h2>常见问题解决</h2>
+
+                    <h3>Q: 报错 "Protocol 'https' not on whitelist"</h3>
+                    <p>添加 <code>-protocol_whitelist file,http,https,tcp,tls,crypto</code> 参数：</p>
+                    <pre><code>ffmpeg -protocol_whitelist file,http,https,tcp,tls,crypto \
+  -i "video.m3u8" -c copy output.mp4</code></pre>
+
+                    <h3>Q: 下载速度慢或中断</h3>
+                    <ul>
+                        <li>添加重连参数：<code>-reconnect 1 -reconnect_streamed 1</code></li>
+                        <li>增加超时时间：<code>-timeout 30000000</code></li>
+                        <li>尝试使用代理或更换网络</li>
+                    </ul>
+
+                    <h3>Q: 输出文件无法播放</h3>
+                    <p>尝试重新编码而非直接复制：</p>
+                    <pre><code>ffmpeg -i "video.m3u8" -c:v libx264 -c:a aac output.mp4</code></pre>
+
+                    <h3>Q: 音视频不同步</h3>
+                    <pre><code>ffmpeg -i "video.m3u8" -c copy -bsf:a aac_adtstoasc output.mp4</code></pre>
+
+                    <h2>更简单的替代方案</h2>
+                    <p>如果你觉得命令行操作太复杂，可以使用我们的在线工具，无需安装任何软件：</p>
+
+                    <div class="cta-box">
+                        <h3>✨ 在线 M3U8 转换器</h3>
+                        <p>无需命令行，浏览器直接转换</p>
+                        <a href="/">立即使用 →</a>
+                    </div>
+
+                    <h2>相关阅读</h2>
+                    <ul>
+                        <li><a href="/blog/how-to-download-m3u8-video.html">如何下载 M3U8 视频 - 完整教程</a></li>
+                        <li><a href="/blog/m3u8-to-mp4-guide.html">M3U8 转 MP4 终极指南</a></li>
+                        <li><a href="/blog/merge-ts-files-to-mp4.html">TS 文件合并为 MP4 的 3 种方法</a></li>
+                    </ul>
+
+                    <h2>总结</h2>
+                    <p>FFmpeg 是处理 M3U8 视频的强大工具，虽然需要一定的命令行知识，但掌握后可以处理各种复杂场景。记住以下关键点：</p>
+                    <ol>
+                        <li>优先使用 <code>-c copy</code> 直接复制，速度快且无损</li>
+                        <li>遇到认证问题时添加 <code>-headers</code> 参数</li>
+                        <li>网络不稳定时添加重连参数</li>
+                        <li>兼容性问题尝试重新编码</li>
+                    </ol>
+                </div>
+
+                <!-- English Content -->
+                <div data-lang="en">
+                    <p><strong>FFmpeg</strong> is a powerful open-source multimedia processing tool that can handle
+                        almost all audio and video formats. This article will detail how to use FFmpeg to download and
+                        convert M3U8/HLS video streams, including basic commands, advanced parameters, and common
+                        troubleshooting solutions.</p>
+
+                    <h2>Installing FFmpeg</h2>
+                    <p>Before getting started, you need to install FFmpeg:</p>
+
+                    <h3>Windows Installation</h3>
+                    <ol>
+                        <li>Visit <a href="https://ffmpeg.org/download.html" target="_blank" rel="noopener">FFmpeg
+                                official website</a> to download the Windows version</li>
+                        <li>Extract to any directory, e.g., <code>C:\ffmpeg</code></li>
+                        <li>Add <code>C:\ffmpeg\bin</code> to system PATH environment variable</li>
+                        <li>Open Command Prompt and type <code>ffmpeg -version</code> to verify installation</li>
+                    </ol>
+
+                    <h3>macOS Installation</h3>
+                    <pre><code># Install using Homebrew
+brew install ffmpeg</code></pre>
+
+                    <h3>Linux Installation</h3>
+                    <pre><code># Ubuntu/Debian
+sudo apt update
+sudo apt install ffmpeg
+
+# CentOS/RHEL
+sudo yum install ffmpeg</code></pre>
+
+                    <h2>Basic Download Command</h2>
+                    <p>The simplest M3U8 download command:</p>
+                    <pre><code>ffmpeg -i "https://example.com/video.m3u8" -c copy output.mp4</code></pre>
+
+                    <p>Parameter explanation:</p>
+                    <ul>
+                        <li><code>-i</code>: Specify input file (M3U8 URL)</li>
+                        <li><code>-c copy</code>: Copy streams directly without re-encoding (fastest)</li>
+                        <li><code>output.mp4</code>: Output filename</li>
+                    </ul>
+
+                    <div class="tip-box">
+                        <strong>💡 Tip:</strong> Using <code>-c copy</code> preserves original quality and is the
+                        fastest option. Only re-encode when encountering compatibility issues.
+                    </div>
+
+                    <h2>Common Command Parameters</h2>
+
+                    <h3>Handling Authentication and Headers</h3>
+                    <p>Some M3U8 streams require specific HTTP Headers to access:</p>
+                    <pre><code>ffmpeg -headers "Referer: https://example.com\r\nUser-Agent: Mozilla/5.0\r\n" \
+  -i "https://example.com/video.m3u8" \
+  -c copy output.mp4</code></pre>
+
+                    <h3>Setting Timeout and Retry</h3>
+                    <pre><code>ffmpeg -reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5 \
+  -i "https://example.com/video.m3u8" \
+  -c copy output.mp4</code></pre>
+
+                    <h3>Specifying Time Range</h3>
+                    <p>Download only a specific portion of the video:</p>
+                    <pre><code># Download first 60 seconds
+ffmpeg -i "https://example.com/video.m3u8" -t 60 -c copy output.mp4
+
+# Download 60 seconds starting from 30 seconds
+ffmpeg -ss 30 -i "https://example.com/video.m3u8" -t 60 -c copy output.mp4</code></pre>
+
+                    <h3>Re-encoding to Compatible Format</h3>
+                    <p>When direct copy is not compatible, re-encoding is needed:</p>
+                    <pre><code>ffmpeg -i "https://example.com/video.m3u8" \
+  -c:v libx264 -preset fast -crf 23 \
+  -c:a aac -b:a 128k \
+  output.mp4</code></pre>
+
+                    <table class="command-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Description</th>
+                                <th>Recommended</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>-preset</code></td>
+                                <td>Speed/quality balance</td>
+                                <td>fast, medium, slow</td>
+                            </tr>
+                            <tr>
+                                <td><code>-crf</code></td>
+                                <td>Video quality (0-51)</td>
+                                <td>18-28 (lower = better)</td>
+                            </tr>
+                            <tr>
+                                <td><code>-b:a</code></td>
+                                <td>Audio bitrate</td>
+                                <td>128k, 192k, 256k</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Handling Encrypted M3U8</h2>
+                    <p>Some M3U8 streams use AES-128 encryption. If you have the decryption key, you can download like
+                        this:</p>
+                    <pre><code># FFmpeg will automatically read KEY from M3U8 and decrypt
+ffmpeg -i "https://example.com/encrypted.m3u8" -c copy output.mp4</code></pre>
+
+                    <div class="warning-box">
+                        <strong>⚠️ Note:</strong> If the KEY file requires authentication, you need to pass
+                        corresponding auth info via <code>-headers</code> parameter. FFmpeg cannot handle DRM-protected
+                        videos.
+                    </div>
+
+                    <h2>Complete Example Script</h2>
+                    <p>Here's a complete download script with error handling and progress display:</p>
+                    <pre><code>#!/bin/bash
+# M3U8 Download Script
+
+URL="$1"
+OUTPUT="${2:-output.mp4}"
+
+if [ -z "$URL" ]; then
+    echo "Usage: $0 <m3u8_url> [output_file]"
+    exit 1
+fi
+
+ffmpeg -y \
+    -reconnect 1 \
+    -reconnect_streamed 1 \
+    -reconnect_delay_max 5 \
+    -i "$URL" \
+    -c copy \
+    -bsf:a aac_adtstoasc \
+    "$OUTPUT"
+
+echo "Download complete: $OUTPUT"</code></pre>
+
+                    <h2>Troubleshooting</h2>
+
+                    <h3>Q: Error "Protocol 'https' not on whitelist"</h3>
+                    <p>Add <code>-protocol_whitelist file,http,https,tcp,tls,crypto</code> parameter:</p>
+                    <pre><code>ffmpeg -protocol_whitelist file,http,https,tcp,tls,crypto \
+  -i "video.m3u8" -c copy output.mp4</code></pre>
+
+                    <h3>Q: Slow download or interruptions</h3>
+                    <ul>
+                        <li>Add reconnect parameters: <code>-reconnect 1 -reconnect_streamed 1</code></li>
+                        <li>Increase timeout: <code>-timeout 30000000</code></li>
+                        <li>Try using a proxy or different network</li>
+                    </ul>
+
+                    <h3>Q: Output file won't play</h3>
+                    <p>Try re-encoding instead of direct copy:</p>
+                    <pre><code>ffmpeg -i "video.m3u8" -c:v libx264 -c:a aac output.mp4</code></pre>
+
+                    <h3>Q: Audio/video out of sync</h3>
+                    <pre><code>ffmpeg -i "video.m3u8" -c copy -bsf:a aac_adtstoasc output.mp4</code></pre>
+
+                    <h2>Easier Alternative</h2>
+                    <p>If you find command-line operations too complex, you can use our online tool without installing
+                        any software:</p>
+
+                    <div class="cta-box">
+                        <h3>✨ Online M3U8 Converter</h3>
+                        <p>No command line needed, convert directly in browser</p>
+                        <a href="/">Use Now →</a>
+                    </div>
+
+                    <h2>Related Reading</h2>
+                    <ul>
+                        <li><a href="/blog/how-to-download-m3u8-video.html">How to Download M3U8 Video - Complete
+                                Guide</a></li>
+                        <li><a href="/blog/m3u8-to-mp4-guide.html">Ultimate M3U8 to MP4 Conversion Guide</a></li>
+                        <li><a href="/blog/merge-ts-files-to-mp4.html">3 Ways to Merge TS Files into MP4</a></li>
+                    </ul>
+
+                    <h2>Summary</h2>
+                    <p>FFmpeg is a powerful tool for handling M3U8 videos. While it requires some command-line
+                        knowledge, mastering it allows you to handle various complex scenarios. Remember these key
+                        points:</p>
+                    <ol>
+                        <li>Prefer <code>-c copy</code> for direct copying - fastest and lossless</li>
+                        <li>Add <code>-headers</code> parameter for authentication issues</li>
+                        <li>Add reconnect parameters for unstable networks</li>
+                        <li>Try re-encoding for compatibility issues</li>
+                    </ol>
+                </div>
+            </div>
+        </article>
+
+        <footer
+            style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border);">
+            <a href="/blog/" class="back-link">← <span data-lang="zh">返回博客列表</span><span data-lang="en">Back to
+                    Blog</span></a>
+        </footer>
+    </div>
+
+    <script type="module">
+        import { themeManager } from '/src/theme.js';
+        themeManager.init();
+    </script>
+    <script>
+        function setLang(lang) {
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.includes(lang === 'zh' ? '中' : 'EN'));
+            });
+            localStorage.setItem('preferred-lang', lang);
+        }
+        // Initialize
+        const savedLang = localStorage.getItem('preferred-lang') || (navigator.language.startsWith('zh') ? 'zh' : 'en');
+        setLang(savedLang);
+    </script>
+</body>
+
+</html>

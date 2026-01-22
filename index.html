@@ -206,11 +206,11 @@
           <div class="option-group">
             <label for="output-format" data-i18n="format_label">输出格式</label>
             <select id="output-format" aria-describedby="format-desc">
-              <option value="mp4">MP4 (H.264) - 推荐</option>
-              <option value="webm">WebM (VP9)</option>
-              <option value="avi">AVI</option>
-              <option value="mkv">MKV (快速)</option>
-              <option value="mov">MOV</option>
+              <option value="mp4" data-i18n="format_mp4">MP4 (H.264) - 推荐</option>
+              <option value="webm" data-i18n="format_webm">WebM (VP9)</option>
+              <option value="avi" data-i18n="format_avi">AVI</option>
+              <option value="mkv" data-i18n="format_mkv">MKV (快速)</option>
+              <option value="mov" data-i18n="format_mov">MOV</option>
             </select>
             <p id="format-desc" class="option-desc" data-i18n="format_desc">MP4 兼容性最佳</p>
           </div>
@@ -305,28 +305,70 @@
       <!-- Blog Articles Section -->
       <section class="blog-section card" aria-labelledby="blog-title">
         <h2 id="blog-title" data-i18n="blog_title">📚 教程与指南</h2>
-        <div class="blog-list">
-          <a href="/blog/how-to-download-m3u8-video.html" class="blog-item">
-            <span class="blog-icon">📥</span>
-            <div class="blog-content">
-              <strong data-i18n="blog_article1">如何下载 M3U8 视频</strong>
-              <span data-i18n="blog_article1_desc">完整教程，新手入门</span>
-            </div>
-          </a>
-          <a href="/blog/m3u8-to-mp4-guide.html" class="blog-item">
-            <span class="blog-icon">🔄</span>
-            <div class="blog-content">
-              <strong data-i18n="blog_article2">M3U8 转 MP4 指南</strong>
-              <span data-i18n="blog_article2_desc">多种方法对比</span>
-            </div>
-          </a>
-          <a href="/blog/what-is-hls-streaming.html" class="blog-item">
-            <span class="blog-icon">📡</span>
-            <div class="blog-content">
-              <strong data-i18n="blog_article3">HLS 流媒体详解</strong>
-              <span data-i18n="blog_article3_desc">技术原理介绍</span>
-            </div>
-          </a>
+
+        <!-- Latest Articles -->
+        <div class="blog-latest">
+          <span class="section-label" data-i18n="blog_latest">🆕 最新文章</span>
+          <div class="blog-grid">
+            <a href="/blog/browser-extract-m3u8.html" class="blog-item blog-item-new">
+              <span class="blog-icon">🔍</span>
+              <div class="blog-content">
+                <strong data-i18n="blog_new1">浏览器获取 M3U8 链接的 5 种方法</strong>
+                <span class="new-badge">NEW</span>
+              </div>
+            </a>
+            <a href="/blog/m3u8-vs-mp4-difference.html" class="blog-item blog-item-new">
+              <span class="blog-icon">⚖️</span>
+              <div class="blog-content">
+                <strong data-i18n="blog_new2">M3U8 与 MP4 有什么区别？</strong>
+                <span class="new-badge">NEW</span>
+              </div>
+            </a>
+            <a href="/blog/ffmpeg-m3u8-commands.html" class="blog-item blog-item-new">
+              <span class="blog-icon">⚡</span>
+              <div class="blog-content">
+                <strong data-i18n="blog_new3">FFmpeg 下载 M3U8 命令指南</strong>
+                <span class="new-badge">NEW</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- All Articles -->
+        <div class="blog-all">
+          <span class="section-label" data-i18n="blog_guides">📖 基础教程</span>
+          <div class="blog-grid blog-grid-compact">
+            <a href="/blog/how-to-download-m3u8-video.html" class="blog-item">
+              <span class="blog-icon">📥</span>
+              <div class="blog-content">
+                <strong data-i18n="blog_article1">如何下载 M3U8 视频</strong>
+              </div>
+            </a>
+            <a href="/blog/m3u8-to-mp4-guide.html" class="blog-item">
+              <span class="blog-icon">🔄</span>
+              <div class="blog-content">
+                <strong data-i18n="blog_article2">M3U8 转 MP4 指南</strong>
+              </div>
+            </a>
+            <a href="/blog/what-is-hls-streaming.html" class="blog-item">
+              <span class="blog-icon">📡</span>
+              <div class="blog-content">
+                <strong data-i18n="blog_article3">HLS 流媒体详解</strong>
+              </div>
+            </a>
+            <a href="/blog/merge-ts-files-to-mp4.html" class="blog-item">
+              <span class="blog-icon">📦</span>
+              <div class="blog-content">
+                <strong data-i18n="blog_article4">TS 文件合并为 MP4</strong>
+              </div>
+            </a>
+            <a href="/blog/best-m3u8-downloader-2026.html" class="blog-item">
+              <span class="blog-icon">🏆</span>
+              <div class="blog-content">
+                <strong data-i18n="blog_article5">2026 最佳 M3U8 下载器</strong>
+              </div>
+            </a>
+          </div>
         </div>
         <a href="/blog/" class="blog-view-all" data-i18n="blog_view_all">查看全部文章 →</a>
       </section>
