@@ -171,26 +171,27 @@
             text-decoration: none;
         }
 
-        .lang-bar {
+        .lang-bar,
+        .lang-switcher {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.25rem;
             margin-bottom: 1rem;
         }
 
         .lang-btn {
-            font-size: 0.8rem;
-            padding: 0.3rem 0.75rem;
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 20px;
+            font-size: 0.875rem;
+            padding: 0.25rem 0.75rem;
+            background: transparent;
+            color: var(--color-text-muted);
+            border: 1px solid transparent;
+            border-radius: 999px;
             cursor: pointer;
-            color: var(--color-text-secondary);
         }
 
         .lang-btn.active {
-            background: var(--color-primary);
-            color: white;
-            border-color: var(--color-primary);
+            background: var(--color-surface);
+            color: var(--color-primary);
+            border-color: var(--color-border);
         }
 
         .step-number {
@@ -633,10 +634,15 @@
         }
 
         // Initialize language
+        // 优先读取localStorage，如果没有才用浏览器语言
         document.addEventListener('DOMContentLoaded', function() {
-            const savedLang = localStorage.getItem('preferred-lang') || 
-                             (navigator.language.startsWith('zh') ? 'zh' : 'en');
-            switchLang(savedLang);
+            const savedLang = localStorage.getItem('preferred-lang');
+            if (savedLang) {
+                switchLang(savedLang);
+            } else {
+                // 默认英文
+                switchLang('en');
+            }
         });
     </script>
     <script type="module">
