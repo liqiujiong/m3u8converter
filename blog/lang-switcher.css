@@ -1,0 +1,62 @@
+/* Shared language switcher for blog article pages */
+.lang-switcher-wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 0 0.75rem;
+}
+
+.lang-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.2rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: rgba(99, 102, 241, 0.08);
+    backdrop-filter: blur(6px);
+}
+
+.lang-btn {
+    appearance: none;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-text-muted);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1;
+    padding: 0.42rem 0.82rem;
+    min-width: 3rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.lang-btn:hover {
+    color: var(--color-text-primary);
+}
+
+.lang-btn.active {
+    background: var(--gradient-primary);
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(99, 102, 241, 0.32);
+}
+
+.lang-btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+[data-lang][hidden] {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .lang-switcher-wrap {
+        justify-content: flex-start;
+        margin-bottom: 0.5rem;
+    }
+
+    .lang-btn {
+        padding: 0.4rem 0.75rem;
+    }
+}

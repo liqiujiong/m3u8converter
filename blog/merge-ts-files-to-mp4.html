@@ -9,6 +9,7 @@
     <meta name="keywords" content="merge ts to mp4,combine ts files,merge ts video,ts to mp4 method,ffmpeg merge ts">
     <link rel="canonical" href="https://m3u8-converter.com/blog/merge-ts-files-to-mp4.html">
     <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/blog/lang-switcher.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         .article-container {
@@ -159,6 +160,13 @@
 
 <body>
     <div class="article-container">
+        <div class="lang-switcher-wrap">
+            <div class="lang-switcher" data-lang-switcher>
+                <button class="lang-btn" type="button" data-lang-target="zh" aria-pressed="false">中文</button>
+                <button class="lang-btn" type="button" data-lang-target="en" aria-pressed="false">EN</button>
+            </div>
+        </div>
+
         <nav class="breadcrumb">
             <a href="/">首页</a> / <a href="/blog/">博客</a> / TS合并MP4
         </nav>
@@ -289,6 +297,9 @@ ffmpeg -f concat -safe 0 -i filelist.txt -c:v libx264 -c:a aac output.mp4</code>
             <a href="/blog/" class="back-link">← 返回博客列表</a>
         </footer>
     </div>
+
+    <script src="/blog/lang-switcher.js"></script>
+
     <script type="module">
         import { themeManager } from '/src/theme.js';
         themeManager.init();

@@ -22,6 +22,7 @@
     <meta name="twitter:description" content="Learn how to download M3U8 videos on iPhone and Android devices.">
     
     <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/blog/lang-switcher.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
@@ -171,29 +172,6 @@
             text-decoration: none;
         }
 
-        .lang-bar,
-        .lang-switcher {
-            display: flex;
-            gap: 0.25rem;
-            margin-bottom: 1rem;
-        }
-
-        .lang-btn {
-            font-size: 0.875rem;
-            padding: 0.25rem 0.75rem;
-            background: transparent;
-            color: var(--color-text-muted);
-            border: 1px solid transparent;
-            border-radius: 999px;
-            cursor: pointer;
-        }
-
-        .lang-btn.active {
-            background: var(--color-surface);
-            color: var(--color-primary);
-            border-color: var(--color-border);
-        }
-
         .step-number {
             display: inline-flex;
             align-items: center;
@@ -206,18 +184,6 @@
             font-size: 0.875rem;
             font-weight: 600;
             margin-right: 0.5rem;
-        }
-
-        [data-lang="en"] {
-            display: none;
-        }
-
-        :root:lang(en) [data-lang="en"] {
-            display: block;
-        }
-
-        :root:lang(en) [data-lang="zh"] {
-            display: none;
         }
     </style>
 
@@ -254,15 +220,16 @@
 
 <body>
     <div class="article-container">
+        <div class="lang-switcher-wrap">
+            <div class="lang-switcher" data-lang-switcher>
+                <button class="lang-btn" type="button" data-lang-target="zh" aria-pressed="false">中文</button>
+                <button class="lang-btn" type="button" data-lang-target="en" aria-pressed="false">EN</button>
+            </div>
+        </div>
+
         <nav class="breadcrumb">
             <a href="/">首页</a> / <a href="/blog/">博客</a> / <span data-lang="zh">手机M3U8下载教程</span><span data-lang="en">Mobile M3U8 Download Tutorial</span>
         </nav>
-
-        <div class="lang-bar">
-            <button class="lang-btn active" onclick="switchLang('zh')">中文</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-        </div>
-
         <article>
             <header class="article-header">
                 <h1>📱 <span data-lang="zh">手机M3U8视频下载教程 - iPhone和Android设备完整指南</span><span data-lang="en">Mobile M3U8 Video Download Tutorial - Complete Guide for iPhone & Android</span></h1>
@@ -622,29 +589,8 @@
         </footer>
     </div>
 
-    <script>
-        function switchLang(lang) {
-            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', 
-                    (lang === 'zh' && btn.textContent === '中文') || 
-                    (lang === 'en' && btn.textContent === 'English'));
-            });
-            localStorage.setItem('preferred-lang', lang);
-        }
+    <script src="/blog/lang-switcher.js"></script>
 
-        // Initialize language
-        // 优先读取localStorage，如果没有才用浏览器语言
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedLang = localStorage.getItem('preferred-lang');
-            if (savedLang) {
-                switchLang(savedLang);
-            } else {
-                // 默认英文
-                switchLang('en');
-            }
-        });
-    </script>
     <script type="module">
         import { themeManager } from '/src/theme.js';
         themeManager.init();

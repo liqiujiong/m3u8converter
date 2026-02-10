@@ -9,6 +9,7 @@
     <meta name="keywords" content="hls streaming,what is hls,m3u8 format,ts segment,http live streaming">
     <link rel="canonical" href="https://m3u8-converter.com/blog/what-is-hls-streaming.html">
     <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/blog/lang-switcher.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         .article-container {
@@ -128,6 +129,13 @@
 
 <body>
     <div class="article-container">
+        <div class="lang-switcher-wrap">
+            <div class="lang-switcher" data-lang-switcher>
+                <button class="lang-btn" type="button" data-lang-target="zh" aria-pressed="false">中文</button>
+                <button class="lang-btn" type="button" data-lang-target="en" aria-pressed="false">EN</button>
+            </div>
+        </div>
+
         <nav class="breadcrumb">
             <a href="/">首页</a> / <a href="/blog/">博客</a> / HLS流媒体详解
         </nav>
@@ -288,6 +296,9 @@ high/playlist.m3u8</code></pre>
             <a href="/blog/" class="back-link">← 返回博客列表</a>
         </footer>
     </div>
+
+    <script src="/blog/lang-switcher.js"></script>
+
     <script type="module">
         import { themeManager } from '/src/theme.js';
         themeManager.init();

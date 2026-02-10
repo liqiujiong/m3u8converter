@@ -1,6 +1,6 @@
 # M3U8 Converter Blog Content Guidelines and Plan
 
-> 📅 Last Updated: 2026-01-22  
+> 📅 Last Updated: 2026-02-10  
 > 🌐 Domain: https://www.m3u8converter.com/blog/
 
 ---
@@ -78,7 +78,22 @@ Blog content should focus on these core areas:
 ### Bilingual Support
 - All articles must provide both Chinese and English versions
 - Use `data-lang="zh"` / `data-lang="en"` tags for switching
-- Language switcher placed at top of page
+- All blog detail pages must use the shared language switcher template
+- Language switcher must be compact (pill style), not a full-width top bar
+- Place switcher inside `.article-container`, above breadcrumb, right-aligned on desktop and left-aligned on mobile
+- Required shared files:
+  - `/blog/lang-switcher.css`
+  - `/blog/lang-switcher.js`
+- Required markup snippet:
+
+```html
+<div class="lang-switcher-wrap">
+  <div class="lang-switcher" data-lang-switcher>
+    <button class="lang-btn" type="button" data-lang-target="zh" aria-pressed="false">中文</button>
+    <button class="lang-btn" type="button" data-lang-target="en" aria-pressed="false">EN</button>
+  </div>
+</div>
+```
 
 ---
 

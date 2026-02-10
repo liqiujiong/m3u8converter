@@ -13,6 +13,7 @@
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://www.m3u8converter.com/blog/browser-extract-m3u8.html">
     <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/blog/lang-switcher.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         .article-container {
@@ -227,40 +228,6 @@
         .comparison-table th {
             background: var(--color-bg-alt);
         }
-
-        .lang-switcher {
-            display: flex;
-            gap: 0.25rem;
-            margin-bottom: 1rem;
-        }
-
-        .lang-btn {
-            font-size: 0.875rem;
-            padding: 0.25rem 0.75rem;
-            background: transparent;
-            color: var(--color-text-muted);
-            border: 1px solid transparent;
-            border-radius: 999px;
-            cursor: pointer;
-        }
-
-        .lang-btn.active {
-            background: var(--color-surface);
-            color: var(--color-primary);
-            border-color: var(--color-border);
-        }
-
-        [data-lang="en"] {
-            display: none;
-        }
-
-        [lang="en"] [data-lang="en"] {
-            display: block;
-        }
-
-        [lang="en"] [data-lang="zh"] {
-            display: none;
-        }
     </style>
     <script type="application/ld+json">
     {
@@ -278,9 +245,11 @@
 
 <body>
     <div class="article-container">
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="setLang('zh')">中文</button>
-            <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <div class="lang-switcher-wrap">
+            <div class="lang-switcher" data-lang-switcher>
+                <button class="lang-btn" type="button" data-lang-target="zh" aria-pressed="false">中文</button>
+                <button class="lang-btn" type="button" data-lang-target="en" aria-pressed="false">EN</button>
+            </div>
         </div>
 
         <nav class="breadcrumb">
@@ -796,27 +765,12 @@
         </footer>
     </div>
 
+    <script src="/blog/lang-switcher.js"></script>
+
+
     <script type="module">
         import { themeManager } from '/src/theme.js';
         themeManager.init();
-    </script>
-    <script>
-        function setLang(lang) {
-            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.textContent.includes(lang === 'zh' ? '中' : 'EN'));
-            });
-            localStorage.setItem('preferred-lang', lang);
-        }
-        // Initialize language
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedLang = localStorage.getItem('preferred-lang');
-            if (savedLang) {
-                setLang(savedLang);
-            } else {
-                setLang('en');
-            }
-        });
     </script>
 </body>
 
