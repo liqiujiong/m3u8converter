@@ -158,7 +158,7 @@ Each article must link to:
 | Priority | Filename | Title | Target Keywords |
 |----------|----------|-------|-----------------|
 | 🔴 High | `encrypted-m3u8-guide.html` | How to Download Encrypted M3U8 Videos | encrypted m3u8 download |
-| 🔴 High | `mobile-m3u8-download.html` | Mobile M3U8 Video Download Tutorial | mobile m3u8 download |
+| 🔴 High | `mobile-m3u8-download.html` | Mobile M3U8 Video Download Tutorial | mobile m3u8 download | ✅ Jan 23 |
 | 🟡 Medium | `m3u8-batch-download.html` | Batch Download M3U8 Videos Method | batch download m3u8 |
 | 🟡 Medium | `vlc-m3u8-convert.html` | Convert M3U8 Videos Using VLC | vlc m3u8 |
 | 🟢 Low | `hls-drm-explained.html` | HLS DRM Protection Explained | HLS DRM |
