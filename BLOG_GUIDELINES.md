@@ -76,11 +76,17 @@ Blog content should focus on these core areas:
 | **Alt Text** | Required, include relevant keywords |
 
 ### Bilingual Support
-- All articles must provide both Chinese and English versions
+- All blog detail articles must provide both Chinese and English versions (mandatory)
+- Single-language blog pages are forbidden
+- Chinese-only blog pages are strictly prohibited
+- 严禁发布单语中文 Blog（必须中英双语）
 - Use `data-lang="zh"` / `data-lang="en"` tags for switching
 - All blog detail pages must use the shared language switcher template
 - Language switcher must be compact (pill style), not a full-width top bar
 - Place switcher inside `.article-container`, above breadcrumb, right-aligned on desktop and left-aligned on mobile
+- Bilingual pairing rule: key blocks (`breadcrumb`, `h1`, meta text, main paragraphs, CTA, back link) must have both `data-lang="zh"` and `data-lang="en"` variants
+- Do not leave plain text-only sections in detail pages after adding language switcher
+- If bilingual content is incomplete, the article must not be published
 - Required shared files:
   - `/blog/lang-switcher.css`
   - `/blog/lang-switcher.js`
@@ -94,6 +100,24 @@ Blog content should focus on these core areas:
   </div>
 </div>
 ```
+
+### Language Switcher QA Gate (Required Before Publish)
+1. Run structure check (must return no FAIL lines):
+
+```bash
+for f in blog/*.html; do
+  [ "$(basename "$f")" = "index.html" ] && continue
+  en=$(grep -o 'data-lang="en"' "$f" | wc -l | tr -d ' ')
+  zh=$(grep -o 'data-lang="zh"' "$f" | wc -l | tr -d ' ')
+  if [ "$en" -eq 0 ] || [ "$zh" -eq 0 ]; then
+    echo "FAIL: $f is not fully bilingual (en:$en zh:$zh)"
+  fi
+done
+```
+
+2. Manual verification:
+- Click `中文` and `EN`; breadcrumb, title, meta, and first screen body must visibly change
+- Verify mobile layout keeps switcher compact and not full-width
 
 ---
 
@@ -204,7 +228,7 @@ graph LR
 ### Publishing Checklist
 
 - [ ] Article content complete, no typos
-- [ ] Both Chinese and English versions ready
+- [ ] Both Chinese and English versions ready (mandatory, otherwise block publish)
 - [ ] SEO meta tags complete
 - [ ] Schema.org structured data added
 - [ ] Images compressed with alt text

@@ -137,20 +137,23 @@
         </div>
 
         <nav class="breadcrumb">
-            <a href="/">首页</a> / <a href="/blog/">博客</a> / HLS流媒体详解
+            <span data-lang="zh"><a href="/">首页</a> / <a href="/blog/">博客</a> / HLS流媒体详解</span>
+            <span data-lang="en"><a href="/">Home</a> / <a href="/blog/">Blog</a> / What Is HLS Streaming</span>
         </nav>
 
         <article>
             <header class="article-header">
-                <h1>📡 什么是 HLS 流媒体？M3U8 格式详解</h1>
+                <h1 data-lang="zh">📡 什么是 HLS 流媒体？M3U8 格式详解</h1>
+                <h1 data-lang="en">📡 What Is HLS Streaming? M3U8 Explained</h1>
                 <div class="article-meta">
-                    <span>📅 2026年1月18日</span>
-                    <span>⏱️ 10 分钟阅读</span>
-                    <span>📚 技术深度</span>
+                    <span>📅 2026-01-18</span>
+                    <span>⏱️ <span data-lang="zh">10 分钟阅读</span><span data-lang="en">10 min read</span></span>
+                    <span>📚 <span data-lang="zh">技术深度</span><span data-lang="en">Technical Deep Dive</span></span>
                 </div>
             </header>
 
             <div class="article-content">
+                <div data-lang="zh">
                 <p>HLS (HTTP Live Streaming) 是目前最流行的视频流媒体协议之一。理解它的工作原理，有助于你更好地下载和处理在线视频。</p>
 
                 <h2>HLS 协议简介</h2>
@@ -288,12 +291,152 @@ high/playlist.m3u8</code></pre>
                     <li>合并分片并转换为 MP4</li>
                 </ol>
                 <p>我们的 <a href="/">M3U8 Converter</a> 工具自动完成以上所有步骤。</p>
+                </div>
+
+                <div data-lang="en">
+                    <p>HLS (HTTP Live Streaming) is one of the most widely used video streaming protocols. Understanding its
+                        structure makes downloading, troubleshooting, and conversion much easier.</p>
+
+                    <h2>HLS Basics</h2>
+                    <p><strong>HLS</strong> was introduced by Apple in 2009. The core design is:</p>
+                    <ul>
+                        <li>Split video into short segments (typically 2-10 seconds)</li>
+                        <li>Deliver content over standard HTTP</li>
+                        <li>Use M3U8 playlists to manage segment order</li>
+                        <li>Support adaptive bitrate for different network conditions</li>
+                    </ul>
+
+                    <div class="info-box">
+                        <strong>Why HLS became mainstream</strong><br>
+                        It works with standard web/CDN infrastructure and has strong compatibility across modern browsers and devices.
+                    </div>
+
+                    <h2>How HLS Works</h2>
+                    <div class="diagram">
+                        <pre class="diagram-text">
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│ Source Video│ →  │   Encoder   │ →  │ TS Segments │
+│ (MP4, etc.) │    │  (FFmpeg)   │    │ (2-10s each)│
+└─────────────┘    └─────────────┘    └─────────────┘
+                                              ↓
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│   Player    │ ←  │  HTTP / CDN │ ←  │ M3U8 Playlist│
+│  (Browser)  │    │ (Delivery)  │    │  (Index File)│
+└─────────────┘    └─────────────┘    └─────────────┘
+          </pre>
+                    </div>
+
+                    <h2>M3U8 File Structure</h2>
+                    <p>M3U8 is a UTF-8 text playlist containing metadata and segment references.</p>
+
+                    <h3>Basic Media Playlist Example</h3>
+                    <pre><code>#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-TARGETDURATION:10
+#EXT-X-MEDIA-SEQUENCE:0
+
+#EXTINF:10.0,
+segment_0.ts
+#EXTINF:10.0,
+segment_1.ts
+#EXTINF:10.0,
+segment_2.ts
+#EXTINF:8.5,
+segment_3.ts
+
+#EXT-X-ENDLIST</code></pre>
+
+                    <h3>Key Tags</h3>
+                    <ul>
+                        <li><code>#EXTM3U</code>: identifies the file as M3U8 playlist</li>
+                        <li><code>#EXT-X-VERSION</code>: HLS version</li>
+                        <li><code>#EXT-X-TARGETDURATION</code>: max segment duration</li>
+                        <li><code>#EXTINF</code>: duration of the next segment</li>
+                        <li><code>#EXT-X-ENDLIST</code>: marks VOD playlist end</li>
+                    </ul>
+
+                    <h2>Variant Playlists (Adaptive Bitrate)</h2>
+                    <p>HLS supports multiple quality levels through a master playlist:</p>
+                    <pre><code>#EXTM3U
+#EXT-X-VERSION:3
+
+#EXT-X-STREAM-INF:BANDWIDTH=800000,RESOLUTION=640x360
+low/playlist.m3u8
+
+#EXT-X-STREAM-INF:BANDWIDTH=1400000,RESOLUTION=1280x720
+mid/playlist.m3u8
+
+#EXT-X-STREAM-INF:BANDWIDTH=2800000,RESOLUTION=1920x1080
+high/playlist.m3u8</code></pre>
+                    <p>Players switch quality automatically based on current bandwidth and buffer state.</p>
+
+                    <h2>TS Segment Format</h2>
+                    <p><strong>MPEG-TS</strong> is the classic container used by HLS:</p>
+                    <ul>
+                        <li>Designed for streaming and error resilience</li>
+                        <li>Uses fixed 188-byte packet units</li>
+                        <li>Commonly carries H.264 video + AAC audio</li>
+                        <li>Each segment can usually be decoded independently</li>
+                    </ul>
+
+                    <h2>Encryption and DRM</h2>
+                    <p>HLS can protect premium content using encryption and DRM.</p>
+
+                    <h3>AES-128 Encryption</h3>
+                    <pre><code>#EXT-X-KEY:METHOD=AES-128,URI="https://example.com/key.bin"</code></pre>
+                    <p>Segments are encrypted and require key access for playback/decryption.</p>
+
+                    <h3>FairPlay DRM</h3>
+                    <p>Apple's DRM solution for licensed content with secure key and playback policies.</p>
+
+                    <h2>HLS vs Other Protocols</h2>
+                    <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+                        <thead>
+                            <tr style="background: var(--color-bg-alt);">
+                                <th style="padding: 0.75rem; border: 1px solid var(--color-border);">Protocol</th>
+                                <th style="padding: 0.75rem; border: 1px solid var(--color-border);">Latency</th>
+                                <th style="padding: 0.75rem; border: 1px solid var(--color-border);">Compatibility</th>
+                                <th style="padding: 0.75rem; border: 1px solid var(--color-border);">Typical Use</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 0.75rem; border: 1px solid var(--color-border);">HLS</td>
+                                <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Higher (10-30s)</td>
+                                <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Excellent</td>
+                                <td style="padding: 0.75rem; border: 1px solid var(--color-border);">VOD, live streaming</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.75rem; border: 1px solid var(--color-border);">DASH</td>
+                                <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Medium (5-15s)</td>
+                                <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Good</td>
+                                <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Mainly VOD</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.75rem; border: 1px solid var(--color-border);">WebRTC</td>
+                                <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Ultra-low (&lt;1s)</td>
+                                <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Medium</td>
+                                <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Real-time communication</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>How to Process HLS Video</h2>
+                    <p>Once you understand HLS structure, the workflow is straightforward:</p>
+                    <ol>
+                        <li>Get the M3U8 playlist URL</li>
+                        <li>Parse playlist and collect TS segment URLs</li>
+                        <li>Download all segments</li>
+                        <li>Merge and convert to MP4</li>
+                    </ol>
+                    <p><a href="/">M3U8 Converter</a> automates this entire pipeline in one place.</p>
+                </div>
             </div>
         </article>
 
         <footer
             style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border);">
-            <a href="/blog/" class="back-link">← 返回博客列表</a>
+            <a href="/blog/" class="back-link"><span data-lang="zh">← 返回博客列表</span><span data-lang="en">← Back to Blog</span></a>
         </footer>
     </div>
 

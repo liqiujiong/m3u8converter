@@ -168,20 +168,23 @@
         </div>
 
         <nav class="breadcrumb">
-            <a href="/">首页</a> / <a href="/blog/">博客</a> / TS合并MP4
+            <span data-lang="zh"><a href="/">首页</a> / <a href="/blog/">博客</a> / TS合并MP4</span>
+            <span data-lang="en"><a href="/">Home</a> / <a href="/blog/">Blog</a> / Merge TS Files to MP4</span>
         </nav>
 
         <article>
             <header class="article-header">
-                <h1>🔗 TS 文件合并为 MP4 的 3 种方法</h1>
+                <h1 data-lang="zh">🔗 TS 文件合并为 MP4 的 3 种方法</h1>
+                <h1 data-lang="en">🔗 3 Ways to Merge TS Files into MP4</h1>
                 <div class="article-meta">
-                    <span>📅 2026年1月18日</span>
-                    <span>⏱️ 6 分钟阅读</span>
-                    <span>🛠️ 实用技巧</span>
+                    <span>📅 2026-01-18</span>
+                    <span>⏱️ <span data-lang="zh">6 分钟阅读</span><span data-lang="en">6 min read</span></span>
+                    <span>🛠️ <span data-lang="zh">实用技巧</span><span data-lang="en">Practical Tips</span></span>
                 </div>
             </header>
 
             <div class="article-content">
+                <div data-lang="zh">
                 <p>你可能遇到过这种情况：下载了一个视频，结果是一堆 <code>.ts</code> 文件，每个只有几秒钟。这些就是 HLS 视频的分片文件。本文将介绍三种方法将它们合并为一个完整的 MP4 视频。
                 </p>
 
@@ -289,12 +292,125 @@ ffmpeg -f concat -safe 0 -i filelist.txt -c:v libx264 -c:a aac output.mp4</code>
                     <p>无需手动下载 TS 文件，直接粘贴链接转换</p>
                     <a href="/">立即使用 →</a>
                 </div>
+                </div>
+
+                <div data-lang="en">
+                    <p>If you downloaded a video and got many <code>.ts</code> files, you are dealing with HLS segments.
+                        This guide explains three practical methods to merge them into one MP4 file.</p>
+
+                    <div class="warning-box">
+                        <strong>⚠️ Note:</strong> If you still have the original M3U8 playlist URL, use
+                        <a href="/">M3U8 Converter</a> directly to avoid manual segment operations.
+                    </div>
+
+                    <h2>Quick Overview</h2>
+                    <ul>
+                        <li><strong>Method 1</strong>: FFmpeg command line - most reliable and flexible</li>
+                        <li><strong>Method 2</strong>: Online merge tools - easiest, but upload-dependent</li>
+                        <li><strong>Method 3</strong>: Desktop editors/players - visual workflow</li>
+                    </ul>
+
+                    <div class="method-card">
+                        <h3>📟 Method 1: FFmpeg CLI <span class="difficulty">⭐⭐ Medium</span></h3>
+                        <p>FFmpeg is the most powerful option for stable TS merging.</p>
+
+                        <h4>Step 1: Create a file list</h4>
+                        <p>Create <code>filelist.txt</code> and list all TS files in playback order:</p>
+                        <pre><code>file 'segment_0.ts'
+file 'segment_1.ts'
+file 'segment_2.ts'
+file 'segment_3.ts'
+...</code></pre>
+
+                        <p>Or generate it automatically:</p>
+                        <pre><code># Windows
+(for %i in (*.ts) do @echo file '%i') > filelist.txt
+
+# macOS/Linux
+for f in *.ts; do echo "file '$f'" >> filelist.txt; done</code></pre>
+
+                        <h4>Step 2: Merge segments</h4>
+                        <pre><code># Fast remux
+ffmpeg -f concat -safe 0 -i filelist.txt -c copy output.mp4
+
+# Re-encode for compatibility
+ffmpeg -f concat -safe 0 -i filelist.txt -c:v libx264 -c:a aac output.mp4</code></pre>
+                    </div>
+
+                    <div class="method-card">
+                        <h3>🌐 Method 2: Online Merge Tools <span class="difficulty">⭐ Easy</span></h3>
+                        <p>Good for users without FFmpeg, but there are upload limits and privacy trade-offs.</p>
+
+                        <p><strong>Recommended tools:</strong></p>
+                        <ul>
+                            <li><a href="https://www.aconvert.com/video/merge/" target="_blank">Aconvert</a> - merges multiple files</li>
+                            <li><a href="https://www.clideo.com/merge-video" target="_blank">Clideo</a> - user-friendly UI</li>
+                        </ul>
+
+                        <p><strong>Steps:</strong></p>
+                        <ol>
+                            <li>Open the merge tool website</li>
+                            <li>Upload TS files in the correct order</li>
+                            <li>Select MP4 as output format</li>
+                            <li>Start merge and wait for processing</li>
+                            <li>Download the merged MP4</li>
+                        </ol>
+
+                        <p><em>Limitations: requires upload, weaker privacy, and large files may fail.</em></p>
+                    </div>
+
+                    <div class="method-card">
+                        <h3>🎬 Method 3: Desktop Software <span class="difficulty">⭐ Easy</span></h3>
+                        <p>You can merge with visual tools if command line is not preferred.</p>
+
+                        <p><strong>Suggested software:</strong></p>
+                        <ul>
+                            <li><strong>VLC Media Player</strong> - free and open-source</li>
+                            <li><strong>Shotcut</strong> - free editor</li>
+                            <li><strong>DaVinci Resolve</strong> - powerful free tier</li>
+                        </ul>
+
+                        <h4>Merge in VLC</h4>
+                        <ol>
+                            <li>Open VLC → Media → Open Multiple Files</li>
+                            <li>Add TS files in exact sequence</li>
+                            <li>Use the arrow next to Play → Convert</li>
+                            <li>Select profile and output path</li>
+                            <li>Start conversion</li>
+                        </ol>
+                    </div>
+
+                    <h2>FAQ</h2>
+
+                    <h3>Q: Audio/video is out of sync after merge?</h3>
+                    <p>Try re-encoding with FFmpeg:</p>
+                    <pre><code>ffmpeg -f concat -safe 0 -i filelist.txt -c:v libx264 -c:a aac -async 1 output.mp4</code></pre>
+
+                    <h3>Q: Segment order is wrong?</h3>
+                    <p>Ensure numeric sorting is correct. Rename files like
+                        <code>segment_1.ts</code>, <code>segment_10.ts</code>, <code>segment_2.ts</code> to
+                        <code>segment_01.ts</code>, <code>segment_02.ts</code>, etc.
+                    </p>
+
+                    <h3>Q: Output file cannot play?</h3>
+                    <p>Container/codec mismatch can cause this. Re-encode to standard MP4:</p>
+                    <pre><code>ffmpeg -i input.ts -c:v libx264 -c:a aac -movflags faststart output.mp4</code></pre>
+
+                    <h2>Better Workflow</h2>
+                    <p>Instead of manually merging TS segments, use a one-step M3U8 to MP4 pipeline whenever possible.</p>
+
+                    <div class="cta-box">
+                        <h3>One-Click M3U8 to MP4</h3>
+                        <p>Paste M3U8 URL and convert directly in your browser</p>
+                        <a href="/">Use Now →</a>
+                    </div>
+                </div>
             </div>
         </article>
 
         <footer
             style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border);">
-            <a href="/blog/" class="back-link">← 返回博客列表</a>
+            <a href="/blog/" class="back-link"><span data-lang="zh">← 返回博客列表</span><span data-lang="en">← Back to Blog</span></a>
         </footer>
     </div>
 

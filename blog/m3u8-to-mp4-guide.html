@@ -163,20 +163,23 @@
         </div>
 
         <nav class="breadcrumb">
-            <a href="/">首页</a> / <a href="/blog/">博客</a> / M3U8转MP4指南
+            <span data-lang="zh"><a href="/">首页</a> / <a href="/blog/">博客</a> / M3U8转MP4指南</span>
+            <span data-lang="en"><a href="/">Home</a> / <a href="/blog/">Blog</a> / M3U8 to MP4 Guide</span>
         </nav>
 
         <article>
             <header class="article-header">
-                <h1>🔄 M3U8 转 MP4 终极指南</h1>
+                <h1 data-lang="zh">🔄 M3U8 转 MP4 终极指南</h1>
+                <h1 data-lang="en">🔄 Ultimate Guide: Convert M3U8 to MP4</h1>
                 <div class="article-meta">
-                    <span>📅 2026年1月18日</span>
-                    <span>⏱️ 8 分钟阅读</span>
-                    <span>🔧 进阶教程</span>
+                    <span>📅 2026-01-18</span>
+                    <span>⏱️ <span data-lang="zh">8 分钟阅读</span><span data-lang="en">8 min read</span></span>
+                    <span>🔧 <span data-lang="zh">进阶教程</span><span data-lang="en">Advanced Guide</span></span>
                 </div>
             </header>
 
             <div class="article-content">
+                <div data-lang="zh">
                 <p>将 M3U8 视频流转换为 MP4 有多种方法，每种方法都有其优缺点。本文将全面对比各种方案，帮助你选择最适合的工具。</p>
 
                 <h2>方法对比表</h2>
@@ -307,12 +310,148 @@ ffmpeg -i "https://example.com/video.m3u8" -c copy -progress - output.mp4</code>
 
                 <h3>加密视频</h3>
                 <p>如果视频使用 AES-128 加密，需要提供密钥才能解密下载。</p>
+                </div>
+
+                <div data-lang="en">
+                    <p>There are multiple ways to convert M3U8 streams into MP4 files. Each approach has trade-offs in
+                        usability, speed, privacy, and flexibility. This guide compares the main options and helps you choose
+                        the right one.</p>
+
+                    <h2>Method Comparison</h2>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Difficulty</th>
+                                <th>Speed</th>
+                                <th>Privacy</th>
+                                <th>Best For</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Online Tool (This Site)</td>
+                                <td>⭐ Easy</td>
+                                <td>⭐⭐⭐ Fast</td>
+                                <td>⭐⭐⭐ Local Processing</td>
+                                <td>Everyone</td>
+                            </tr>
+                            <tr>
+                                <td>FFmpeg CLI</td>
+                                <td>⭐⭐⭐ Advanced</td>
+                                <td>⭐⭐⭐ Fastest</td>
+                                <td>⭐⭐⭐ Fully Local</td>
+                                <td>Technical Users</td>
+                            </tr>
+                            <tr>
+                                <td>Desktop Apps</td>
+                                <td>⭐⭐ Medium</td>
+                                <td>⭐⭐⭐ Fast</td>
+                                <td>⭐⭐ Depends on Tool</td>
+                                <td>General Users</td>
+                            </tr>
+                            <tr>
+                                <td>Browser Extensions</td>
+                                <td>⭐ Easy</td>
+                                <td>⭐⭐ Medium</td>
+                                <td>⭐⭐ Depends on Extension</td>
+                                <td>General Users</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Method 1: Online Converter (Recommended)</h2>
+                    <p>Using M3U8 Converter in your browser is the easiest option:</p>
+                    <ul>
+                        <li><strong>No installation</strong>: runs directly in modern browsers</li>
+                        <li><strong>Better privacy</strong>: conversion is processed locally</li>
+                        <li><strong>Multiple outputs</strong>: MP4, WebM, AVI, MKV, MOV</li>
+                        <li><strong>Free to use</strong>: no signup required</li>
+                    </ul>
+
+                    <div class="cta-box">
+                        <h3>Try Online Conversion Now</h3>
+                        <a href="/">Open M3U8 Converter →</a>
+                    </div>
+
+                    <h2>Method 2: FFmpeg Command Line</h2>
+                    <p>If you are comfortable with CLI tools, FFmpeg gives the most control.</p>
+
+                    <h3>Install FFmpeg</h3>
+                    <pre><code># macOS (Homebrew)
+brew install ffmpeg
+
+# Windows (Chocolatey)
+choco install ffmpeg
+
+# Ubuntu/Debian
+sudo apt install ffmpeg</code></pre>
+
+                    <h3>Conversion Commands</h3>
+                    <pre><code># Basic remux
+ffmpeg -i "https://example.com/video.m3u8" -c copy output.mp4
+
+# Re-encode for better compatibility
+ffmpeg -i "https://example.com/video.m3u8" -c:v libx264 -c:a aac output.mp4
+
+# Show progress
+ffmpeg -i "https://example.com/video.m3u8" -c copy -progress - output.mp4</code></pre>
+
+                    <div class="tip-box">
+                        <strong>💡 Tip:</strong> Use <code>-c copy</code> first for maximum speed. If output playback fails on
+                        some devices, switch to re-encoding with <code>-c:v libx264</code>.
+                    </div>
+
+                    <h2>Method 3: Desktop Software</h2>
+                    <p>Popular desktop options include:</p>
+                    <ul>
+                        <li><strong>VLC Media Player</strong>: free, open-source, and widely available</li>
+                        <li><strong>JDownloader</strong>: strong batch download support</li>
+                        <li><strong>Video DownloadHelper</strong>: usually combined with browser extension workflow</li>
+                    </ul>
+
+                    <h3>Convert with VLC</h3>
+                    <ol>
+                        <li>Open VLC: Media → Convert/Save</li>
+                        <li>Go to the Network tab and paste the M3U8 URL</li>
+                        <li>Click Convert/Save</li>
+                        <li>Select an output profile (e.g., H.264 + MP3)</li>
+                        <li>Choose output file path and start conversion</li>
+                    </ol>
+
+                    <h2>Method 4: Browser Extensions</h2>
+                    <p>Some extensions can detect and download HLS resources directly:</p>
+                    <ul>
+                        <li><strong>Video DownloadHelper</strong> (Firefox/Chrome)</li>
+                        <li><strong>HLS Downloader</strong> (Chrome)</li>
+                        <li><strong>Stream Recorder</strong> (Chrome)</li>
+                    </ul>
+                    <p>Use trusted extensions with clear privacy disclosures.</p>
+
+                    <h2>Recommendations</h2>
+                    <ul>
+                        <li><strong>General users</strong>: use the online converter for the fastest workflow</li>
+                        <li><strong>Batch automation</strong>: FFmpeg + scripts</li>
+                        <li><strong>Frequent downloads</strong>: desktop tools may fit better</li>
+                        <li><strong>Privacy-sensitive</strong>: choose browser-local conversion or FFmpeg</li>
+                    </ul>
+
+                    <h2>Common Errors</h2>
+                    <h3>403 Forbidden</h3>
+                    <p>The source server may require headers/cookies such as Referer or auth tokens.</p>
+
+                    <h3>CORS Errors</h3>
+                    <p>Browser policies can block cross-origin playlist/segment requests. FFmpeg can avoid browser CORS limits.</p>
+
+                    <h3>Encrypted Streams</h3>
+                    <p>AES-128 protected streams may require valid key URLs and access credentials.</p>
+                </div>
             </div>
         </article>
 
         <footer
             style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border);">
-            <a href="/blog/" class="back-link">← 返回博客列表</a>
+            <a href="/blog/" class="back-link"><span data-lang="zh">← 返回博客列表</span><span data-lang="en">← Back to Blog</span></a>
         </footer>
     </div>
 

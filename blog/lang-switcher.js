@@ -22,6 +22,32 @@
         });
     }
 
+    function detectPageLanguages() {
+        var hasZh = false;
+        var hasEn = false;
+        document.querySelectorAll('[data-lang]').forEach(function (node) {
+            var nodeLang = normalizeLang(node.getAttribute('data-lang'));
+            if (nodeLang === 'zh') {
+                hasZh = true;
+            }
+            if (nodeLang === 'en') {
+                hasEn = true;
+            }
+        });
+        return { hasZh: hasZh, hasEn: hasEn };
+    }
+
+    function hideSwitchers() {
+        document.querySelectorAll('[data-lang-switcher]').forEach(function (switcher) {
+            var wrap = switcher.closest('.lang-switcher-wrap');
+            if (wrap) {
+                wrap.hidden = true;
+                return;
+            }
+            switcher.hidden = true;
+        });
+    }
+
     function applyLang(lang) {
         var normalizedLang = normalizeLang(lang);
         document.documentElement.lang = normalizedLang === 'zh' ? 'zh-CN' : 'en';
@@ -52,6 +78,13 @@
     }
 
     function initLangSwitcher() {
+        var pageLanguages = detectPageLanguages();
+        if (!pageLanguages.hasZh || !pageLanguages.hasEn) {
+            hideSwitchers();
+            document.documentElement.setAttribute('data-i18n-ready', '1');
+            return;
+        }
+
         bindSwitcherEvents();
         applyLang(getInitialLang());
     }
