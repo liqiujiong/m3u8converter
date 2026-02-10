@@ -305,7 +305,8 @@
             localStorage.setItem('preferred-lang', lang);
         }
         // Initialize
-        const savedLang = localStorage.getItem('preferred-lang') || (navigator.language.startsWith('zh') ? 'zh' : 'en');
+        // 默认英文
+        const savedLang = localStorage.getItem('preferred-lang') || 'en';
         setLang(savedLang);
     </script>
 </body>

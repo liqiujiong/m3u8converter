@@ -640,9 +640,15 @@ echo "Download complete: $OUTPUT"</code></pre>
             });
             localStorage.setItem('preferred-lang', lang);
         }
-        // Initialize
-        
-        setLang(savedLang);
+        // Initialize language
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferred-lang');
+            if (savedLang) {
+                setLang(savedLang);
+            } else {
+                setLang('en');
+            }
+        });
     </script>
 </body>
 
