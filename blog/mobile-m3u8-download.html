@@ -57,6 +57,30 @@
             font-weight: 600;
             margin-right: 0.5rem;
         }
+
+        .article-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-topbar .breadcrumb {
+            margin-bottom: 0;
+        }
+
+        .article-topbar .lang-switcher-wrap {
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .article-topbar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
     </style>
 
     <script type="application/ld+json">
@@ -92,16 +116,18 @@
 
 <body>
     <div class="article-container">
-        <div class="lang-switcher-wrap">
-            <div class="lang-switcher" data-lang-switcher>
-                <button class="lang-btn" type="button" data-lang-target="zh" aria-pressed="false">中文</button>
-                <button class="lang-btn" type="button" data-lang-target="en" aria-pressed="false">EN</button>
+        <div class="article-topbar">
+            <nav class="breadcrumb">
+                <span data-lang="zh"><a href="/">首页</a> / <a href="/blog/">博客</a> / 手机M3U8下载教程</span>
+                <span data-lang="en"><a href="/">Home</a> / <a href="/blog/">Blog</a> / Mobile M3U8 Download Tutorial</span>
+            </nav>
+            <div class="lang-switcher-wrap">
+                <div class="lang-switcher" data-lang-switcher>
+                    <button class="lang-btn" type="button" data-lang-target="zh" aria-pressed="false">中文</button>
+                    <button class="lang-btn" type="button" data-lang-target="en" aria-pressed="false">EN</button>
+                </div>
             </div>
         </div>
-
-        <nav class="breadcrumb">
-            <a href="/">首页</a> / <a href="/blog/">博客</a> / <span data-lang="zh">手机M3U8下载教程</span><span data-lang="en">Mobile M3U8 Download Tutorial</span>
-        </nav>
         <article>
             <header class="article-header">
                 <h1>📱 <span data-lang="zh">手机M3U8视频下载教程 - iPhone和Android设备完整指南</span><span data-lang="en">Mobile M3U8 Video Download Tutorial - Complete Guide for iPhone & Android</span></h1>
