@@ -237,30 +237,37 @@ graph LR
 - [ ] Images compressed with alt text
 - [ ] Internal and external links working
 - [ ] Mobile display normal
-- [ ] **Added to vite.config.js rollup input** (CRITICAL - or 404 error!)
+- [ ] Confirm new article file exists under `/blog/*.html` (vite now auto-discovers blog pages)
 - [ ] Added to sitemap.xml
 - [ ] Blog homepage list updated
 - [ ] Submitted to Google Search Console
 
 ---
 
-## ⚙️ Vite Config (IMPORTANT)
+## ⚙️ Vite Config
 
-**每个新博客文章必须添加到 `vite.config.js` 的 rollup input 中，否则部署后返回 404！**
-
-```javascript
-// vite.config.js
-rollupOptions: {
-  input: {
-    // ... existing articles
-    articleX: 'blog/your-new-article.html',
-  },
-}
-```
+`vite.config.js` 已改为自动扫描 `blog/*.html` 并加入构建输入。  
+发布新文章时不再需要手动维护 `article1/article2/...` 条目。
 
 **发布新文章时必须同时修改：**
-1. `vite.config.js` - 添加到 rollup input
-2. `public/sitemap.xml` - 添加 URL 条目
+1. `/public/sitemap.xml` - 添加 URL 条目
+2. `/blog/index.html` - 添加文章列表入口
+
+## 🧩 Article Template Generator
+
+可用命令快速生成文章 HTML 骨架（含 SEO 元信息、双语区块、语言切换器）：
+
+```bash
+npm run blog:new -- \
+  --slug=your-article-slug \
+  --title-zh="中文标题" \
+  --title-en="English Title" \
+  --desc-zh="中文描述" \
+  --desc-en="English description"
+```
+
+生成文件路径：`/blog/<slug>.html`  
+支持可选参数：`--date=YYYY-MM-DD`、`--read-minutes=8`、`--keywords=...`、`--og-image=...`
 
 ---
 

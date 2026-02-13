@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{PAGE_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}">
+  <meta name="keywords" content="{{META_KEYWORDS}}">
+  <link rel="canonical" href="{{CANONICAL_URL}}">
+  <meta property="og:title" content="{{OG_TITLE}}">
+  <meta property="og:description" content="{{OG_DESCRIPTION}}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{{CANONICAL_URL}}">
+  <meta property="og:image" content="{{OG_IMAGE}}">
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="stylesheet" href="/blog/article-base.css">
+  <link rel="stylesheet" href="/blog/lang-switcher.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": {{JSONLD_HEADLINE_JSON}},
+    "description": {{JSONLD_DESCRIPTION_JSON}},
+    "author": { "@type": "Organization", "name": "M3U8 Converter" },
+    "datePublished": "{{DATE_PUBLISHED}}",
+    "dateModified": "{{DATE_MODIFIED}}",
+    "image": "{{OG_IMAGE}}",
+    "publisher": {
+      "@type": "Organization",
+      "name": "M3U8 Converter",
+      "logo": { "@type": "ImageObject", "url": "/logo.png" }
+    }
+  }
+  </script>
+</head>
+<body>
+  <div class="article-container">
+    <div class="lang-switcher-wrap">
+      <div class="lang-switcher" data-lang-switcher>
+        <button class="lang-btn" type="button" data-lang-target="zh" aria-pressed="false">中文</button>
+        <button class="lang-btn" type="button" data-lang-target="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+
+    <nav class="breadcrumb">
+      <span data-lang="zh"><a href="/">首页</a> / <a href="/blog/">博客</a> / {{TITLE_ZH}}</span>
+      <span data-lang="en"><a href="/">Home</a> / <a href="/blog/">Blog</a> / {{TITLE_EN}}</span>
+    </nav>
+
+    <article>
+      <header class="article-header">
+        <h1 data-lang="zh">{{TITLE_ZH}}</h1>
+        <h1 data-lang="en">{{TITLE_EN}}</h1>
+        <div class="article-meta">
+          <span>📅 {{DATE_PUBLISHED}}</span>
+          <span>⏱️ <span data-lang="zh">{{READ_MINUTES}} 分钟阅读</span><span data-lang="en">{{READ_MINUTES}} min read</span></span>
+          <span>👁️ <span data-lang="zh">{{BREADCRUMB_ZH}}</span><span data-lang="en">{{BREADCRUMB_EN}}</span></span>
+        </div>
+      </header>
+
+      <div class="article-content">
+        <div data-lang="zh">
+{{CONTENT_ZH}}
+        </div>
+        <div data-lang="en">
+{{CONTENT_EN}}
+        </div>
+      </div>
+    </article>
+
+    <footer style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border);">
+      <a href="/blog/" class="back-link">← <span data-lang="zh">返回博客列表</span><span data-lang="en">Back to Blog</span></a>
+    </footer>
+  </div>
+
+  <script type="module" src="/blog/lang-switcher.js"></script>
+  <script type="module">
+    import { themeManager } from '/src/theme.js';
+    themeManager.init();
+  </script>
+</body>
+</html>

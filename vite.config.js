@@ -1,4 +1,25 @@
 import { defineConfig } from 'vite'
+import { readdirSync } from 'node:fs'
+import { extname, basename } from 'node:path'
+
+function getHtmlInputs() {
+  const input = {
+    main: 'index.html',
+    blog: 'blog/index.html',
+  }
+
+  const blogFiles = readdirSync('blog', { withFileTypes: true })
+    .filter((entry) => entry.isFile())
+    .map((entry) => entry.name)
+    .filter((name) => extname(name) === '.html' && name !== 'index.html')
+
+  for (const fileName of blogFiles) {
+    const slug = basename(fileName, '.html').replace(/[^a-zA-Z0-9]/g, '_')
+    input[`article_${slug}`] = `blog/${fileName}`
+  }
+
+  return input
+}
 
 export default defineConfig({
   server: {
@@ -16,21 +37,7 @@ export default defineConfig({
     cssCodeSplit: true,
     // Rollup options for multi-page
     rollupOptions: {
-      input: {
-        main: 'index.html',
-        blog: 'blog/index.html',
-        article1: 'blog/how-to-download-m3u8-video.html',
-        article2: 'blog/m3u8-to-mp4-guide.html',
-        article3: 'blog/what-is-hls-streaming.html',
-        article4: 'blog/merge-ts-files-to-mp4.html',
-        article5: 'blog/best-m3u8-downloader-2026.html',
-        article6: 'blog/ffmpeg-m3u8-commands.html',
-        article7: 'blog/browser-extract-m3u8.html',
-        article8: 'blog/m3u8-vs-mp4-difference.html',
-        article9: 'blog/mobile-m3u8-download.html',
-        article10: 'blog/fix-m3u8-download-errors.html',
-        article11: 'blog/download-live-stream.html',
-      },
+      input: getHtmlInputs(),
     },
   },
 })
