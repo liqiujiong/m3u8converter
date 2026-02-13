@@ -169,17 +169,30 @@ HLS下载, 视频流下载
 
 ## 📚 Article Plan (文章计划)
 
-### Q1-Q2 2026 待发布
+### 已发布 (11篇)
+
+| # | Filename | Title | Status |
+|---|----------|-------|--------|
+| 1 | `how-to-download-m3u8-video.html` | How to Download M3U8 Video | ✅ |
+| 2 | `m3u8-to-mp4-guide.html` | M3U8 to MP4 Guide | ✅ |
+| 3 | `what-is-hls-streaming.html` | What is HLS Streaming | ✅ |
+| 4 | `merge-ts-files-to-mp4.html` | Merge TS to MP4 | ✅ |
+| 5 | `best-m3u8-downloader-2026.html` | Best M3U8 Downloaders 2026 | ✅ |
+| 6 | `ffmpeg-m3u8-commands.html` | FFmpeg M3U8 Commands | ✅ |
+| 7 | `browser-extract-m3u8.html` | Extract M3U8 from Browser | ✅ |
+| 8 | `m3u8-vs-mp4-difference.html` | M3U8 vs MP4 | ✅ |
+| 9 | `mobile-m3u8-download.html` | Mobile M3U8 Download | ✅ |
+| 10 | `fix-m3u8-download-errors.html` | Fix Download Errors | ✅ |
+| 11 | `download-live-stream.html` | Download Live Stream | ✅ |
+
+### 待发布
 
 | Priority | Filename | Title | Keywords |
 |----------|----------|-------|----------|
-| 🔴 High | `encrypted-m3u8-guide.html` | How to Download Encrypted M3U8 Videos | encrypted m3u8 download |
-| 🔴 High | `mobile-m3u8-download.html` | Mobile M3U8 Video Download Tutorial | mobile m3u8 download |
-| 🟡 Medium | `download-live-stream.html` | How to Download Live Stream Recordings | live stream download |
-| 🟡 Medium | `m3u8-batch-download.html` | Batch Download M3U8 Videos Method | batch download m3u8 |
-| 🟡 Medium | `vlc-m3u8-convert.html` | Convert M3U8 Videos Using VLC | vlc m3u8 |
-| 🟢 Low | `fix-m3u8-download-errors.html` | Common M3U8 Download Errors and Fixes | m3u8 download failed |
-| 🟢 Low | `hls-drm-explained.html` | HLS DRM Protection Explained | HLS DRM |
+| 🔴 High | `encrypted-m3u8-guide.html` | How to Download Encrypted M3U8 | encrypted m3u8 |
+| 🟡 Medium | `m3u8-batch-download.html` | Batch Download M3U8 | batch download m3u8 |
+| 🟡 Medium | `vlc-m3u8-convert.html` | Convert with VLC | vlc m3u8 |
+| 🟢 Low | `hls-drm-explained.html` | HLS DRM Explained | HLS DRM |
 
 ---
 
@@ -192,10 +205,31 @@ HLS下载, 视频流下载
 - [ ] Images compressed with alt text
 - [ ] Internal and external links working
 - [ ] Mobile display normal
+- [ ] **Added to vite.config.js rollup input** (⚠️ CRITICAL - 否则部署后 404!)
 - [ ] Added to sitemap.xml
 - [ ] Blog homepage list updated
 - [ ] Submitted to Google Search Console
 - [ ] **Passed Language Switcher QA Gate** (结构检查 + 手动验证)
+
+---
+
+## ⚙️ Vite Config (必须操作)
+
+**每个新博客文章必须添加到 `vite.config.js` 的 rollup input 中！**
+
+```javascript
+// vite.config.js
+rollupOptions: {
+  input: {
+    // ... existing articles
+    articleX: 'blog/your-new-article.html',
+  },
+}
+```
+
+**发布新文章时必须同时修改：**
+1. `vite.config.js` - 添加到 rollup input
+2. `public/sitemap.xml` - 添加 URL 条目
 
 ---
 

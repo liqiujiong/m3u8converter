@@ -177,6 +177,9 @@ Each article must link to:
 | 6 | `ffmpeg-m3u8-commands.html` | Complete FFmpeg Commands for M3U8 Download | ffmpeg m3u8 | ✅ Published |
 | 7 | `browser-extract-m3u8.html` | 5 Methods to Extract M3U8 Link from Browser | extract m3u8 link | ✅ Published |
 | 8 | `m3u8-vs-mp4-difference.html` | M3U8 vs MP4: What's the Difference? | m3u8 vs mp4 | ✅ Published |
+| 9 | `mobile-m3u8-download.html` | Mobile M3U8 Video Download Tutorial | mobile m3u8 download | ✅ Published |
+| 10 | `fix-m3u8-download-errors.html` | Common M3U8 Download Errors and Fixes | m3u8 download failed | ✅ Published |
+| 11 | `download-live-stream.html` | How to Download Live Stream Recordings | live stream download | ✅ Published |
 
 ---
 
@@ -234,9 +237,30 @@ graph LR
 - [ ] Images compressed with alt text
 - [ ] Internal and external links working
 - [ ] Mobile display normal
+- [ ] **Added to vite.config.js rollup input** (CRITICAL - or 404 error!)
 - [ ] Added to sitemap.xml
 - [ ] Blog homepage list updated
 - [ ] Submitted to Google Search Console
+
+---
+
+## ⚙️ Vite Config (IMPORTANT)
+
+**每个新博客文章必须添加到 `vite.config.js` 的 rollup input 中，否则部署后返回 404！**
+
+```javascript
+// vite.config.js
+rollupOptions: {
+  input: {
+    // ... existing articles
+    articleX: 'blog/your-new-article.html',
+  },
+}
+```
+
+**发布新文章时必须同时修改：**
+1. `vite.config.js` - 添加到 rollup input
+2. `public/sitemap.xml` - 添加 URL 条目
 
 ---
 
