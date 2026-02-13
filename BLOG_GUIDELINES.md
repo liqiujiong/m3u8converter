@@ -77,6 +77,19 @@ Then fill the generated TODO blocks and keep the generated page structure unchan
 | **Query-driven FAQ** | Include at least 3 FAQ items sourced from real Search Console queries |
 | **Unique Value Block** | Must include at least one original comparison table/checklist/error matrix, not generic rewrite |
 
+### Content Quality Scorecard (Must Pass Before Publish)
+
+Score each draft before publish. Minimum pass score: **80/100**.
+
+| Dimension | Weight | Pass Rule |
+|-----------|--------|-----------|
+| **Intent Match** | 25 | Main query answered in first screen + clear solution path |
+| **Uniqueness** | 20 | Has unique section (matrix/checklist/decision tree) not duplicated in existing posts |
+| **Depth & Accuracy** | 20 | Practical steps, edge cases, and limitations are covered without factual conflicts |
+| **On-page SEO** | 15 | Title/H1/meta/canonical/schema all complete and aligned |
+| **Internal Linking** | 10 | At least 3 contextual internal links (2 related posts + 1 tool page) |
+| **Readability & UX** | 10 | Clear H2/H3 hierarchy, short paragraphs, bilingual consistency |
+
 ### Image Resources
 
 | Item | Requirement |
@@ -237,6 +250,28 @@ Each article must link to:
 2. **Related Tutorials** - Increase dwell time
 3. **Technical Deep-dives** - Interconnect comprehensive content
 
+### Topic Cluster Rules (Avoid Cannibalization)
+
+Use one hub + multiple spokes model:
+
+1. **Hub pages**
+- `how-to-download-m3u8-video.html`
+- `m3u8-to-mp4-guide.html`
+- `browser-extract-m3u8.html`
+
+2. **Spoke pages**
+- Tool- or scenario-specific posts (e.g., mobile, ffmpeg.wasm, encrypted/hls, error fixes)
+
+3. **Mandatory linking direction**
+- Spoke → relevant hub (at least 1 link)
+- Hub → high-priority spoke (at least 2 links per hub refresh cycle)
+- New spoke pages must receive at least 2 in-content links from existing pages within 7 days
+
+4. **When not to create a new page**
+- If query intent is already satisfied by an existing page and only wording differs
+- If expected content overlap with an existing page is greater than 60%
+- In these cases, refresh and expand the existing URL instead of adding a new one
+
 ---
 
 ## 📚 Current Article List
@@ -337,11 +372,40 @@ graph LR
 - [ ] Added at least 2 contextual in-links from existing relevant articles
 - [ ] Confirm new article file exists under `/blog/*.html` (vite now auto-discovers blog pages)
 - [ ] Added to sitemap.xml
-- [ ] Blog homepage list updated
+- [ ] Blog homepage list updated (`/blog/index.html`)
 - [ ] Main homepage article entry updated (`/index.html`)
 - [ ] `npm run build` passed
 - [ ] Index status follow-up scheduled for D7 / D14 / D28 in Search Console
 - [ ] Submitted to Google Search Console
+
+### Post-publish Tracking Cadence (Mandatory)
+
+Track each new/updated article at fixed checkpoints:
+
+1. **D1**
+- Confirm URL is in sitemap
+- Confirm article appears in `/blog/index.html` and `/index.html`
+
+2. **D7**
+- Check Search Console coverage and impressions
+- If still "Crawled - currently not indexed", run remediation step 1 (intro rewrite + unique block + in-links)
+
+3. **D14**
+- Re-check indexing and CTR
+- If not indexed, run remediation step 2 (major rewrite / merge decision)
+
+4. **D28**
+- Final decision: keep as standalone URL or consolidate into stronger page
+- Record conclusion in changelog/notes for next editorial planning cycle
+
+### Monthly SEO Review (Editorial + Technical)
+
+Run once per month:
+- Top gaining queries and pages (keep scaling)
+- High impression / low CTR pages (rewrite title/meta and intro)
+- Crawled-not-indexed URLs (reduce low-value URL inventory)
+- Internal link gaps between hubs and spokes
+- Canonical/sitemap consistency audit
 
 ---
 
