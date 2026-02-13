@@ -1,6 +1,6 @@
 # M3U8 Converter Blog Content Guidelines and Plan
 
-> 📅 Last Updated: 2026-02-10  
+> 📅 Last Updated: 2026-02-13  
 > 🌐 Domain: https://www.m3u8converter.com/blog/
 
 ---
@@ -29,41 +29,53 @@ Blog content should focus on these core areas:
 
 ## ✍️ Article Writing Guidelines
 
-### Structure Template
+### Standard Authoring Workflow (Only Allowed Method)
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>[Article Title, English-First]</title>
-  <meta name="description" content="[Description within 150 characters, English-First]">
-  <meta name="keywords" content="[5-8 keywords, English-First]">
-  <link rel="canonical" href="https://www.m3u8converter.com/blog/[slug].html">
-  <!-- Schema.org Structured Data -->
-</head>
-<body>
-  <!-- Breadcrumb Navigation -->
-  <!-- Article Title + Meta Info (Date, Reading Time) -->
-  <!-- Main Content -->
-  <!-- CTA Link to Tool -->
-  <!-- Back to Blog Link -->
-</body>
-</html>
+New articles must be created with the template generator.  
+Manual copy/paste from old blog HTML files is deprecated and should not be used.
+
+**Source of truth files:**
+- `/blog/templates/article.template.html`
+- `/blog/article-base.css`
+- `/blog/lang-switcher.js`
+- `/blog/lang-switcher.css`
+- `/scripts/new-blog-article.mjs`
+
+**Create a new article:**
+
+```bash
+npm run blog:new -- \
+  --slug=your-article-slug \
+  --title-zh="中文标题" \
+  --title-en="English Title" \
+  --desc-zh="中文描述" \
+  --desc-en="English description"
 ```
+
+Generated output: `/blog/<slug>.html`
+
+Then fill the generated TODO blocks and keep the generated page structure unchanged:
+- `.article-topbar` (breadcrumb + language switcher in one row)
+- `article > .article-header > .article-meta`
+- `.article-content` with bilingual `data-lang="zh"` and `data-lang="en"` blocks
+- Footer back link and shared module scripts
 
 ### Content Requirements
 
 | Item | Requirement |
 |------|-------------|
 | **Title** | Include primary keyword, 20-35 characters, English-First |
-| **Body Text** | 1500-3000 words |
+| **Body Text** | Bilingual complete coverage; avoid thin content; target 1500-3000 words total |
 | **Paragraphs** | Max 4 lines per paragraph for readability |
 | **Subheadings** | Use H2/H3 hierarchy with long-tail keywords |
 | **Images** | At least 2 images, WebP format, stored in `/blog/images/` |
-| **Internal Links** | At least 2 links to other blog articles |
+| **Internal Links** | At least 2 links to other blog articles + at least 1 link to tool page |
 | **External Links** | 1-2 authoritative source links |
 | **CTA** | Must include tool usage guidance |
+| **Primary Intent Match** | First screen must answer the main query directly within 120 words |
+| **Cannibalization Check** | Each post must define one primary keyword; if overlap with existing page > 60%, update old page instead of creating a new one |
+| **Query-driven FAQ** | Include at least 3 FAQ items sourced from real Search Console queries |
+| **Unique Value Block** | Must include at least one original comparison table/checklist/error matrix, not generic rewrite |
 
 ### Image Resources
 
@@ -83,20 +95,29 @@ Blog content should focus on these core areas:
 - Use `data-lang="zh"` / `data-lang="en"` tags for switching
 - All blog detail pages must use the shared language switcher template
 - Language switcher must be compact (pill style), not a full-width top bar
-- Place switcher inside `.article-container`, above breadcrumb, right-aligned on desktop and left-aligned on mobile
+- Place switcher and breadcrumb in the same top row (`.article-topbar`) inside `.article-container`
+- Desktop: breadcrumb on the left, switcher on the right; mobile: stack vertically and left-align
 - Bilingual pairing rule: key blocks (`breadcrumb`, `h1`, meta text, main paragraphs, CTA, back link) must have both `data-lang="zh"` and `data-lang="en"` variants
 - Do not leave plain text-only sections in detail pages after adding language switcher
 - If bilingual content is incomplete, the article must not be published
 - Required shared files:
   - `/blog/lang-switcher.css`
   - `/blog/lang-switcher.js`
+- Required shared base style:
+  - `/blog/article-base.css`
 - Required markup snippet:
 
 ```html
-<div class="lang-switcher-wrap">
-  <div class="lang-switcher" data-lang-switcher>
-    <button class="lang-btn" type="button" data-lang-target="zh" aria-pressed="false">中文</button>
-    <button class="lang-btn" type="button" data-lang-target="en" aria-pressed="false">EN</button>
+<div class="article-topbar">
+  <nav class="breadcrumb">
+    <span data-lang="zh"><a href="/">首页</a> / <a href="/blog/">博客</a> / 文章标题</span>
+    <span data-lang="en"><a href="/">Home</a> / <a href="/blog/">Blog</a> / Article Title</span>
+  </nav>
+  <div class="lang-switcher-wrap">
+    <div class="lang-switcher" data-lang-switcher>
+      <button class="lang-btn" type="button" data-lang-target="zh" aria-pressed="false">中文</button>
+      <button class="lang-btn" type="button" data-lang-target="en" aria-pressed="false">EN</button>
+    </div>
   </div>
 </div>
 ```
@@ -116,8 +137,8 @@ done
 ```
 
 2. Manual verification:
-- Click `中文` and `EN`; breadcrumb, title, meta, and first screen body must visibly change
-- Verify mobile layout keeps switcher compact and not full-width
+- Click `中文` and `EN`; breadcrumb (`首页/博客` ↔ `Home/Blog`), title, meta, and first screen body must visibly change
+- Verify topbar is one row on desktop and stacked on mobile; switcher remains compact and not full-width
 
 ---
 
@@ -127,12 +148,61 @@ done
 
 - [ ] **Title Tag**: Keyword first, brand last, within 60 characters
 - [ ] **Meta Description**: Include keywords, 150-160 characters
-- [ ] **Canonical URL**: Point to canonical page address
+- [ ] **Canonical URL**: Must be self-referencing and use `https://www.m3u8converter.com/blog/<slug>.html`
 - [ ] **H1 Tag**: Unique per page, include primary keyword
 - [ ] **URL Slug**: Lowercase, keywords hyphenated
 - [ ] **Schema.org**: Add Article structured data
 - [ ] **Open Graph**: og:title, og:description, og:image
 - [ ] **Image Alt**: Descriptive text with keywords
+
+### Search Console Signals (2026-02 Snapshot)
+
+Current keyword signals indicate three priorities:
+
+1. **Validated intent (already clicked):**
+- `how to extract m3u8 link`
+- `m3u8 downloader online`
+
+2. **High-impression, low-click opportunities:**
+- `ffmpeg download m3u8 tutorial`
+- `m3u8 to mp4`
+- `m3u8 to mp4 online`
+
+3. **New long-tail opportunities (needs dedicated sections/pages):**
+- `mp4 to m3u8`, `video to m3u8`, `convert video to m3u8`
+- `get m3u8 from url online`, `get m3u8 link`, `index.m3u8`, `/index.m3u8`
+- `video downloadhelper m3u8`, `the stream detector`
+- `ffmpeg.wasm hls m3u8 to mp4 in browser`
+- `download hls encrypted video`
+- `no m3u8 links have been found on this site`
+- `online m3u8 downloader`, `online m3u8 to mp4 converter`, `m3u8 video downloader online`, `download m3u8 videos online`, `m3u8 转 mp4 在线`
+
+### Indexation Guardrails (Crawled - currently not indexed)
+
+When pages are crawled but not indexed, treat as a quality + architecture issue first:
+
+1. **Canonical consistency**
+- Use only one canonical host: `https://www.m3u8converter.com`
+- Do not publish canonicals with `m3u8-converter.com` or non-www variants
+
+2. **Internal linking minimum**
+- New page must be linked from `/blog/index.html`
+- New page must be linked from `/index.html` blog block
+- Add contextual in-content links from at least 2 existing relevant articles to the new page
+
+3. **Sitemap quality**
+- Include only canonical URLs in `/public/sitemap.xml`
+- Update `<lastmod>` on publish/major refresh
+
+4. **Quality threshold before publish**
+- No placeholder or repetitive bilingual filler
+- No near-duplicate topic that already exists unless this is a refresh/merge strategy
+- Must contain one “why this page is unique” section (e.g., tool comparison matrix, troubleshooting decision tree, or tested command set)
+
+5. **Re-index remediation SOP**
+- Day 7 not indexed: strengthen intro + add unique section + add 2 internal links in
+- Day 14 not indexed: merge/redirect overlapping page or significantly rewrite (>30% new content)
+- Day 28 not indexed: consolidate with stronger canonical page; avoid expanding low-value URL count
 
 ### Keyword Strategy
 
@@ -155,6 +225,10 @@ HLS下载, 视频流下载
 - What software opens M3U8 files
 - Methods to extract M3U8 link from browser
 - Free online M3U8 to MP4 converter tools
+- MP4 to M3U8 conversion in browser
+- Get M3U8 from URL online safely
+- Download HLS encrypted video legally
+- No M3U8 links found on this site
 
 ### Internal Linking Strategy
 
@@ -185,32 +259,45 @@ Each article must link to:
 
 ## 📅 Future Article Plans
 
-### Q1 2026 (Jan-Mar)
+### Completed (Reference)
 
-| Priority | Filename | Title | Target Keywords | Est. Release |
-|----------|----------|-------|-----------------|--------------|
-| ✅ | `ffmpeg-m3u8-commands.html` | Complete FFmpeg Commands for M3U8 Download | ffmpeg m3u8 | ✅ Jan 22 |
-| ✅ | `browser-extract-m3u8.html` | 5 Methods to Extract M3U8 Link from Browser | extract m3u8 link | ✅ Jan 22 |
-| ✅ | `m3u8-vs-mp4-difference.html` | M3U8 vs MP4: What's the Difference? | m3u8 vs mp4 | ✅ Jan 22 |
-| 🟡 Medium | `download-live-stream.html` | How to Download Live Stream Recordings | live stream download | March |
-| 🟢 Low | `fix-m3u8-download-errors.html` | Common M3U8 Download Errors and Fixes | m3u8 download failed | Q2 |
+| Status | Filename | Notes |
+|--------|----------|-------|
+| ✅ | `ffmpeg-m3u8-commands.html` | FFmpeg intent covered |
+| ✅ | `browser-extract-m3u8.html` | Extraction intent covered |
+| ✅ | `m3u8-vs-mp4-difference.html` | Format comparison covered |
+| ✅ | `download-live-stream.html` | Live replay intent covered |
+| ✅ | `fix-m3u8-download-errors.html` | Core troubleshooting intent covered |
 
-### Q2 2026 (Apr-Jun)
+### Next Posts Roadmap (Data-driven, 2026 Q1-Q2)
 
-| Priority | Filename | Title | Target Keywords |
-|----------|----------|-------|-----------------|
-| 🔴 High | `encrypted-m3u8-guide.html` | How to Download Encrypted M3U8 Videos | encrypted m3u8 download |
-| 🔴 High | `mobile-m3u8-download.html` | Mobile M3U8 Video Download Tutorial | mobile m3u8 download | ✅ Jan 23 |
-| 🟡 Medium | `m3u8-batch-download.html` | Batch Download M3U8 Videos Method | batch download m3u8 |
-| 🟡 Medium | `vlc-m3u8-convert.html` | Convert M3U8 Videos Using VLC | vlc m3u8 |
-| 🟢 Low | `hls-drm-explained.html` | HLS DRM Protection Explained | HLS DRM |
+| Priority | Filename | Title | Primary Query Cluster | Why Now |
+|----------|----------|-------|-----------------------|---------|
+| 🔴 High | `online-m3u8-downloader.html` | Online M3U8 Downloader: Convert M3U8 to MP4 in Browser | m3u8 downloader online / online m3u8 downloader / online m3u8 to mp4 converter / m3u8 转 mp4 在线 | Transactional queries already showing impressions |
+| 🔴 High | `mp4-to-m3u8-convert.html` | MP4 to M3U8: How to Convert Video to HLS (Step-by-Step) | mp4 to m3u8 / video to m3u8 / convert video to m3u8 | Clear uncovered intent gap |
+| 🔴 High | `download-hls-encrypted-video.html` | Download HLS Encrypted Video: Legal Scenarios, Limits, and Methods | download hls encrypted video | High-risk query; needs compliant and authoritative content |
+| 🟡 Medium | `get-m3u8-from-url-online.html` | Get M3U8 Link from URL Online: 6 Reliable Methods | get m3u8 from url online / get m3u8 link / index.m3u8 | Early demand with extraction intent refinement |
+| 🟡 Medium | `video-downloadhelper-m3u8-guide.html` | Video DownloadHelper & Stream Detector for M3U8: Practical Guide | video downloadhelper m3u8 / the stream detector | Tool-specific long-tail opportunities |
+| 🟡 Medium | `no-m3u8-links-found-fix.html` | “No M3U8 Links Have Been Found on This Site” Fix Guide | no m3u8 links have been found on this site | Exact-match troubleshooting query |
+| 🟡 Medium | `ffmpeg-wasm-m3u8-browser.html` | FFmpeg.wasm: Convert HLS M3U8 to MP4 in Browser | ffmpeg.wasm hls m3u8 to mp4 in browser | Developer/advanced traffic seed |
+| 🟢 Low | `m3u8-index-file-explained.html` | What Is `index.m3u8` and `/index.m3u8`? | index.m3u8 / /index.m3u8 | Supporting educational cluster page |
 
-### Long-term Plans (Q3-Q4)
+### Refresh Plan for Crawled-not-indexed URLs (Immediate)
 
-- Video tutorial series (with YouTube)
-- Major video platform guides
-- Developer API documentation
-- User case study sharing
+Target pages currently reported as “Crawled - currently not indexed”:
+- `https://www.m3u8converter.com/blog/`
+- `https://www.m3u8converter.com/blog/best-m3u8-downloader-2026.html`
+- `https://www.m3u8converter.com/blog/m3u8-to-mp4-guide.html`
+- `https://www.m3u8converter.com/blog/m3u8-vs-mp4-difference.html`
+- `https://www.m3u8converter.com/blog/merge-ts-files-to-mp4.html`
+- `https://www.m3u8converter.com/blog/what-is-hls-streaming.html`
+
+Required refresh actions:
+1. Standardize canonical host to `https://www.m3u8converter.com` on all pages
+2. Add/update unique sections in each page (not template-level repetition)
+3. Increase contextual internal links between target pages (topic clusters)
+4. Update sitemap `<lastmod>` after each substantive refresh
+5. Recheck indexing status at D7 / D14 / D28 and apply remediation SOP
 
 ---
 
@@ -219,14 +306,21 @@ Each article must link to:
 ```mermaid
 graph LR
     A[Topic Planning] --> B[Keyword Research]
-    B --> C[Content Writing]
-    C --> D[SEO Check]
-    D --> E[Bilingual Translation]
-    E --> F[Code Review]
-    F --> G[Publish]
-    G --> H[Submit to Search Engines]
-    H --> I[Performance Tracking]
+    B --> C[Generate Article Skeleton npm run blog:new]
+    C --> D[Fill Bilingual Content zh+en]
+    D --> E[SEO Check]
+    E --> F[Language Switcher QA]
+    F --> G[Update index.html blog/index.html sitemap.xml]
+    G --> H[Build Verification npm run build]
+    H --> I[Publish]
+    I --> J[Submit to Search Engines]
+    J --> K[Performance Tracking]
 ```
+
+### Deprecated Workflow (Do Not Use)
+- ❌ Copy an old `blog/*.html` file and edit in place
+- ❌ Recreate repeated inline CSS/JS language-switch logic
+- ❌ Publish articles not generated from current template workflow
 
 ### Publishing Checklist
 
@@ -237,9 +331,16 @@ graph LR
 - [ ] Images compressed with alt text
 - [ ] Internal and external links working
 - [ ] Mobile display normal
+- [ ] Created from template generator (`npm run blog:new`), not copied from old article HTML
+- [ ] Primary keyword and search intent are unique (no cannibalization with existing pages)
+- [ ] Canonical URL is self-referencing and uses `https://www.m3u8converter.com/blog/<slug>.html`
+- [ ] Added at least 2 contextual in-links from existing relevant articles
 - [ ] Confirm new article file exists under `/blog/*.html` (vite now auto-discovers blog pages)
 - [ ] Added to sitemap.xml
 - [ ] Blog homepage list updated
+- [ ] Main homepage article entry updated (`/index.html`)
+- [ ] `npm run build` passed
+- [ ] Index status follow-up scheduled for D7 / D14 / D28 in Search Console
 - [ ] Submitted to Google Search Console
 
 ---
@@ -252,6 +353,7 @@ graph LR
 **发布新文章时必须同时修改：**
 1. `/public/sitemap.xml` - 添加 URL 条目
 2. `/blog/index.html` - 添加文章列表入口
+3. `/index.html` - 更新首页文章入口（如有展示）
 
 ## 🧩 Article Template Generator
 
@@ -268,6 +370,11 @@ npm run blog:new -- \
 
 生成文件路径：`/blog/<slug>.html`  
 支持可选参数：`--date=YYYY-MM-DD`、`--read-minutes=8`、`--keywords=...`、`--og-image=...`
+
+**发布前必须做：**
+1. 填写生成文件中的 TODO 内容（中英双语都要填）
+2. 保持 `article-topbar` 与语言切换器结构不变
+3. 不要手动复制旧文章的内联语言切换脚本
 
 ---
 
