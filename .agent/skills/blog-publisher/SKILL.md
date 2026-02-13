@@ -206,6 +206,7 @@ HLS下载, 视频流下载
 - [ ] Internal and external links working
 - [ ] Mobile display normal
 - [ ] **Added to vite.config.js rollup input** (⚠️ CRITICAL - 否则部署后 404!)
+- [ ] **添加到 index.html 时：必须在 `src/i18n.js` 添加 i18n key (zh+en)，或直接使用纯文本**
 - [ ] Added to sitemap.xml
 - [ ] Blog homepage list updated
 - [ ] Submitted to Google Search Console
