@@ -371,6 +371,7 @@ graph LR
 - [ ] Canonical URL is self-referencing and uses `https://www.m3u8converter.com/blog/<slug>.html`
 - [ ] Added at least 2 contextual in-links from existing relevant articles
 - [ ] Confirm new article file exists under `/blog/*.html` (vite now auto-discovers blog pages)
+- [ ] use seo-audit skill check this new article(if has)
 - [ ] Added to sitemap.xml
 - [ ] Blog homepage list updated (`/blog/index.html`)
 - [ ] Main homepage article entry updated (`/index.html`)
