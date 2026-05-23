@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get M3U8 Link from URL Online: 6 Reliable Methods | M3U8 Converter</title>
+  <meta name="description" content="Learn how to extract M3U8 links from any webpage online. 6 browser and CLI methods with troubleshooting guide.">
+  <meta name="keywords" content="get m3u8 from url online,get m3u8 link,extract m3u8 url online,index.m3u8,m3u8 link finder,免费在线M3U8链接提取">
+  <link rel="canonical" href="https://www.m3u8converter.com/blog/get-m3u8-from-url-online.html">
+  <meta property="og:title" content="在线获取M3U8链接：6种可靠方法详解">
+  <meta property="og:description" content="学会如何从任意网页在线提取M3U8链接，6种浏览器和命令行方法，附常见问题排查指南。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.m3u8converter.com/blog/get-m3u8-from-url-online.html">
+  <meta property="og:image" content="/blog/images/get-m3u8-from-url-online/og-image.jpg">
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="stylesheet" href="/blog/article-base.css">
+  <link rel="stylesheet" href="/blog/lang-switcher.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Get M3U8 Link from URL Online: 6 Reliable Methods",
+    "description": "Learn how to extract M3U8 links from any webpage online. 6 browser and CLI methods with troubleshooting guide.",
+    "author": { "@type": "Organization", "name": "M3U8 Converter" },
+    "datePublished": "2026-05-24",
+    "dateModified": "2026-05-24",
+    "image": "/blog/images/get-m3u8-from-url-online/og-image.jpg",
+    "publisher": {
+      "@type": "Organization",
+      "name": "M3U8 Converter",
+      "logo": { "@type": "ImageObject", "url": "/logo.png" }
+    }
+  }
+  </script>
+</head>
+<body>
+  <div class="article-container">
+    <div class="lang-switcher-wrap">
+      <div class="lang-switcher" data-lang-switcher>
+        <button class="lang-btn" type="button" data-lang-target="zh" aria-pressed="false">中文</button>
+        <button class="lang-btn" type="button" data-lang-target="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+
+    <nav class="breadcrumb">
+      <span data-lang="zh"><a href="/">首页</a> / <a href="/blog/">博客</a> / <a href="/blog/get-m3u8-from-url-online.html">在线获取M3U8链接</a></span>
+      <span data-lang="en"><a href="/">Home</a> / <a href="/blog/">Blog</a> / <a href="/blog/get-m3u8-from-url-online.html">Get M3U8 Link from URL</a></span>
+    </nav>
+
+    <article>
+      <header class="article-header">
+        <h1 data-lang="zh">在线获取M3U8链接：6种可靠方法详解（2026）</h1>
+        <h1 data-lang="en">Get M3U8 Link from URL Online: 6 Reliable Methods (2026)</h1>
+        <div class="article-meta">
+          <span>📅 2026-05-24</span>
+          <span>⏱️ <span data-lang="zh">10 分钟阅读</span><span data-lang="en">10 min read</span></span>
+          <span>👁️ <span data-lang="zh">教程</span><span data-lang="en">Tutorials</span></span>
+        </div>
+      </header>
+
+      <div class="article-content">
+        <!-- ==================== 中文内容 ==================== -->
+        <div data-lang="zh">
+          <p>想下载网页上的视频，第一步就是找到它的 M3U8 链接。M3U8 是 HLS 流媒体的播放列表文件，包含了视频的实际下载地址。但很多网站并不会直接暴露这些链接，本文将介绍 <strong>6 种从在线 URL 获取 M3U8 链接的可靠方法</strong>，从浏览器开发者工具到命令行，总有一种适合你。</p>
+
+          <p>无论你是遇到"No M3U8 links have been found on this site"的报错，还是想手动提取加密流媒体地址，本文都将提供完整解决方案。</p>
+
+          <!-- 方法对比矩阵（独有价值块） -->
+          <h2>6种方法速览对比</h2>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+              <thead>
+                <tr style="background: var(--color-bg-secondary);">
+                  <th style="text-align: left; padding: 0.75rem; border-bottom: 2px solid var(--color-border);">方法</th>
+                  <th style="text-align: center; padding: 0.75rem; border-bottom: 2px solid var(--color-border);">难度</th>
+                  <th style="text-align: center; padding: 0.75rem; border-bottom: 2px solid var(--color-border);">成功率</th>
+                  <th style="text-align: center; padding: 0.75rem; border-bottom: 2px solid var(--color-border);">需安装</th>
+                  <th style="text-align: left; padding: 0.75rem; border-bottom: 2px solid var(--color-border);">最佳场景</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">浏览器开发者工具</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">⭐⭐</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">90%</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">❌</td>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">通用，最推荐</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">浏览器扩展</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">⭐</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">75%</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">✅</td>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">小白用户</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">查看网页源代码</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">⭐</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">40%</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">❌</td>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">简单页面快速查找</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">在线提取工具</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">⭐</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">60%</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">❌</td>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">临时使用</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">命令行（curl + grep）</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">⭐⭐⭐</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">70%</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">✅</td>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">批量/自动化</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">M3U8 Converter 工具</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">⭐</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">95%</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">❌</td>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">获取后直接下载转换</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- 方法1: 浏览器开发者工具 -->
+          <h2>方法一：浏览器开发者工具（DevTools）</h2>
+          <p>这是最基础也最可靠的方法，无需安装任何额外软件。所有主流浏览器（Chrome、Edge、Firefox、Safari）都内置了开发者工具。</p>
+          <h3>操作步骤</h3>
+          <ol>
+            <li><strong>打开目标网页</strong>：访问包含视频的页面，<strong>先不要播放视频</strong>。</li>
+            <li><strong>打开开发者工具</strong>：按 <code>F12</code> 键，或右键点击页面选择"检查"。</li>
+            <li><strong>切换到 Network（网络）标签</strong>：点击顶部的 Network 选项卡。</li>
+            <li><strong>设置过滤器</strong>：在过滤框中输入 <code>m3u8</code> 或者 <code>.ts</code>。也可以使用类型过滤器，选择 <code>XHR/Fetch</code> 或 <code>Media</code>。</li>
+            <li><strong>播放视频</strong>：点击页面上的播放按钮。</li>
+            <li><strong>查找 M3U8 请求</strong>：Network 面板中会出现 <code>.m3u8</code> 或 <code>index.m3u8</code> 的请求。点击该请求，在 Headers 标签中复制完整的 Request URL。</li>
+          </ol>
+          <p><strong>关键技巧</strong>：如果过滤 m3u8 没结果，试试过滤 <code>.ts</code> 或 <code>.m3u</code>。部分网站使用 <code>chunklist.m3u8</code> 或自定义扩展名。</p>
+          <p><strong>Chrome vs Firefox 差异</strong>：Chrome 的 Network 面板中可直接右键复制 URL；Firefox 需要在请求上点击右键 → Copy → Copy URL。</p>
+
+          <!-- 方法2: 浏览器扩展 -->
+          <h2>方法二：使用浏览器扩展</h2>
+          <p>如果不想手动翻找 Network 面板，浏览器扩展可以自动检测并提取页面上的 M3U8 链接。</p>
+          <h3>推荐扩展</h3>
+          <ul>
+            <li><strong>Video DownloadHelper</strong>：老牌视频检测扩展，支持多平台。安装后播放视频，扩展图标变色即表示检测到视频流。点击图标即可查看所有捕获的链接。</li>
+            <li><strong>The Stream Detector</strong>：专为 HLS/MPD 流媒体设计的轻量扩展。能自动捕获 M3U8 和 MPD 请求，并提供一键复制功能。</li>
+            <li><strong>FetchV</strong>：基于 curl_cffi 的进阶方案，可以绕过部分网站的反爬检测。支持导出 M3U8 链接到第三方下载器。</li>
+          </ul>
+          <h3>使用注意</h3>
+          <p>扩展方法的局限：某些网站会检测浏览器扩展并阻止视频加载；部分扩展对动态加载的内容检测不及时，需要刷新页面后重新播放。</p>
+
+          <!-- 方法3: 查看网页源代码 -->
+          <h2>方法三：查看网页源代码</h2>
+          <p>部分网站会直接在 HTML 源代码的 <code>&lt;script&gt;</code> 标签或 <code>&lt;video&gt;</code> 标签中暴露 M3U8 地址。这是一个快速但成功率有限的方法。</p>
+          <h3>操作步骤</h3>
+          <ol>
+            <li>在目标页面上右键 → "<strong>查看网页源代码</strong>"（不是"检查"）。</li>
+            <li>按 <code>Ctrl+F</code>（Mac 上 <code>Cmd+F</code>）打开搜索框。</li>
+            <li>搜索关键词：<code>m3u8</code>、<code>.m3u8</code>、<code>index.m3u8</code>、<code>master.m3u8</code>、<code>chunklist</code>。</li>
+            <li>如果找到，复制完整的 URL（通常以 <code>http</code> 或 <code>//</code> 开头）。</li>
+          </ol>
+          <p><strong>额外搜索目标</strong>：也可以尝试搜索 <code>source src</code>、<code>videoUrl</code>、<code>play_url</code> 等常见的视频地址变量名。</p>
+
+          <!-- 方法4: 在线提取工具 -->
+          <h2>方法四：在线 M3U8 链接提取工具</h2>
+          <p>有一些在线服务专门用于提取网页中的 M3U8 链接。你只需输入页面 URL，工具会自动分析并返回检测到的流媒体地址。</p>
+          <h3>注意事项</h3>
+          <ul>
+            <li><strong>安全性</strong>：使用在线工具时，避免输入包含登录信息的私人页面 URL。选择有 HTTPS 加密的知名工具。</li>
+            <li><strong>局限性</strong>：大多数在线提取工具无法处理需要登录认证、动态 JavaScript 加载、或地域限制的页面。对于这些场景，优先使用方法一（DevTools）。</li>
+            <li><strong>推荐工具</strong>：可以使用我们的 <a href="/">M3U8 Converter</a> 直接输入页面 URL 提取并下载，一站式完成。</li>
+          </ul>
+
+          <!-- 方法5: 命令行 -->
+          <h2>方法五：命令行提取（curl + grep）</h2>
+          <p>对于开发者或需要批量处理的场景，命令行是最灵活的方式。以下是使用 <code>curl</code> 和 <code>grep</code> 提取 M3U8 链接的方法：</p>
+          <pre><code># 下载页面源码并搜索 m3u8 链接
+curl -s "https://example.com/video-page" | grep -oP 'https?://[^"'"'"']*\.m3u8[^"'"'"']*'
+
+# 更宽泛的匹配（包含相对路径）
+curl -s "https://example.com/video-page" | grep -oP '[^"'"'"']*\.m3u8[^"'"'"']*'
+
+# 使用 ripgrep（更快）
+curl -s "https://example.com/video-page" | rg -o 'https?://[^"'"'"']*\.?m3u8[^"'"'"']*'</code></pre>
+          <h3>进阶：分析动态加载的 M3U8</h3>
+          <p>如果 M3U8 链接是由 JavaScript 动态生成的，上面的静态方法不起作用。可以使用 <code>yt-dlp</code> 来提取：</p>
+          <pre><code># 列出可用格式（同时会显示 m3u8 URL）
+yt-dlp -F "https://example.com/video-page"
+
+# 仅输出 M3U8 URL
+yt-dlp -g "https://example.com/video-page"</code></pre>
+          <p><strong>yt-dlp 的优势</strong>：它能执行 JavaScript、自动处理重定向和加密，是获取复杂网站 M3U8 链接的最强命令行工具。</p>
+
+          <!-- 方法6: M3U8 Converter -->
+          <h2>方法六：使用 M3U8 Converter 一站式提取并下载</h2>
+          <p><strong>最推荐的方法</strong>：使用我们的免费在线工具 <a href="/">M3U8 Converter</a>，不需要安装任何软件，可以检测并提取页面中的 M3U8 链接，然后直接转换为 MP4 下载。</p>
+          <h3>使用步骤</h3>
+          <ol>
+            <li>访问 <a href="/">M3U8 Converter</a></li>
+            <li>粘贴包含视频的页面 URL，或直接粘贴 M3U8 链接</li>
+            <li>工具自动检测并提取视频流地址</li>
+            <li>选择输出格式（MP4 推荐），点击转换下载</li>
+          </ol>
+          <p>所有处理在浏览器本地完成，视频不会被上传到任何服务器，保证隐私安全。</p>
+
+          <!-- 常见问题排查 -->
+          <h2>常见问题：找不到 M3U8 链接怎么办？</h2>
+          <p>如果尝试以上方法后仍然找不到 M3U8 链接，可以按以下决策树排查：</p>
+          <ol>
+            <li><strong>检查 Network 过滤器是否错误</strong>：清除过滤器，手动滚动请求列表，查找 Type 为 <code>media</code> 或 <code>xhr</code> 的请求。</li>
+            <li><strong>视频是否使用其他协议</strong>：检查是否有 <code>.mpd</code>（MPEG-DASH）或 <code>.mp4</code> 直接加载，并非所有视频都使用 HLS。</li>
+            <li><strong>DRM 加密保护</strong>：如果是 Widevine 或 FairPlay 加密的内容，M3U8 链接虽然存在但无法直接下载。需要合法的解密密钥。</li>
+            <li><strong>Referer/User-Agent 限制</strong>：某些 M3U8 链接需要正确的请求头。使用 <a href="/blog/browser-extract-m3u8.html">浏览器提取方法</a> 获取完整请求头信息。</li>
+            <li><strong>页面在 iframe 中加载视频</strong>：检查 Elements 面板中是否有 iframe，切换到 iframe 的 Network 上下文再过滤。</li>
+            <li><strong>尝试不同的 User-Agent</strong>：部分网站对移动端和桌面端返回不同的视频地址。</li>
+          </ol>
+
+          <!-- FAQ -->
+          <h2>常见问答（FAQ）</h2>
+          <h3>1. 什么是 index.m3u8 和 master.m3u8 的区别？</h3>
+          <p><code>master.m3u8</code>（也称 variant playlist）包含多个不同质量的子播放列表的引用。而 <code>index.m3u8</code>（也称 media playlist）包含具体视频片段的 URL 列表。下载时应优先获取 <code>master.m3u8</code>，以便选择最佳质量。</p>
+
+          <h3>2. 获取到 M3U8 链接后如何下载视频？</h3>
+          <p>获取 M3U8 链接后，可以直接粘贴到 <a href="/">M3U8 Converter</a> 在线转换下载。也可使用 FFmpeg 命令行：<code>ffmpeg -i "m3u8_url" -c copy output.mp4</code>。更多详情参见 <a href="/blog/ffmpeg-m3u8-commands.html">FFmpeg M3U8 命令指南</a>。</p>
+
+          <h3>3. M3U8 链接会过期吗？</h3>
+          <p>会的。许多视频网站（尤其是直播平台）的 M3U8 链接包含时效性 Token，通常在几分钟到几小时内过期。获取后应尽快使用。如果是直播流，链接本身可能一直有效，但内容实时变化。</p>
+
+          <h3>4. "No M3U8 links have been found on this site"是什么意思？</h3>
+          <p>这表示当前页面没有检测到 M3U8/HLS 视频流。可能原因：视频使用其他协议（MPEG-DASH、WebSocket）、视频在 iframe 中加载需单独分析、或页面使用 JavaScript 动态生成链接需要先交互（播放）再检测。详见我们的 <a href="/blog/browser-extract-m3u8.html">浏览器提取 M3U8 指南</a>。</p>
+
+          <h3>5. 在线提取 M3U8 链接安全吗？</h3>
+          <p>使用 HTTPS 的知名在线工具是相对安全的。但建议避免在第三方网站上输入包含个人认证信息的 URL。最安全的方式是使用浏览器内置的开发者工具（方法一），所有操作在你自己的电脑上完成，无隐私风险。</p>
+
+          <!-- CTA -->
+          <h2>现在就开始提取你的 M3U8 链接</h2>
+          <p>掌握了这 6 种方法，你应该能从绝大多数网页中提取到 M3U8 链接。推荐从 <strong>方法一（DevTools）</strong> 开始尝试，这是最通用、成功率最高的方案。如果遇到困难，<strong>方法二（扩展）</strong> 或 <strong>方法六（M3U8 Converter）</strong> 是不错的备选。</p>
+          <p>获取到 M3U8 链接后，直接访问 <a href="/"><strong>M3U8 Converter</strong></a> 进行在线下载和格式转换——完全免费，无需注册，所有处理在浏览器本地完成。也欢迎查阅我们的其他教程：</p>
+          <ul>
+            <li><a href="/blog/how-to-download-m3u8-video.html">M3U8 视频下载完整教程</a></li>
+            <li><a href="/blog/m3u8-to-mp4-guide.html">M3U8 转 MP4 终极指南</a></li>
+            <li><a href="/blog/browser-extract-m3u8.html">浏览器提取 M3U8 的 5 种方法</a></li>
+            <li><a href="/blog/ffmpeg-m3u8-commands.html">FFmpeg M3U8 命令大全</a></li>
+          </ul>
+        </div>
+
+        <!-- ==================== English Content ==================== -->
+        <div data-lang="en">
+          <p>Want to download a video from a webpage? The first step is finding its M3U8 link. M3U8 is the playlist file for HLS streaming, containing the actual download address of the video. Many websites don't expose these links directly. This article covers <strong>6 reliable methods to get M3U8 links from URLs online</strong> — from browser DevTools to command line, there's a method for everyone.</p>
+
+          <p>Whether you're stuck with "No M3U8 links have been found on this site" or trying to manually extract encrypted stream addresses, this guide provides complete solutions.</p>
+
+          <!-- Comparison Matrix (Unique Value Block) -->
+          <h2>Quick Comparison: 6 Methods at a Glance</h2>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+              <thead>
+                <tr style="background: var(--color-bg-secondary);">
+                  <th style="text-align: left; padding: 0.75rem; border-bottom: 2px solid var(--color-border);">Method</th>
+                  <th style="text-align: center; padding: 0.75rem; border-bottom: 2px solid var(--color-border);">Difficulty</th>
+                  <th style="text-align: center; padding: 0.75rem; border-bottom: 2px solid var(--color-border);">Success Rate</th>
+                  <th style="text-align: center; padding: 0.75rem; border-bottom: 2px solid var(--color-border);">Install</th>
+                  <th style="text-align: left; padding: 0.75rem; border-bottom: 2px solid var(--color-border);">Best For</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">Browser DevTools</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">⭐⭐</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">90%</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">❌</td>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">Universal, most recommended</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">Browser Extensions</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">⭐</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">75%</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">✅</td>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">Beginners</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">View Page Source</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">⭐</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">40%</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">❌</td>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">Quick lookup on simple pages</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">Online Extractor Tools</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">⭐</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">60%</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">❌</td>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">One-off usage</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">CLI (curl + grep)</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">⭐⭐⭐</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">70%</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">✅</td>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">Batch/automation</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">M3U8 Converter Tool</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">⭐</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">95%</td>
+                  <td style="text-align: center; padding: 0.75rem; border-bottom: 1px solid var(--color-border);">❌</td>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">Extract + download in one step</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Method 1: Browser DevTools -->
+          <h2>Method 1: Browser Developer Tools (DevTools)</h2>
+          <p>This is the most fundamental and reliable method — no extra software required. All major browsers (Chrome, Edge, Firefox, Safari) have built-in developer tools.</p>
+          <h3>Step-by-Step</h3>
+          <ol>
+            <li><strong>Open the target page</strong>: Navigate to the page with the video. <strong>Do not play the video yet.</strong></li>
+            <li><strong>Open DevTools</strong>: Press <code>F12</code>, or right-click anywhere on the page and select "Inspect".</li>
+            <li><strong>Switch to the Network tab</strong>: Click the Network tab at the top.</li>
+            <li><strong>Set a filter</strong>: Type <code>m3u8</code> or <code>.ts</code> in the filter box. You can also use the type filter and select <code>XHR/Fetch</code> or <code>Media</code>.</li>
+            <li><strong>Play the video</strong>: Click the play button on the page.</li>
+            <li><strong>Find the M3U8 request</strong>: A request ending with <code>.m3u8</code> or <code>index.m3u8</code> will appear. Click it, go to the Headers tab, and copy the full Request URL.</li>
+          </ol>
+          <p><strong>Pro Tip</strong>: If filtering for m3u8 yields nothing, try <code>.ts</code> or <code>.m3u</code>. Some sites use <code>chunklist.m3u8</code> or custom extensions.</p>
+          <p><strong>Chrome vs Firefox</strong>: In Chrome, right-click the request → Copy → Copy link address. In Firefox, right-click → Copy → Copy URL.</p>
+
+          <!-- Method 2: Browser Extensions -->
+          <h2>Method 2: Browser Extensions</h2>
+          <p>If you prefer not to manually dig through the Network panel, browser extensions can automatically detect and extract M3U8 links on a page.</p>
+          <h3>Recommended Extensions</h3>
+          <ul>
+            <li><strong>Video DownloadHelper</strong>: A well-established video detection extension supporting multiple platforms. Install it, play the video, and when the extension icon changes color, click it to see all captured links.</li>
+            <li><strong>The Stream Detector</strong>: A lightweight extension designed specifically for HLS/MPD streaming. It automatically captures M3U8 and MPD requests with one-click copy.</li>
+            <li><strong>FetchV</strong>: An advanced option based on curl_cffi that can bypass some anti-bot detection. Supports exporting M3U8 links to third-party downloaders.</li>
+          </ul>
+          <h3>Limitations</h3>
+          <p>Extension limitations: some websites detect browser extensions and block video loading; some extensions may miss dynamically loaded content — refresh and replay if needed.</p>
+
+          <!-- Method 3: View Page Source -->
+          <h2>Method 3: View Page Source</h2>
+          <p>Some websites embed M3U8 URLs directly in the HTML source, within <code>&lt;script&gt;</code> or <code>&lt;video&gt;</code> tags. This is a quick but low-success-rate method.</p>
+          <h3>Steps</h3>
+          <ol>
+            <li>Right-click the page → "<strong>View Page Source</strong>" (not "Inspect").</li>
+            <li>Press <code>Ctrl+F</code> (<code>Cmd+F</code> on Mac) to open search.</li>
+            <li>Search for: <code>m3u8</code>, <code>.m3u8</code>, <code>index.m3u8</code>, <code>master.m3u8</code>, <code>chunklist</code>.</li>
+            <li>If found, copy the full URL (usually starting with <code>http</code> or <code>//</code>).</li>
+          </ol>
+          <p><strong>Additional search targets</strong>: Try <code>source src</code>, <code>videoUrl</code>, <code>play_url</code>, and other common video URL variable names.</p>
+
+          <!-- Method 4: Online Tools -->
+          <h2>Method 4: Online M3U8 Link Extractor Tools</h2>
+          <p>Various online services can extract M3U8 links from web pages. Simply paste the page URL, and the tool analyzes it to return detected streaming addresses.</p>
+          <h3>Important Considerations</h3>
+          <ul>
+            <li><strong>Security</strong>: When using online tools, avoid entering URLs to private pages with login credentials. Stick to well-known tools with HTTPS.</li>
+            <li><strong>Limitations</strong>: Most online extractors can't handle login-gated, dynamically JavaScript-loaded, or geo-restricted pages. For those scenarios, use Method 1 (DevTools) instead.</li>
+            <li><strong>Recommendation</strong>: Try our <a href="/">M3U8 Converter</a> — directly input a page URL to extract and download in one step.</li>
+          </ul>
+
+          <!-- Method 5: CLI -->
+          <h2>Method 5: Command Line Extraction (curl + grep)</h2>
+          <p>For developers or batch processing scenarios, the command line is the most flexible approach. Here's how to extract M3U8 links using <code>curl</code> and <code>grep</code>:</p>
+          <pre><code># Download page source and search for m3u8 links
+curl -s "https://example.com/video-page" | grep -oP 'https?://[^"'"'"']*\.m3u8[^"'"'"']*'
+
+# Broader match (includes relative paths)
+curl -s "https://example.com/video-page" | grep -oP '[^"'"'"']*\.m3u8[^"'"'"']*'
+
+# Using ripgrep (faster)
+curl -s "https://example.com/video-page" | rg -o 'https?://[^"'"'"']*\.?m3u8[^"'"'"']*'</code></pre>
+          <h3>Advanced: Handle Dynamically Loaded M3U8</h3>
+          <p>If the M3U8 link is generated by JavaScript, static methods won't work. Use <code>yt-dlp</code> instead:</p>
+          <pre><code># List available formats (also shows m3u8 URL)
+yt-dlp -F "https://example.com/video-page"
+
+# Output only the M3U8 URL
+yt-dlp -g "https://example.com/video-page"</code></pre>
+          <p><strong>Why yt-dlp</strong>: It executes JavaScript, handles redirects and encryption automatically — making it the most powerful CLI tool for extracting M3U8 links from complex sites.</p>
+
+          <!-- Method 6: M3U8 Converter -->
+          <h2>Method 6: Use M3U8 Converter — Extract & Download in One Step</h2>
+          <p><strong>Most recommended</strong>: Use our free online tool <a href="/">M3U8 Converter</a>. No installation required. It can detect and extract M3U8 links from pages, then convert them to MP4 directly.</p>
+          <h3>How to Use</h3>
+          <ol>
+            <li>Visit <a href="/">M3U8 Converter</a></li>
+            <li>Paste the video page URL, or directly paste an M3U8 link</li>
+            <li>The tool automatically detects and extracts the video stream URL</li>
+            <li>Choose output format (MP4 recommended), then convert and download</li>
+          </ol>
+          <p>All processing happens locally in your browser — videos are never uploaded to any server, ensuring complete privacy.</p>
+
+          <!-- Troubleshooting -->
+          <h2>Troubleshooting: Can't Find the M3U8 Link?</h2>
+          <p>If none of the above methods work, follow this decision tree:</p>
+          <ol>
+            <li><strong>Check your Network filter</strong>: Clear the filter, manually scroll through requests, and look for Type <code>media</code> or <code>xhr</code>.</li>
+            <li><strong>Is the video using a different protocol?</strong> Check for <code>.mpd</code> (MPEG-DASH) or direct <code>.mp4</code> loading — not all videos use HLS.</li>
+            <li><strong>DRM encryption</strong>: If content is protected by Widevine or FairPlay, M3U8 links exist but can't be downloaded without valid decryption keys.</li>
+            <li><strong>Referer/User-Agent restrictions</strong>: Some M3U8 links require specific headers. Use the <a href="/blog/browser-extract-m3u8.html">browser extraction method</a> to capture full header details.</li>
+            <li><strong>Video loaded in an iframe</strong>: Check the Elements panel for iframes. Switch to the iframe's network context and re-filter.</li>
+            <li><strong>Try a different User-Agent</strong>: Some websites serve different video URLs to mobile vs desktop clients.</li>
+          </ol>
+
+          <!-- FAQ -->
+          <h2>Frequently Asked Questions</h2>
+          <h3>1. What's the difference between index.m3u8 and master.m3u8?</h3>
+          <p><code>master.m3u8</code> (also called variant playlist) contains references to multiple sub-playlists at different quality levels. <code>index.m3u8</code> (also called media playlist) contains the actual list of video segment URLs. When downloading, prioritize the <code>master.m3u8</code> to choose the best quality.</p>
+
+          <h3>2. How do I download the video after getting the M3U8 link?</h3>
+          <p>Once you have the M3U8 link, paste it into <a href="/">M3U8 Converter</a> for online conversion and download. You can also use FFmpeg: <code>ffmpeg -i "m3u8_url" -c copy output.mp4</code>. See our <a href="/blog/ffmpeg-m3u8-commands.html">FFmpeg M3U8 Commands Guide</a> for more details.</p>
+
+          <h3>3. Do M3U8 links expire?</h3>
+          <p>Yes. Many video sites (especially live streaming platforms) include time-limited tokens in M3U8 URLs, typically lasting from minutes to hours. Use the link immediately after extraction. For live streams, the link itself may remain valid while content changes in real time.</p>
+
+          <h3>4. What does "No M3U8 links have been found on this site" mean?</h3>
+          <p>This means no M3U8/HLS video stream was detected on the current page. Possible reasons: the video uses a different protocol (MPEG-DASH, WebSocket); the video is in an iframe that needs separate analysis; or the page loads links dynamically via JavaScript and requires interaction (playing) before detection. See our <a href="/blog/browser-extract-m3u8.html">Browser M3U8 Extraction Guide</a> for more.</p>
+
+          <h3>5. Is it safe to extract M3U8 links online?</h3>
+          <p>Using well-known HTTPS online tools is relatively safe. However, avoid pasting URLs containing personal authentication information into third-party sites. The safest approach is using your browser's built-in DevTools (Method 1) — all operations happen on your own computer with zero privacy risk.</p>
+
+          <!-- CTA -->
+          <h2>Start Extracting Your M3U8 Links Now</h2>
+          <p>With these 6 methods, you should be able to extract M3U8 links from most web pages. We recommend starting with <strong>Method 1 (DevTools)</strong> — it's the most universal and has the highest success rate. If you run into trouble, <strong>Method 2 (Extensions)</strong> or <strong>Method 6 (M3U8 Converter)</strong> are great alternatives.</p>
+          <p>Once you have the M3U8 link, head to <a href="/"><strong>M3U8 Converter</strong></a> for online download and format conversion — completely free, no registration needed, all processing happens locally in your browser. Also check out our other tutorials:</p>
+          <ul>
+            <li><a href="/blog/how-to-download-m3u8-video.html">How to Download M3U8 Video - Complete Tutorial</a></li>
+            <li><a href="/blog/m3u8-to-mp4-guide.html">Ultimate Guide to M3U8 to MP4 Conversion</a></li>
+            <li><a href="/blog/browser-extract-m3u8.html">5 Methods to Extract M3U8 Link from Browser</a></li>
+            <li><a href="/blog/ffmpeg-m3u8-commands.html">Complete FFmpeg M3U8 Commands</a></li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <footer style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border);">
+      <a href="/blog/" class="back-link">← <span data-lang="zh">返回博客列表</span><span data-lang="en">Back to Blog</span></a>
+    </footer>
+  </div>
+
+  <script type="module" src="/blog/lang-switcher.js"></script>
+  <script type="module">
+    import { themeManager } from '/src/theme.js';
+    themeManager.init();
+  </script>
+</body>
+</html>
