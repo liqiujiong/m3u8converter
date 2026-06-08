@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video DownloadHelper for M3U8: Browser Extension + Stream Detector Guide | M3U8 Converter</title>
+  <meta name="description" content="Use Video DownloadHelper and Stream Detector to capture and download M3U8/HLS video. Includes tool comparison, decision matrix, error fixes, and compliance scope.">
+  <meta name="keywords" content="video downloadhelper m3u8,stream detector,video downloadhelper chrome,grab m3u8 link,m3u8 downloader extension">
+  <link rel="canonical" href="https://www.m3u8converter.com/blog/video-downloadhelper-m3u8-guide.html">
+  <meta property="og:title" content="Video DownloadHelper 抓 M3U8 实战：浏览器扩展 + Stream Detector 完整指南">
+  <meta property="og:description" content="用 Video DownloadHelper 与 Stream Detector 抓取并下载 M3U8/HLS 视频,含工具对比、决策矩阵、常见报错与合规边界。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.m3u8converter.com/blog/video-downloadhelper-m3u8-guide.html">
+  <meta property="og:image" content="https://www.m3u8converter.com/blog/images/video-downloadhelper-m3u8-guide/downloadhelper-decision-flow.webp">
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="stylesheet" href="/blog/article-base.css">
+  <link rel="stylesheet" href="/blog/lang-switcher.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .matrix-table td:first-child {
+      white-space: nowrap;
+      font-weight: 600;
+    }
+    .article-content figure {
+      margin: 1.25rem 0;
+    }
+    .article-content figure img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--color-border);
+    }
+    .article-content figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+    @media (max-width: 768px) {
+      .comparison-table {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Video DownloadHelper for M3U8: Browser Extension + Stream Detector Guide",
+    "description": "Use Video DownloadHelper and Stream Detector to capture and download M3U8/HLS video. Includes tool comparison, decision matrix, error fixes, and compliance scope.",
+    "author": { "@type": "Organization", "name": "M3U8 Converter" },
+    "datePublished": "2026-06-08",
+    "dateModified": "2026-06-08",
+    "image": [
+      "https://www.m3u8converter.com/blog/images/video-downloadhelper-m3u8-guide/downloadhelper-decision-flow.webp",
+      "https://www.m3u8converter.com/blog/images/video-downloadhelper-m3u8-guide/downloadhelper-error-matrix.webp"
+    ],
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.m3u8converter.com/blog/video-downloadhelper-m3u8-guide.html"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "M3U8 Converter",
+      "logo": { "@type": "ImageObject", "url": "/logo.png" }
+    }
+  }
+  </script>
+</head>
+<body>
+  <div class="article-container">
+    <div class="lang-switcher-wrap">
+      <div class="lang-switcher" data-lang-switcher>
+        <button class="lang-btn" type="button" data-lang-target="zh" aria-pressed="false">中文</button>
+        <button class="lang-btn" type="button" data-lang-target="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+
+    <nav class="breadcrumb">
+      <span data-lang="zh"><a href="/">首页</a> / <a href="/blog/">博客</a> / Video DownloadHelper 抓 M3U8 实战：浏览器扩展 + Stream Detector 完整指南</span>
+      <span data-lang="en"><a href="/">Home</a> / <a href="/blog/">Blog</a> / Video DownloadHelper for M3U8: Browser Extension + Stream Detector Guide</span>
+    </nav>
+
+    <article>
+      <header class="article-header">
+        <h1 data-lang="zh">Video DownloadHelper 抓 M3U8 实战：浏览器扩展 + Stream Detector 完整指南</h1>
+        <h1 data-lang="en">Video DownloadHelper for M3U8: Browser Extension + Stream Detector Guide</h1>
+        <div class="article-meta">
+          <span>📅 2026-06-08</span>
+          <span>⏱️ <span data-lang="zh">10 分钟阅读</span><span data-lang="en">10 min read</span></span>
+          <span>👁️ <span data-lang="zh">工具评测</span><span data-lang="en">Tools</span></span>
+        </div>
+      </header>
+
+      <div class="article-content">
+        <div data-lang="zh">
+          <p>如果你在用 <strong>Video DownloadHelper</strong> 抓 M3U8，却经常只看到 master playlist、找不到 .ts 分片，或者合并出来没声音，这一篇就是为了解决这些具体问题。我们用一张决策图先帮你选路线（DownloadHelper 主路径 vs Stream Detector 备选），再给一份实测后的错误矩阵和 6 项预检清单。所有步骤都基于 Chrome / Firefox 上的免费版本，付费版可以省略部分手动动作但对抓 M3U8 不是必需。</p>
+
+          <figure>
+            <img src="/blog/images/video-downloadhelper-m3u8-guide/downloadhelper-decision-flow.webp" alt="Video DownloadHelper M3U8 抓取与决策流程图 4 步" loading="lazy" width="1200" height="675">
+            <figcaption>Video DownloadHelper 抓 M3U8 的 4 步主流程：触发播放 → 抓 manifest → 决策分支（M3U8 路径 / Stream Detector 备选）→ 校验保存</figcaption>
+          </figure>
+
+          <h2>先选路线再动手：DownloadHelper / Stream Detector / 在线工具</h2>
+          <p>很多人失败在第一步：用错工具。下表先按你的实际场景分流，避免走错分支浪费半小时。</p>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>你的场景</th>
+                <th>推荐工具</th>
+                <th>难度</th>
+                <th>成功率</th>
+                <th>何时切换</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Chrome / Firefox 直接抓到 .m3u8 行</td>
+                <td>Video DownloadHelper 主路径</td>
+                <td>低</td>
+                <td>高</td>
+                <td>遇到 master-only / 没声音时切到 Stream Detector</td>
+              </tr>
+              <tr>
+                <td>DownloadHelper 面板空白或只剩 master playlist</td>
+                <td>Stream Detector 重扫</td>
+                <td>中</td>
+                <td>高</td>
+                <td>重扫仍无时改用 DevTools Network 手抓</td>
+              </tr>
+              <tr>
+                <td>已拿到 m3u8 链接，要稳定合并</td>
+                <td><a href="/">M3U8 Converter</a> 在线合并 / FFmpeg</td>
+                <td>低</td>
+                <td>高</td>
+                <td>遇到加密 HLS 时停止，参考合规边界</td>
+              </tr>
+              <tr>
+                <td>DRM 加密内容（Widevine / FairPlay / PlayReady）</td>
+                <td>停止抓取，使用平台官方授权下载</td>
+                <td>不适用</td>
+                <td>不适用</td>
+                <td>不要尝试绕过保护</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="tip-box">
+            <strong>快速结论：</strong> 先用 Video DownloadHelper 抓 m3u8；如果只看到 master playlist 或抓不到，立刻换 Stream Detector 重扫一次，不要在错路径上反复重试。
+          </div>
+
+          <h2>方法 1：Video DownloadHelper 抓 M3U8（Easy）</h2>
+          <div class="method-card">
+            <h3>🌐 浏览器扩展主路径 <span class="method-badge badge-easy">Easy</span></h3>
+            <p>适合 Chrome / Firefox 用户，不需要任何命令行基础。下面是按真实抓取顺序写出的步骤，跳步会导致面板空白。</p>
+            <ol>
+              <li><strong>先安装扩展</strong>：Chrome 用户从 Chrome Web Store 搜 “Video DownloadHelper”，Firefox 用户从 Mozilla Add-ons 安装同一作者版本。注意不要装到仿冒扩展。</li>
+              <li><strong>打开目标页面后先点播放</strong>：必须真的点 ▶ 触发 HLS 拉流，不能只滚到页面就让扩展去扫。HLS 是 lazy 加载，DOM 出现 ≠ 请求发出。</li>
+              <li><strong>等工具栏图标亮起</strong>：图标右上角出现红点说明捕获到媒体。点击图标打开面板，在下拉列表里找 <code>.m3u8</code> 结尾的行（不是 <code>master.m3u8</code>）。</li>
+              <li><strong>右键该行 → “复制链接”</strong>：或者用 “Download” 触发直接下载（部分站点会触发跨域失败，此时复制链接更稳）。</li>
+              <li><strong>把链接粘到 <a href="/">M3U8 Converter</a></strong>：浏览器内一键合并为 MP4，不要再多装一个本地下载器。</li>
+              <li><strong>QA 抽检</strong>：导出后看时长、拖到中间、跳到末尾，确认音轨在。</li>
+            </ol>
+            <p><strong>成功信号：</strong> 面板出现至少一条 <code>.m3u8</code> 行；粘到在线工具后进度条稳定递增；导出 MP4 在 VLC / 移动端播放器均能拖动。</p>
+            <p><strong>失败信号：</strong> 图标不亮；面板只列 mp4 / jpg 媒体；只有 <code>master.m3u8</code> 没有分片行。</p>
+            <p>如果扩展一直不亮，先确认你访问的站点是 HLS 投递（Network 里能看到 <code>application/vnd.apple.mpegurl</code> 或 <code>application/x-mpegurl</code>），再继续后面的排查。如果还没拿到 m3u8 链接，可以看 <a href="/blog/browser-extract-m3u8.html">浏览器提取 M3U8 链接的 5 种方法</a> 和 <a href="/blog/get-m3u8-from-url-online.html">Get M3U8 Link from URL Online</a>。</p>
+          </div>
+
+          <h2>方法 2：Stream Detector 备选路径（Medium）</h2>
+          <div class="method-card">
+            <h3>🔍 站点级重扫 <span class="method-badge badge-medium">Medium</span></h3>
+            <p>当 DownloadHelper 抓不到、但你怀疑页面上确实有流媒体时，用 Stream Detector 重新扫整页的请求。它不做单媒体识别，而是把页面生命周期内所有 <code>.m3u8</code> / <code>.mpd</code> / <code>segment</code> 请求列出来，更适合视频嵌套 iframe 的复杂页面。</p>
+            <ol>
+              <li>在 Chrome 安装 <em>Stream Detector</em>，打开目标页面后同样先点 ▶ 触发播放。</li>
+              <li>点击工具栏图标，Stream Detector 会展示所有命中的流媒体 URL，按时间倒序排列。</li>
+              <li>优先复制 <code>index.m3u8</code> 或 <code>playlist.m3u8</code> 这一类叶节点，而不是 master。</li>
+              <li>遇到多个候选（常见 480p / 720p / 1080p）时，按清晰度选最高码率的那条，但要先确认它含独立音轨。</li>
+              <li>同方法 1，把链接送到 <a href="/">M3U8 Converter</a> 完成合并。</li>
+            </ol>
+            <p><strong>成功信号：</strong> 列表里出现 2 条以上 .m3u8；粘到合并工具后无 403；导出 MP4 音画同步。</p>
+            <p><strong>失败信号：</strong> 列表完全为空（说明 HLS 是 WebSocket 或 DASH 而非 HLS）；粘到工具立刻 403（token 过期，需要重抓）。</p>
+            <p>Stream Detector 抓不到但 DownloadHelper 能抓的场景极少，遇到时通常说明页面用了 MSE + Fragmented MP4 而不是传统 HLS，这种情况可以看 <a href="/blog/fix-m3u8-download-errors.html">M3U8 下载报错修复</a> 中的 “manifest 类型不对” 一节。</p>
+          </div>
+
+          <h2>方法 3：从拿到链接到 MP4（衔接 Online / FFmpeg）</h2>
+          <div class="method-card">
+            <h3>🔗 拿到 m3u8 之后 <span class="method-badge badge-easy">Easy</span></h3>
+            <p>无论你用 DownloadHelper 还是 Stream Detector，最后都会落到一个 m3u8 链接。这条链接有两种稳定接法：</p>
+            <ul>
+              <li><strong>浏览器内合并</strong>：直接用 <a href="/">M3U8 Converter</a>，粘贴链接即可，不需要安装任何东西，适合 90% 的一次性需求。</li>
+              <li><strong>FFmpeg 命令行</strong>：当你需要批量、重试或写定时任务时用 FFmpeg，下面是两种最常见的命令。
+                <pre><code>ffmpeg -allowed_extensions ALL -protocol_whitelist "file,http,https,tcp,tls,crypto" \
+  -i "https://example.com/playlist.m3u8" -c copy output.mp4</code></pre>
+                <pre><code>ffmpeg -i "https://example.com/playlist.m3u8" -c:v libx264 -c:a aac -movflags faststart output.mp4</code></pre>
+              </li>
+            </ul>
+            <p>命令解释和批量重试写法可参考 <a href="/blog/ffmpeg-m3u8-commands.html">FFmpeg M3U8 命令大全</a>，移动端场景看 <a href="/blog/mobile-m3u8-download.html">Mobile M3U8 Video Download</a>。</p>
+          </div>
+
+          <h2>为什么这篇页面独特：Video DownloadHelper 错误矩阵 + 6 项预检</h2>
+          <p>通用教程往往只教 “装好扩展就能用”，但实战中 70% 的失败都能归到下面 5 类信号。我们把信号、根因、恢复动作列在同一张表，你可以照着打勾定位。</p>
+
+          <table class="comparison-table matrix-table">
+            <thead>
+              <tr>
+                <th>错误信号</th>
+                <th>最可能根因</th>
+                <th>优先动作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>DownloadHelper 图标不亮 / 面板空白</td>
+                <td>未触发真实播放，HLS 是 lazy 请求</td>
+                <td>点 ▶ 后等 3-5 秒再点图标，重启浏览器</td>
+              </tr>
+              <tr>
+                <td>面板只列 master.m3u8 没有 .ts 行</td>
+                <td>自适应码率根清单，没有直接分片</td>
+                <td>用 Stream Detector 重扫，复制叶节点 .m3u8</td>
+              </tr>
+              <tr>
+                <td>合并时立刻报 HTTP 403</td>
+                <td>token / cookie / Referer 失效</td>
+                <td>刷新源页后 30 秒内重抓，不复用旧链接</td>
+              </tr>
+              <tr>
+                <td>导出 MP4 没声音或音画错位</td>
+                <td>选中的变体是 video-only，没有独立音轨</td>
+                <td>切到含 audio codec 的变体，或重编码为 H.264 + AAC</td>
+              </tr>
+              <tr>
+                <td>提示 “encrypted” / Widevine 报错</td>
+                <td>DRM 受保护内容，密钥不向扩展暴露</td>
+                <td>停止抓取，改用平台官方授权下载</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <figure>
+            <img src="/blog/images/video-downloadhelper-m3u8-guide/downloadhelper-error-matrix.webp" alt="Video DownloadHelper 抓 M3U8 错误信号与恢复动作矩阵" loading="lazy" width="1200" height="675">
+            <figcaption>按错误信号分类：先排捕获时机、再排权限状态、再排音轨兼容性，最后才到编码层</figcaption>
+          </figure>
+
+          <div class="warning-box">
+            <strong>合规边界：</strong> 本文只覆盖你有合法访问权限的内容。DRM 加密、付费订阅内容、版权方明确禁止下载的资源，请使用平台官方离线功能。绕过 DRM 在多数司法辖区属于违法行为。
+          </div>
+
+          <h3>抓取前 6 项预检清单</h3>
+          <ul class="checklist-list">
+            <li>源页面 Network 面板里能看到 <code>application/vnd.apple.mpegurl</code> 或 <code>application/x-mpegurl</code> 响应，确认是 HLS。</li>
+            <li>已实际点击播放按钮（不是 hover / 滚动到可视区）。</li>
+            <li>扩展图标已亮起，且面板里能看到至少一条媒体记录。</li>
+            <li>复制到的是叶节点 <code>.m3u8</code>，不是 master playlist。</li>
+            <li>链接是 30 秒内新抓的（避免 token 过期）。</li>
+            <li>目标容器是 MP4（H.264 + AAC），移动端兼容性最好。</li>
+          </ul>
+
+          <h2>常见问题与下一步</h2>
+          <h3>1) Video DownloadHelper 抓不到 m3u8 怎么办？</h3>
+          <p>九成是 “未真正播放” 或 “抓的是 master 而不是分片”。先点 ▶ 触发，再点图标；如果只看到 master.m3u8，换 Stream Detector 复制叶节点 URL。</p>
+
+          <h3>2) Stream Detector 跟 Video DownloadHelper 有什么区别？</h3>
+          <p>DownloadHelper 按媒体类型识别（识别得到就显示），Stream Detector 按请求 URL 模式识别（更宽松）。前者准确、后者兜底，两者配合基本覆盖所有 HLS 站点。</p>
+
+          <h3>3) 抓到了 m3u8 但合并后没声音？</h3>
+          <p>说明你抓到的是 video-only 变体。回 Stream Detector 选一个 <code>video+audio</code> 的变体（通常码率更高那条），或者用 FFmpeg 重编码为 H.264 + AAC。</p>
+
+          <h3>4) Video DownloadHelper 提示 “需要付费版” 怎么办？</h3>
+          <p>免费版对常规 HLS 抓取已经够用。付费版主要在“自动转码 / 一键合并”上省事。如果你抓到了链接但不想装桌面工具，可以直接粘到 <a href="/">M3U8 Converter</a> 完成合并。</p>
+
+          <h3>5) 为什么每次都报 403？</h3>
+          <p>token / cookie 时效问题。刷新源页面后 30 秒内重抓，不要复用历史链接；如果仍 403，改用 FFmpeg 并加 <code>-headers "Referer: ..."</code> 携带原始 Referer。</p>
+
+          <h2>关联教程与外部参考</h2>
+          <ul>
+            <li><a href="/blog/online-m3u8-downloader.html">Online M3U8 Downloader 实战指南</a>：拿到链接后用在线工具合并的完整路径。</li>
+            <li><a href="/blog/get-m3u8-from-url-online.html">Get M3U8 Link from URL Online</a>：6 种在线提取方法，作为扩展抓不到时的兜底。</li>
+            <li><a href="/blog/browser-extract-m3u8.html">浏览器提取 M3U8 链接的 5 种方法</a>：用 DevTools Network 手抓 m3u8，作为最后兜底。</li>
+            <li><a href="/blog/fix-m3u8-download-errors.html">M3U8 下载报错修复</a>：覆盖 403、超时、连接失败场景的排障手册。</li>
+            <li><a href="/blog/ffmpeg-m3u8-commands.html">FFmpeg M3U8 命令大全</a>：批量、自动化、参数解释全在这里。</li>
+            <li><a href="https://www.downloadhelper.net/" target="__blank" rel="noopener noreferrer">Video DownloadHelper 官网</a>：安装时认准官方域名，避免装到仿冒扩展。</li>
+          </ul>
+
+          <div class="cta-box">
+            <h3>现在就用：拿到 m3u8 之后一键合并</h3>
+            <p>把 Video DownloadHelper 或 Stream Detector 抓到的链接粘到 M3U8 Converter，浏览器内直接合并为 MP4，不需要装任何本地工具。</p>
+            <a href="/">打开 M3U8 Converter</a>
+          </div>
+        </div>
+
+        <div data-lang="en">
+          <p>If you are using <strong>Video DownloadHelper</strong> for M3U8 and keep getting only the master playlist, missing audio, or a panel that refuses to light up, this page solves the exact failure modes. We start with a decision flow (DownloadHelper main path vs Stream Detector fallback), then ship a tested error matrix and a six-point preflight checklist. Every step is based on the free Chrome and Firefox builds; the paid version skips some manual work but is not required for M3U8 capture.</p>
+
+          <figure>
+            <img src="/blog/images/video-downloadhelper-m3u8-guide/downloadhelper-decision-flow.webp" alt="Video DownloadHelper M3U8 capture and decision flow in four steps" loading="lazy" width="1200" height="675">
+            <figcaption>Four-step M3U8 capture flow with Video DownloadHelper: trigger playback, capture manifest, pick a branch (M3U8 path or Stream Detector fallback), verify and save</figcaption>
+          </figure>
+
+          <h2>Route First: DownloadHelper / Stream Detector / Online Tool</h2>
+          <p>Most failed sessions start with the wrong tool. Use this matrix to pick the correct path before you spend 30 minutes debugging.</p>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Your Scenario</th>
+                <th>Recommended Tool</th>
+                <th>Difficulty</th>
+                <th>Success Rate</th>
+                <th>When to Switch</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Chrome / Firefox shows a direct .m3u8 row</td>
+                <td>Video DownloadHelper main path</td>
+                <td>Low</td>
+                <td>High</td>
+                <td>Switch to Stream Detector when only the master playlist appears or audio is missing</td>
+              </tr>
+              <tr>
+                <td>DownloadHelper panel is empty or only lists master.m3u8</td>
+                <td>Stream Detector re-scan</td>
+                <td>Medium</td>
+                <td>High</td>
+                <td>Fall back to DevTools Network hand-grab when re-scan is still empty</td>
+              </tr>
+              <tr>
+                <td>You already have an m3u8 URL and want a stable merge</td>
+                <td><a href="/">M3U8 Converter</a> online merge or FFmpeg</td>
+                <td>Low</td>
+                <td>High</td>
+                <td>Stop immediately on encrypted HLS — see compliance scope</td>
+              </tr>
+              <tr>
+                <td>DRM-encrypted content (Widevine / FairPlay / PlayReady)</td>
+                <td>Stop capture, use official authorized download</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>Do not attempt bypass</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="tip-box">
+            <strong>Fast takeaway:</strong> Try Video DownloadHelper first. If you only see the master playlist or nothing at all, switch to Stream Detector immediately. Do not retry the same broken path.
+          </div>
+
+          <h2>Method 1: Video DownloadHelper Capture (Easy)</h2>
+          <div class="method-card">
+            <h3>🌐 Browser Extension Main Path <span class="method-badge badge-easy">Easy</span></h3>
+            <p>Ideal for Chrome and Firefox users with no CLI background. Follow the order below — skipping a step is the #1 reason for an empty panel.</p>
+            <ol>
+              <li><strong>Install from the official store</strong>: Chrome Web Store or Mozilla Add-ons. Verify the publisher domain matches the official site — copycat extensions exist.</li>
+              <li><strong>Click play on the target page first</strong>: You must trigger the HLS request. Scrolling to the player or hovering it does not fire the manifest.</li>
+              <li><strong>Wait for the toolbar icon to light up</strong>: A red badge means media is detected. Click the icon to open the panel, then look for a row ending in <code>.m3u8</code> (not the master playlist).</li>
+              <li><strong>Right-click the row → "Copy link"</strong>: Or click "Download" to trigger a direct save. Cross-origin failures are common on direct download — copying the link is usually safer.</li>
+              <li><strong>Paste the link into <a href="/">M3U8 Converter</a></strong>: Merge to MP4 entirely in the browser. No extra desktop tool needed.</li>
+              <li><strong>Quick QA</strong>: Verify duration, scrub to mid-point, jump to the end, and confirm the audio track exists.</li>
+            </ol>
+            <p><strong>Success signals:</strong> at least one <code>.m3u8</code> row visible, steady progress in the online merger, output MP4 plays and scrubs cleanly in VLC and on mobile.</p>
+            <p><strong>Failure signals:</strong> icon never lights up, panel only lists mp4 / jpg entries, only the master playlist row is present.</p>
+            <p>If the icon never lights up, first confirm the site actually delivers HLS by checking for <code>application/vnd.apple.mpegurl</code> or <code>application/x-mpegurl</code> responses in the Network tab. If you do not have a usable URL yet, read <a href="/blog/browser-extract-m3u8.html">5 ways to extract M3U8 links in browser</a> or <a href="/blog/get-m3u8-from-url-online.html">Get M3U8 Link from URL Online</a>.</p>
+          </div>
+
+          <h2>Method 2: Stream Detector Fallback (Medium)</h2>
+          <div class="method-card">
+            <h3>🔍 Page-Wide Rescan <span class="method-badge badge-medium">Medium</span></h3>
+            <p>When DownloadHelper misses the target but you are confident a stream exists, Stream Detector rescans every request on the page. It does not classify by media type; it lists every URL matching <code>.m3u8</code>, <code>.mpd</code>, or <code>segment</code>. This is more resilient on pages that nest players in iframes.</p>
+            <ol>
+              <li>Install Stream Detector in Chrome, open the target page, and click ▶ to trigger playback.</li>
+              <li>Click the toolbar icon. Stream Detector lists all matched stream URLs, newest first.</li>
+              <li>Prefer leaf-level <code>index.m3u8</code> or <code>playlist.m3u8</code> URLs over the master playlist.</li>
+              <li>When multiple variants are available (typical 480p / 720p / 1080p), pick the highest bitrate that still carries an audio codec.</li>
+              <li>Send the link to <a href="/">M3U8 Converter</a> to finish the merge.</li>
+            </ol>
+            <p><strong>Success signals:</strong> two or more .m3u8 entries appear, no HTTP 403 from the merger, clean A/V sync in the output.</p>
+            <p><strong>Failure signals:</strong> the list is empty (the site likely uses WebSocket or DASH instead of HLS), or the merger returns 403 immediately (token expired — recapture).</p>
+            <p>Rare cases where Stream Detector fails but DownloadHelper succeeds usually point to MSE plus Fragmented MP4 rather than classic HLS. See the "wrong manifest type" section of <a href="/blog/fix-m3u8-download-errors.html">M3U8 download error fixes</a>.</p>
+          </div>
+
+          <h2>Method 3: From m3u8 URL to MP4 (Online or FFmpeg)</h2>
+          <div class="method-card">
+            <h3>🔗 After You Have the Link <span class="method-badge badge-easy">Easy</span></h3>
+            <p>Regardless of which extension you used, you will end up with an m3u8 URL. Two reliable ways to convert it to MP4:</p>
+            <ul>
+              <li><strong>Browser-only merge</strong>: paste the link into <a href="/">M3U8 Converter</a>. No install, covers ~90% of one-off needs.</li>
+              <li><strong>FFmpeg CLI</strong>: use this for batch jobs, retries, and scheduled tasks. The two workhorse commands:
+                <pre><code>ffmpeg -allowed_extensions ALL -protocol_whitelist "file,http,https,tcp,tls,crypto" \
+  -i "https://example.com/playlist.m3u8" -c copy output.mp4</code></pre>
+                <pre><code>ffmpeg -i "https://example.com/playlist.m3u8" -c:v libx264 -c:a aac -movflags faststart output.mp4</code></pre>
+              </li>
+            </ul>
+            <p>For deeper parameter explanations and batch retry patterns, see the <a href="/blog/ffmpeg-m3u8-commands.html">FFmpeg M3U8 command guide</a>. Mobile-specific workflows live in <a href="/blog/mobile-m3u8-download.html">Mobile M3U8 Video Download</a>.</p>
+          </div>
+
+          <h2>Why This Page Is Unique: Error Matrix + Six-Point Preflight</h2>
+          <p>Generic tutorials tell you "install the extension and it works." In practice, 70% of failures map to one of the five signals below. We list signal, root cause, and recovery action in a single matrix so you can check off the diagnosis.</p>
+
+          <table class="comparison-table matrix-table">
+            <thead>
+              <tr>
+                <th>Error Signal</th>
+                <th>Most Likely Cause</th>
+                <th>Priority Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>DownloadHelper icon does not light up / panel is empty</td>
+                <td>Playback was not triggered, HLS loads lazily</td>
+                <td>Click play, wait 3-5 seconds, then open the icon; restart the browser if needed</td>
+              </tr>
+              <tr>
+                <td>Only master.m3u8 listed, no .ts rows</td>
+                <td>Adaptive bitrate root, no direct segment list</td>
+                <td>Use Stream Detector to recapture and copy a leaf-level .m3u8</td>
+              </tr>
+              <tr>
+                <td>HTTP 403 the moment merge starts</td>
+                <td>Token / cookie / Referer validation failed</td>
+                <td>Refresh the source page, recapture within 30 seconds, do not reuse old URLs</td>
+              </tr>
+              <tr>
+                <td>Output MP4 has no audio or A/V drift</td>
+                <td>Selected variant is video-only, no separate audio rendition</td>
+                <td>Pick a variant with an audio codec, or re-encode to H.264 + AAC</td>
+              </tr>
+              <tr>
+                <td>"Encrypted" or Widevine error appears</td>
+                <td>DRM keys are not exposed to the extension</td>
+                <td>Stop capture, use the platform's official authorized download instead</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <figure>
+            <img src="/blog/images/video-downloadhelper-m3u8-guide/downloadhelper-error-matrix.webp" alt="Video DownloadHelper M3U8 error signal and recovery action matrix" loading="lazy" width="1200" height="675">
+            <figcaption>Triage order: capture timing first, then permission state, then audio codec compatibility, then encoding layer</figcaption>
+          </figure>
+
+          <div class="warning-box">
+            <strong>Compliance boundary:</strong> This guide only applies to content you are authorized to access. DRM-encrypted, paywalled, or rights-holder-restricted content must use official platform offline workflows. Bypassing DRM is illegal in most jurisdictions.
+          </div>
+
+          <h3>Six-Point Preflight Checklist</h3>
+          <ul class="checklist-list">
+            <li>Network tab shows an <code>application/vnd.apple.mpegurl</code> or <code>application/x-mpegurl</code> response, confirming HLS.</li>
+            <li>Playback has actually been triggered (not just hover or scroll into view).</li>
+            <li>The extension icon is lit and the panel shows at least one media entry.</li>
+            <li>You copied a leaf-level <code>.m3u8</code>, not the master playlist.</li>
+            <li>The URL was recaptured within the last 30 seconds to avoid token expiry.</li>
+            <li>Target container is MP4 (H.264 + AAC) for the best mobile compatibility.</li>
+          </ul>
+
+          <h2>FAQ (Query-driven)</h2>
+          <h3>1) Video DownloadHelper is not capturing m3u8 — what now?</h3>
+          <p>Nine times out of ten, the issue is "no real playback" or "you captured the master, not the leaf." Click play first, then the icon. If you only see the master playlist, switch to Stream Detector and copy a leaf-level URL.</p>
+
+          <h3>2) How is Stream Detector different from Video DownloadHelper?</h3>
+          <p>DownloadHelper classifies by media type — if it does not recognize the media, it shows nothing. Stream Detector matches by URL pattern, which is more permissive. DownloadHelper is more accurate when it works; Stream Detector is the safety net.</p>
+
+          <h3>3) The m3u8 is captured but the MP4 has no audio. Why?</h3>
+          <p>You grabbed a video-only variant. Go back to Stream Detector and pick a variant that bundles an audio codec, or use FFmpeg to re-encode to H.264 + AAC.</p>
+
+          <h3>4) Video DownloadHelper keeps asking me to upgrade — is the free version enough?</h3>
+          <p>For standard HLS capture, the free version is enough. The paid tier mainly automates "capture plus convert in one click." If you have a link but do not want another desktop tool, paste it into <a href="/">M3U8 Converter</a> and finish the job in the browser.</p>
+
+          <h3>5) Why does every merge attempt return HTTP 403?</h3>
+          <p>Token or cookie expiry. Refresh the source page, recapture within 30 seconds, and do not reuse old URLs. If the 403 persists, run FFmpeg with <code>-headers "Referer: ..."</code> carrying the original Referer.</p>
+
+          <h2>Related Guides and External References</h2>
+          <ul>
+            <li><a href="/blog/online-m3u8-downloader.html">Online M3U8 Downloader Guide</a>: full path from link to MP4 using a browser-only tool.</li>
+            <li><a href="/blog/get-m3u8-from-url-online.html">Get M3U8 Link from URL Online</a>: six reliable extraction methods when the extension misses the target.</li>
+            <li><a href="/blog/browser-extract-m3u8.html">5 ways to extract M3U8 links in browser</a>: DevTools Network hand-grab as the last-resort fallback.</li>
+            <li><a href="/blog/fix-m3u8-download-errors.html">M3U8 download error fixes</a>: extended troubleshooting for 403, timeout, and connection failures.</li>
+            <li><a href="/blog/ffmpeg-m3u8-commands.html">FFmpeg M3U8 command guide</a>: batch jobs, automation, and parameter explanations.</li>
+            <li><a href="https://www.downloadhelper.net/" target="_blank" rel="noopener noreferrer">Video DownloadHelper official site</a>: always install from the official domain to avoid copycat extensions.</li>
+          </ul>
+
+          <div class="cta-box">
+            <h3>Start Now: One-Click M3U8 to MP4 Merge</h3>
+            <p>Paste the link you captured with Video DownloadHelper or Stream Detector into M3U8 Converter and finish the merge entirely in your browser.</p>
+            <a href="/">Open M3U8 Converter</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <footer style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border);">
+      <a href="/blog/" class="back-link">← <span data-lang="zh">返回博客列表</span><span data-lang="en">Back to Blog</span></a>
+    </footer>
+  </div>
+
+  <script type="module" src="/blog/lang-switcher.js"></script>
+  <script type="module">
+    import { themeManager } from '/src/theme.js';
+    themeManager.init();
+  </script>
+</body>
+</html>
